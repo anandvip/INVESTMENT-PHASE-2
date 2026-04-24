@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FD Rate Intelligence — India 2026</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --navy: #0a0f1e;
+      --navy2: #111827;
+      --panel: #151c2c;
+      --border: #1e2d45;
+      --gold: #c9a84c;
+      --gold-light: #e8c96a;
+      --teal: #2dd4bf;
+      --red: #ef4444;
+      --green: #22c55e;
+      --amber: #f59e0b;
+      --text: #e2e8f0;
+      --muted: #8899aa;
+      --safe: #10b981;
+      --warn: #f59e0b;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--navy);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      min-height: 100vh;
+      padding: 0 0 60px 0;
+    }
+
+    /* ── HEADER ── */
+    .header {
+      background: linear-gradient(135deg, #0d1526 0%, #0a0f1e 60%, #0d1a2e 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 32px 40px 24px;
+      position: relative;
+      overflow: hidden;
+    }
+    .header::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: -80px;
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(22px, 4vw, 34px);
+      font-weight: 900;
+      color: var(--gold);
+      letter-spacing: -0.5px;
+      line-height: 1.1;
+    }
+    .header h1 span { color: var(--text); }
+    .header-sub {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 6px;
+      font-weight: 400;
+      letter-spacing: 0.5px;
+    }
+    .date-badge {
+      background: rgba(201,168,76,0.1);
+      border: 1px solid rgba(201,168,76,0.3);
+      color: var(--gold);
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      padding: 5px 12px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+
+    /* ── DICGC NOTICE ── */
+    .notice-bar {
+      background: linear-gradient(90deg, rgba(16,185,129,0.08), rgba(16,185,129,0.03));
+      border-left: 3px solid var(--safe);
+      margin: 20px 40px 0;
+      padding: 10px 16px;
+      border-radius: 0 8px 8px 0;
+      font-size: 12px;
+      color: #86efac;
+      line-height: 1.6;
+    }
+    .notice-bar strong { color: var(--safe); }
+
+    /* ── MAIN CONTENT ── */
+    .content { padding: 28px 40px 0; }
+
+    /* ── SECTION LABEL ── */
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .section-label .tag {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 4px;
+    }
+    .tag-bank {
+      background: rgba(45,212,191,0.12);
+      color: var(--teal);
+      border: 1px solid rgba(45,212,191,0.3);
+    }
+    .tag-nbfc {
+      background: rgba(245,158,11,0.12);
+      color: var(--amber);
+      border: 1px solid rgba(245,158,11,0.3);
+    }
+    .section-desc {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    /* ── TABLE ── */
+    .table-wrap {
+      overflow-x: auto;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      margin-bottom: 28px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    thead tr {
+      background: #0e1626;
+      border-bottom: 1px solid var(--border);
+    }
+    thead th {
+      padding: 12px 16px;
+      text-align: left;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+    thead th:first-child { padding-left: 20px; }
+
+    tbody tr {
+      border-bottom: 1px solid rgba(30,45,69,0.7);
+      transition: background 0.15s;
+    }
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover { background: rgba(255,255,255,0.02); }
+
+    tbody tr:first-child { background: rgba(201,168,76,0.04); }
+    tbody tr:first-child:hover { background: rgba(201,168,76,0.07); }
+
+    td {
+      padding: 14px 16px;
+      vertical-align: middle;
+    }
+    td:first-child { padding-left: 20px; }
+
+    /* Rank */
+    .rank {
+      font-size: 16px;
+      width: 28px;
+      display: inline-block;
+      text-align: center;
+    }
+
+    /* Bank name */
+    .bank-name {
+      font-weight: 600;
+      font-size: 14px;
+      color: var(--text);
+    }
+    .bank-alias {
+      font-size: 10px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    /* Rate pill */
+    .rate-best {
+      font-family: 'DM Mono', monospace;
+      font-size: 18px;
+      font-weight: 500;
+      color: var(--gold);
+    }
+    .rate-rank1 { color: var(--gold-light); font-size: 20px; }
+    .rate-senior {
+      font-family: 'DM Mono', monospace;
+      font-size: 13px;
+      color: #86efac;
+    }
+
+    /* Tenure */
+    .tenure {
+      font-size: 11px;
+      color: var(--muted);
+      font-family: 'DM Mono', monospace;
+    }
+
+    /* Rating badge */
+    .rating {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-family: 'DM Mono', monospace;
+    }
+    .r-aaa { background: rgba(34,197,94,0.12); color: #86efac; border: 1px solid rgba(34,197,94,0.25); }
+    .r-aaplus { background: rgba(45,212,191,0.12); color: var(--teal); border: 1px solid rgba(45,212,191,0.25); }
+    .r-aa { background: rgba(96,165,250,0.12); color: #93c5fd; border: 1px solid rgba(96,165,250,0.25); }
+    .r-aaminus { background: rgba(148,163,184,0.1); color: #94a3b8; border: 1px solid rgba(148,163,184,0.2); }
+
+    /* DICGC */
+    .dicgc-yes {
+      display: inline-flex; align-items: center; gap: 4px;
+      font-size: 11px; color: var(--safe); font-weight: 600;
+    }
+    .dicgc-no {
+      display: inline-flex; align-items: center; gap: 4px;
+      font-size: 11px; color: var(--amber); font-weight: 600;
+    }
+
+    /* Verdict chip */
+    .verdict {
+      font-size: 10px;
+      padding: 3px 8px;
+      border-radius: 12px;
+      font-weight: 600;
+      white-space: nowrap;
+      letter-spacing: 0.3px;
+    }
+    .v-top     { background: rgba(201,168,76,0.15); color: var(--gold); border: 1px solid rgba(201,168,76,0.3); }
+    .v-strong  { background: rgba(34,197,94,0.1); color: #86efac; border: 1px solid rgba(34,197,94,0.2); }
+    .v-solid   { background: rgba(96,165,250,0.1); color: #93c5fd; border: 1px solid rgba(96,165,250,0.2); }
+    .v-caution { background: rgba(245,158,11,0.1); color: var(--amber); border: 1px solid rgba(245,158,11,0.2); }
+
+    /* ── SUMMARY CARDS ── */
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 14px;
+      margin: 28px 40px 0;
+    }
+    .sum-card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px 18px;
+    }
+    .sum-card .label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+    .sum-card .value {
+      font-family: 'DM Mono', monospace;
+      font-size: 22px;
+      font-weight: 500;
+    }
+    .sum-card .sub { font-size: 11px; color: var(--muted); margin-top: 3px; }
+    .c-gold { color: var(--gold); }
+    .c-teal { color: var(--teal); }
+    .c-safe { color: var(--safe); }
+    .c-amber { color: var(--amber); }
+
+    /* ── FOOTNOTE ── */
+    .footnote {
+      margin: 24px 40px 0;
+      background: rgba(14,22,38,0.6);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 18px;
+      font-size: 11px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+    .footnote strong { color: var(--text); }
+    .footnote a { color: var(--gold); text-decoration: none; }
+
+    /* ── POST OFFICE COLLAPSIBLE ── */
+    .po-wrapper {
+      margin: 28px 40px 0;
+    }
+    .po-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: linear-gradient(90deg, rgba(139,92,246,0.08), rgba(139,92,246,0.03));
+      border: 1px solid rgba(139,92,246,0.25);
+      border-radius: 10px;
+      padding: 14px 20px;
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .po-toggle:hover {
+      background: linear-gradient(90deg, rgba(139,92,246,0.14), rgba(139,92,246,0.06));
+      border-color: rgba(139,92,246,0.4);
+    }
+    .po-toggle-left {
+      display: flex; align-items: center; gap: 10px;
+    }
+    .po-icon { font-size: 18px; }
+    .po-toggle-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: #c4b5fd;
+    }
+    .po-toggle-sub {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+    .po-arrow {
+      font-size: 13px;
+      color: #a78bfa;
+      transition: transform 0.3s ease;
+      font-weight: 600;
+    }
+    .po-arrow.open { transform: rotate(180deg); }
+
+    .po-body {
+      display: none;
+      padding-top: 16px;
+    }
+    .po-body.open { display: block; }
+
+    .tag-po {
+      background: rgba(139,92,246,0.12);
+      color: #c4b5fd;
+      border: 1px solid rgba(139,92,246,0.3);
+    }
+    .r-govt {
+      background: rgba(139,92,246,0.12);
+      color: #c4b5fd;
+      border: 1px solid rgba(139,92,246,0.25);
+    }
+    .v-govtbest  { background: rgba(139,92,246,0.12); color: #c4b5fd; border: 1px solid rgba(139,92,246,0.3); }
+    .v-taxfree   { background: rgba(16,185,129,0.12); color: #6ee7b7; border: 1px solid rgba(16,185,129,0.3); }
+    .v-senior    { background: rgba(201,168,76,0.12); color: var(--gold); border: 1px solid rgba(201,168,76,0.3); }
+
+    .po-note {
+      background: rgba(139,92,246,0.05);
+      border: 1px solid rgba(139,92,246,0.2);
+      border-radius: 8px;
+      padding: 12px 16px;
+      font-size: 11px;
+      color: #a78bfa;
+      margin-top: 14px;
+      line-height: 1.7;
+    }
+    .po-note strong { color: #c4b5fd; }
+
+    /* ── PROFILER SEED ── */
+    .profiler-seed {
+      margin: 24px 40px 0;
+      background: linear-gradient(135deg, rgba(10,15,30,0.9), rgba(14,22,40,0.95));
+      border: 1px dashed rgba(201,168,76,0.3);
+      border-radius: 12px;
+      padding: 18px 22px;
+    }
+    .profiler-seed-header {
+      display: flex; align-items: center; gap: 10px; margin-bottom: 12px;
+    }
+    .profiler-seed-header .ps-title {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+    .profiler-seed-header .ps-badge {
+      font-size: 9px;
+      padding: 2px 8px;
+      border-radius: 10px;
+      background: rgba(201,168,76,0.1);
+      border: 1px solid rgba(201,168,76,0.25);
+      color: var(--muted);
+      letter-spacing: 0.5px;
+      font-weight: 600;
+    }
+    .profiler-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 10px;
+    }
+    .profiler-card {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 8px;
+      padding: 10px 12px;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .profiler-card:hover {
+      border-color: rgba(201,168,76,0.3);
+      background: rgba(201,168,76,0.04);
+    }
+    .profiler-card.selected {
+      border-color: var(--gold);
+      background: rgba(201,168,76,0.08);
+    }
+    .pc-label {
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+    .pc-value {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .pc-sub { font-size: 10px; color: var(--muted); margin-top: 2px; }
+    .profiler-cta {
+      margin-top: 14px;
+      font-size: 11px;
+      color: var(--muted);
+      line-height: 1.6;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      padding-top: 12px;
+    }
+    .profiler-cta strong { color: var(--gold); }
+
+    @media (max-width: 600px) {
+      .content, .notice-bar, .summary-grid, .footnote,
+      .po-wrapper, .profiler-seed { padding-left: 16px; padding-right: 16px; margin-left: 0; margin-right: 0; }
+      .header { padding: 20px 16px 16px; }
+      .notice-bar { margin: 16px 16px 0; }
+      .summary-grid { margin: 16px 16px 0; }
+      .footnote { margin: 16px 16px 0; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-top">
+    <div>
+      <h1>FD Rate <span>Intelligence</span></h1>
+      <div class="header-sub">Banks &amp; NBFCs — Fixed Deposit Best Rates per Annum · India</div>
+    </div>
+    <div class="date-badge">📅 April 24, 2026</div>
+  </div>
+</div>
+
+<!-- DICGC NOTICE -->
+<div class="notice-bar">
+  <strong>🛡 DICGC Guarantee:</strong> All listed banks are registered with Deposit Insurance &amp; Credit Guarantee Corporation (DICGC / RBI). Deposits insured up to <strong>₹5,00,000</strong> per depositor per bank. NBFCs carry no such guarantee — invest based on credit rating &amp; issuer credibility.
+</div>
+
+<!-- SUMMARY CARDS -->
+<div class="summary-grid">
+  <div class="sum-card">
+    <div class="label">Best Bank Rate</div>
+    <div class="value c-gold">7.10%</div>
+    <div class="sub">SBM Bank (NIYO) · General</div>
+  </div>
+  <div class="sum-card">
+    <div class="label">Best Senior Rate (Bank)</div>
+    <div class="value c-safe">7.60%</div>
+    <div class="sub">SBM Bank (NIYO) · 60+ yrs</div>
+  </div>
+  <div class="sum-card">
+    <div class="label">Best NBFC Rate</div>
+    <div class="value c-amber">8.50%</div>
+    <div class="sub">Muthoot Capital · No DICGC</div>
+  </div>
+  <div class="sum-card">
+    <div class="label">Safest NBFC (AAA)</div>
+    <div class="value c-teal">6.95%</div>
+    <div class="sub">Bajaj Finance · CRISIL + ICRA AAA</div>
+  </div>
+</div>
+
+<!-- BANKS TABLE -->
+<div class="content">
+
+  <div class="section-label">
+    <span class="tag tag-bank">🏦 Scheduled Banks — DICGC Insured</span>
+    <span class="section-desc">Ranked by best general rate · Below ₹3 Crore deposits</span>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Bank</th>
+          <th>Best Rate (General)</th>
+          <th>Senior (+60)</th>
+          <th>Sweet Tenure</th>
+          <th>Rating</th>
+          <th>DICGC</th>
+          <th>Verdict</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- SBM NIYO -->
+        <tr>
+          <td><span class="rank">🥇</span></td>
+          <td>
+            <div class="bank-name">SBM Bank</div>
+            <div class="bank-alias">via NIYO App · Pvt. Sector</div>
+          </td>
+          <td><span class="rate-best rate-rank1">7.10%</span></td>
+          <td><span class="rate-senior">7.60%</span></td>
+          <td><span class="tenure">15 months – 3 years</span></td>
+          <td><span class="rating r-aaplus">AA+</span></td>
+          <td><span class="dicgc-yes">✔ Insured</span></td>
+          <td><span class="verdict v-top">★ Top Pick</span></td>
+        </tr>
+        <!-- KOTAK -->
+        <tr>
+          <td><span class="rank">🥈</span></td>
+          <td>
+            <div class="bank-name">Kotak Mahindra Bank</div>
+            <div class="bank-alias">Private Sector</div>
+          </td>
+          <td><span class="rate-best">6.80%</span></td>
+          <td><span class="rate-senior">7.30%</span></td>
+          <td><span class="tenure">390 days – 2 years</span></td>
+          <td><span class="rating r-aaa">AAA</span></td>
+          <td><span class="dicgc-yes">✔ Insured</span></td>
+          <td><span class="verdict v-strong">Strong Buy</span></td>
+        </tr>
+        <!-- ICICI -->
+        <tr>
+          <td><span class="rank">🥉</span></td>
+          <td>
+            <div class="bank-name">ICICI Bank</div>
+            <div class="bank-alias">Private Sector</div>
+          </td>
+          <td><span class="rate-best">6.50%</span></td>
+          <td><span class="rate-senior">7.10%</span></td>
+          <td><span class="tenure">15 months – 2 years</span></td>
+          <td><span class="rating r-aaa">AAA</span></td>
+          <td><span class="dicgc-yes">✔ Insured</span></td>
+          <td><span class="verdict v-strong">Strong</span></td>
+        </tr>
+        <!-- HDFC -->
+        <tr>
+          <td><span class="rank">4</span></td>
+          <td>
+            <div class="bank-name">HDFC Bank</div>
+            <div class="bank-alias">Private Sector</div>
+          </td>
+          <td><span class="rate-best">6.50%</span></td>
+          <td><span class="rate-senior">7.00%</span></td>
+          <td><span class="tenure">3 years – 5 years</span></td>
+          <td><span class="rating r-aaa">AAA</span></td>
+          <td><span class="dicgc-yes">✔ Insured</span></td>
+          <td><span class="verdict v-strong">Strong</span></td>
+        </tr>
+        <!-- IDBI -->
+        <tr>
+          <td><span class="rank">5</span></td>
+          <td>
+            <div class="bank-name">IDBI Bank</div>
+            <div class="bank-alias">Public Sector (Govt. stake)</div>
+          </td>
+          <td><span class="rate-best">6.50%</span></td>
+          <td><span class="rate-senior">7.00%</span></td>
+          <td><span class="tenure">1 year – 3 years</span></td>
+          <td><span class="rating r-aaminus">AA−</span></td>
+          <td><span class="dicgc-yes">✔ Insured</span></td>
+          <td><span class="verdict v-solid">Solid</span></td>
+        </tr>
+        <!-- SBI -->
+        <tr>
+          <td><span class="rank">6</span></td>
+          <td>
+            <div class="bank-name">State Bank of India</div>
+            <div class="bank-alias">Public Sector · Largest Bank in India</div>
+          </td>
+          <td><span class="rate-best">6.45%</span></td>
+          <td><span class="rate-senior">6.95%</span></td>
+          <td><span class="tenure">444 days (Amrit Vrishti)</span></td>
+          <td><span class="rating r-aaa">AAA</span></td>
+          <td><span class="dicgc-yes">✔ Insured</span></td>
+          <td><span class="verdict v-solid">Stable</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- NBFC TABLE -->
+  <div class="section-label">
+    <span class="tag tag-nbfc">⚡ NBFCs — Higher Yield, No DICGC Insurance</span>
+    <span class="section-desc">Ranked by best general rate · Invest based on credit rating</span>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>NBFC</th>
+          <th>Best Rate (General)</th>
+          <th>Senior (+60)</th>
+          <th>Sweet Tenure</th>
+          <th>Credit Rating</th>
+          <th>Insured?</th>
+          <th>Risk Tier</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- MUTHOOT -->
+        <tr>
+          <td><span class="rank">🥇</span></td>
+          <td>
+            <div class="bank-name">Muthoot Capital Services</div>
+            <div class="bank-alias">NBFC · Gold-backed lending</div>
+          </td>
+          <td><span class="rate-best rate-rank1">8.50%</span></td>
+          <td><span class="rate-senior">~9.00%</span></td>
+          <td><span class="tenure">3 years – 5 years</span></td>
+          <td><span class="rating r-aa">AA</span></td>
+          <td><span class="dicgc-no">✗ None</span></td>
+          <td><span class="verdict v-caution">High Yield / Moderate Risk</span></td>
+        </tr>
+        <!-- SHRIRAM -->
+        <tr>
+          <td><span class="rank">🥈</span></td>
+          <td>
+            <div class="bank-name">Shriram Finance</div>
+            <div class="bank-alias">NBFC · ICRA AA+ Stable</div>
+          </td>
+          <td><span class="rate-best">7.60%</span></td>
+          <td><span class="rate-senior">8.10%</span></td>
+          <td><span class="tenure">3 years – 5 years</span></td>
+          <td><span class="rating r-aaplus">AA+</span></td>
+          <td><span class="dicgc-no">✗ None</span></td>
+          <td><span class="verdict v-caution">High Yield / Low-Mod Risk</span></td>
+        </tr>
+        <!-- PNB HFL -->
+        <tr>
+          <td><span class="rank">🥉</span></td>
+          <td>
+            <div class="bank-name">PNB Housing Finance</div>
+            <div class="bank-alias">HFC / NBFC · PNB parentage</div>
+          </td>
+          <td><span class="rate-best">7.30%</span></td>
+          <td><span class="rate-senior">7.80%</span></td>
+          <td><span class="tenure">36 months – 60 months</span></td>
+          <td><span class="rating r-aaa">AAA</span></td>
+          <td><span class="dicgc-no">✗ None</span></td>
+          <td><span class="verdict v-solid">Best Safety + Yield NBFC</span></td>
+        </tr>
+        <!-- MAHINDRA -->
+        <tr>
+          <td><span class="rank">4</span></td>
+          <td>
+            <div class="bank-name">Mahindra Finance</div>
+            <div class="bank-alias">NBFC · IND AAA / Stable</div>
+          </td>
+          <td><span class="rate-best">7.00%</span></td>
+          <td><span class="rate-senior">7.25%</span></td>
+          <td><span class="tenure">24 months – 36 months</span></td>
+          <td><span class="rating r-aaa">AAA</span></td>
+          <td><span class="dicgc-no">✗ None</span></td>
+          <td><span class="verdict v-solid">Solid AAA</span></td>
+        </tr>
+        <!-- BAJAJ -->
+        <tr>
+          <td><span class="rank">5</span></td>
+          <td>
+            <div class="bank-name">Bajaj Finance</div>
+            <div class="bank-alias">NBFC · CRISIL AAA + ICRA AAA</div>
+          </td>
+          <td><span class="rate-best">6.95%</span></td>
+          <td><span class="rate-senior">7.30%</span></td>
+          <td><span class="tenure">36 months – 60 months</span></td>
+          <td><span class="rating r-aaa">AAA</span></td>
+          <td><span class="dicgc-no">✗ None</span></td>
+          <td><span class="verdict v-strong">Safest NBFC Choice</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════════════════
+     POST OFFICE — COLLAPSIBLE SECTION
+     Government-backed · No DICGC needed
+     ══════════════════════════════════════════ -->
+<div class="po-wrapper">
+  <div class="po-toggle" onclick="togglePO()" id="poToggle">
+    <div class="po-toggle-left">
+      <span class="po-icon">🏛️</span>
+      <div>
+        <div class="po-toggle-title">Post Office Small Savings Schemes — Government of India</div>
+        <div class="po-toggle-sub">Sovereign-backed · Q1 FY2026-27 (Apr–Jun 2026) · Rates unchanged for 8th consecutive quarter · Click to expand</div>
+      </div>
+    </div>
+    <span class="po-arrow" id="poArrow">▼</span>
+  </div>
+
+  <div class="po-body" id="poBody">
+    <div class="section-label" style="margin-top:4px;">
+      <span class="tag tag-po">🏛️ India Post — Small Savings Schemes</span>
+      <span class="section-desc">Sovereign guarantee · No credit risk · Ranked by rate</span>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Scheme</th>
+            <th>Rate p.a.</th>
+            <th>Tenure</th>
+            <th>Who Can Invest</th>
+            <th>Tax 80C</th>
+            <th>Interest Tax</th>
+            <th>Verdict</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="rank">🥇</span></td>
+            <td>
+              <div class="bank-name">SCSS</div>
+              <div class="bank-alias">Senior Citizen Savings Scheme</div>
+            </td>
+            <td><span class="rate-best rate-rank1">8.20%</span></td>
+            <td><span class="tenure">5 yrs (extendable)</span></td>
+            <td><span style="font-size:11px;color:#c4b5fd;">60+ yrs only · Max ₹30L</span></td>
+            <td><span class="dicgc-yes">✔ Yes</span></td>
+            <td><span class="dicgc-no">Taxable</span></td>
+            <td><span class="verdict v-senior">Best for Retirees</span></td>
+          </tr>
+          <tr>
+            <td><span class="rank">🥇</span></td>
+            <td>
+              <div class="bank-name">SSY</div>
+              <div class="bank-alias">Sukanya Samriddhi Yojana</div>
+            </td>
+            <td><span class="rate-best rate-rank1">8.20%</span></td>
+            <td><span class="tenure">21 yrs (girl child)</span></td>
+            <td><span style="font-size:11px;color:#c4b5fd;">Girl child under 10 · Max ₹1.5L/yr</span></td>
+            <td><span class="dicgc-yes">✔ Yes</span></td>
+            <td><span class="dicgc-yes">Tax Free</span></td>
+            <td><span class="verdict v-taxfree">Best Tax-Free Long</span></td>
+          </tr>
+          <tr>
+            <td><span class="rank">🥉</span></td>
+            <td>
+              <div class="bank-name">NSC</div>
+              <div class="bank-alias">National Savings Certificate</div>
+            </td>
+            <td><span class="rate-best">7.70%</span></td>
+            <td><span class="tenure">5 years</span></td>
+            <td><span style="font-size:11px;color:#c4b5fd;">All residents</span></td>
+            <td><span class="dicgc-yes">✔ Yes</span></td>
+            <td><span class="dicgc-no">Taxable</span></td>
+            <td><span class="verdict v-govtbest">High Govt Rate</span></td>
+          </tr>
+          <tr>
+            <td><span class="rank">4</span></td>
+            <td>
+              <div class="bank-name">KVP</div>
+              <div class="bank-alias">Kisan Vikas Patra · Doubles Money</div>
+            </td>
+            <td><span class="rate-best">7.50%</span></td>
+            <td><span class="tenure">115 months (9y 7m)</span></td>
+            <td><span style="font-size:11px;color:#c4b5fd;">All residents · No limit</span></td>
+            <td><span style="font-size:11px;color:var(--muted);">No 80C</span></td>
+            <td><span class="dicgc-no">Taxable</span></td>
+            <td><span class="verdict v-solid">Capital Doubler</span></td>
+          </tr>
+          <tr>
+            <td><span class="rank">5</span></td>
+            <td>
+              <div class="bank-name">Post Office TD (5-yr)</div>
+              <div class="bank-alias">Time Deposit — 5 Year</div>
+            </td>
+            <td><span class="rate-best">7.50%</span></td>
+            <td><span class="tenure">5 years</span></td>
+            <td><span style="font-size:11px;color:#c4b5fd;">All residents</span></td>
+            <td><span class="dicgc-yes">✔ Yes</span></td>
+            <td><span class="dicgc-no">Taxable</span></td>
+            <td><span class="verdict v-govtbest">FD Equivalent</span></td>
+          </tr>
+          <tr>
+            <td><span class="rank">6</span></td>
+            <td>
+              <div class="bank-name">MIS</div>
+              <div class="bank-alias">Monthly Income Scheme</div>
+            </td>
+            <td><span class="rate-best">7.40%</span></td>
+            <td><span class="tenure">5 years</span></td>
+            <td><span style="font-size:11px;color:#c4b5fd;">Max ₹9L single · ₹15L joint</span></td>
+            <td><span style="font-size:11px;color:var(--muted);">No 80C</span></td>
+            <td><span class="dicgc-no">Taxable</span></td>
+            <td><span class="verdict v-solid">Monthly Cash Flow</span></td>
+          </tr>
+          <tr>
+            <td><span class="rank">7</span></td>
+            <td>
+              <div class="bank-name">PPF</div>
+              <div class="bank-alias">Public Provident Fund</div>
+            </td>
+            <td><span class="rate-best">7.10%</span></td>
+            <td><span class="tenure">15 yrs (extendable)</span></td>
+            <td><span style="font-size:11px;color:#c4b5fd;">All · Max ₹1.5L/yr</span></td>
+            <td><span class="dicgc-yes">✔ Yes</span></td>
+            <td><span class="dicgc-yes">Tax Free</span></td>
+            <td><span class="verdict v-taxfree">EEE — Full Tax-Free</span></td>
+          </tr>
+          <tr>
+            <td><span class="rank">8</span></td>
+            <td>
+              <div class="bank-name">Post Office TD (3-yr)</div>
+              <div class="bank-alias">Time Deposit — 3 Year</div>
+            </td>
+            <td><span class="rate-best">7.10%</span></td>
+            <td><span class="tenure">3 years</span></td>
+            <td><span style="font-size:11px;color:#c4b5fd;">All residents</span></td>
+            <td><span style="font-size:11px;color:var(--muted);">No 80C</span></td>
+            <td><span class="dicgc-no">Taxable</span></td>
+            <td><span class="verdict v-govtbest">Govt FD Mid-term</span></td>
+          </tr>
+          <tr>
+            <td><span class="rank">9</span></td>
+            <td>
+              <div class="bank-name">Post Office TD (2-yr)</div>
+              <div class="bank-alias">Time Deposit — 2 Year</div>
+            </td>
+            <td><span class="rate-best">7.00%</span></td>
+            <td><span class="tenure">2 years</span></td>
+            <td><span style="font-size:11px;color:#c4b5fd;">All residents</span></td>
+            <td><span style="font-size:11px;color:var(--muted);">No 80C</span></td>
+            <td><span class="dicgc-no">Taxable</span></td>
+            <td><span class="verdict v-solid">Short-Mid Bridge</span></td>
+          </tr>
+          <tr>
+            <td><span class="rank">10</span></td>
+            <td>
+              <div class="bank-name">Post Office TD (1-yr)</div>
+              <div class="bank-alias">Time Deposit — 1 Year</div>
+            </td>
+            <td><span class="rate-best">6.90%</span></td>
+            <td><span class="tenure">1 year</span></td>
+            <td><span style="font-size:11px;color:#c4b5fd;">All residents</span></td>
+            <td><span style="font-size:11px;color:var(--muted);">No 80C</span></td>
+            <td><span class="dicgc-no">Taxable</span></td>
+            <td><span class="verdict v-solid">Short-Term Safe</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="po-note">
+      <strong>🏛️ Sovereign Safety:</strong> All Post Office schemes are backed by the Government of India — no credit risk, no DICGC ceiling. Interest rates are reviewed quarterly by the Finance Ministry; rates locked at investment date apply for full tenure (except PPF, SCSS which float quarterly). &nbsp;|&nbsp; <strong>EEE Triple Benefit:</strong> PPF and SSY are EEE schemes — investment tax-free (80C), interest tax-free, maturity tax-free. &nbsp;|&nbsp; <strong>Source:</strong> Ministry of Finance notification, March 30, 2026. Q1 FY2026-27 unchanged for 8 consecutive quarters.
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     INVESTMENT PROFILER — SEED DATA
+     Phase 2 input selection foundation
+     ══════════════════════════════════════════ -->
+<div class="profiler-seed">
+  <div class="profiler-seed-header">
+    <span style="font-size:18px;">🧭</span>
+    <div class="ps-title">Investment Profiler — Next Phase</div>
+    <span class="ps-badge">PHASE 2 PREVIEW · SELECT YOUR PROFILE</span>
+  </div>
+
+  <div class="profiler-grid" id="profilerGrid">
+    <!-- Investor Type -->
+    <div class="profiler-card" onclick="selectCard(this,'type','retiree')" data-group="type" data-val="retiree">
+      <div class="pc-label">Investor Type</div>
+      <div class="pc-value">👴 Retiree</div>
+      <div class="pc-sub">Pension / Fixed Income</div>
+    </div>
+    <div class="profiler-card" onclick="selectCard(this,'type','senior')" data-group="type" data-val="senior">
+      <div class="pc-label">Investor Type</div>
+      <div class="pc-value">🧓 Senior Citizen</div>
+      <div class="pc-sub">60+ · SCSS eligible</div>
+    </div>
+    <div class="profiler-card" onclick="selectCard(this,'type','general')" data-group="type" data-val="general">
+      <div class="pc-label">Investor Type</div>
+      <div class="pc-value">🧑 General Investor</div>
+      <div class="pc-sub">Below 60 · All options</div>
+    </div>
+    <div class="profiler-card" onclick="selectCard(this,'type','girl_parent')" data-group="type" data-val="girl_parent">
+      <div class="pc-label">Investor Type</div>
+      <div class="pc-value">👧 Girl Child Parent</div>
+      <div class="pc-sub">SSY eligible</div>
+    </div>
+
+    <!-- Goal -->
+    <div class="profiler-card" onclick="selectCard(this,'goal','income')" data-group="goal" data-val="income">
+      <div class="pc-label">Primary Goal</div>
+      <div class="pc-value">💸 Monthly Income</div>
+      <div class="pc-sub">MIS · Non-cumulative FD</div>
+    </div>
+    <div class="profiler-card" onclick="selectCard(this,'goal','growth')" data-group="goal" data-val="growth">
+      <div class="pc-label">Primary Goal</div>
+      <div class="pc-value">📈 Corpus Growth</div>
+      <div class="pc-sub">Cumulative · Long tenor</div>
+    </div>
+    <div class="profiler-card" onclick="selectCard(this,'goal','tax')" data-group="goal" data-val="tax">
+      <div class="pc-label">Primary Goal</div>
+      <div class="pc-value">🧾 Tax Saving</div>
+      <div class="pc-sub">80C · 5-yr lock-in</div>
+    </div>
+    <div class="profiler-card" onclick="selectCard(this,'goal','liquidity')" data-group="goal" data-val="liquidity">
+      <div class="pc-label">Primary Goal</div>
+      <div class="pc-value">💧 Liquidity</div>
+      <div class="pc-sub">Short tenor · Premature OK</div>
+    </div>
+
+    <!-- Risk -->
+    <div class="profiler-card" onclick="selectCard(this,'risk','zero')" data-group="risk" data-val="zero">
+      <div class="pc-label">Risk Appetite</div>
+      <div class="pc-value">🛡 Zero Risk</div>
+      <div class="pc-sub">Govt + DICGC only</div>
+    </div>
+    <div class="profiler-card" onclick="selectCard(this,'risk','low')" data-group="risk" data-val="low">
+      <div class="pc-label">Risk Appetite</div>
+      <div class="pc-value">🟢 Low Risk</div>
+      <div class="pc-sub">AAA NBFCs acceptable</div>
+    </div>
+    <div class="profiler-card" onclick="selectCard(this,'risk','moderate')" data-group="risk" data-val="moderate">
+      <div class="pc-label">Risk Appetite</div>
+      <div class="pc-value">🟡 Moderate</div>
+      <div class="pc-sub">AA+ NBFCs for yield</div>
+    </div>
+  </div>
+
+  <div class="profiler-cta">
+    <strong>⚡ Phase 2:</strong> Based on your profile selections above, the next phase will auto-recommend the optimal institution + scheme + allocation split. Select your investor type, goal, and risk appetite above — this data will seed the recommendation engine. &nbsp;<span id="profilerStatus" style="color:var(--gold);">0 of 3 profile dimensions selected.</span>
+  </div>
+</div>
+
+<script>
+  // ── POST OFFICE TOGGLE ──
+  function togglePO() {
+    const body  = document.getElementById('poBody');
+    const arrow = document.getElementById('poArrow');
+    const isOpen = body.classList.contains('open');
+    body.classList.toggle('open', !isOpen);
+    arrow.classList.toggle('open', !isOpen);
+  }
+
+  // ── PROFILER SELECTOR ──
+  const selections = {};
+  function selectCard(el, group, val) {
+    // Deselect others in same group
+    document.querySelectorAll(`.profiler-card[data-group="${group}"]`)
+      .forEach(c => c.classList.remove('selected'));
+    el.classList.add('selected');
+    selections[group] = val;
+    const count = Object.keys(selections).length;
+    const status = document.getElementById('profilerStatus');
+    if (count < 3) {
+      status.textContent = `${count} of 3 profile dimensions selected.`;
+    } else {
+      status.innerHTML = `✅ Profile complete: <strong style="color:#c4b5fd">${selections.type}</strong> · <strong style="color:#c4b5fd">${selections.goal}</strong> · <strong style="color:#c4b5fd">${selections.risk}</strong> — Ready for Phase 2 recommendation engine.`;
+    }
+  }
+</script>
+
+<!-- FOOTNOTE -->
+<div class="footnote">
+  <strong>⚠ Disclaimer &amp; Key Notes:</strong> Rates are indicative as of April 2026 from publicly available sources (ZeeBiz, BusinessToday, Paisabazaar, bank websites). Rates are subject to change without notice — always confirm with the institution before investing.
+  <br/><br/>
+  <strong>DICGC vs. Rating Clarification:</strong> DICGC insurance (up to ₹5 lakh/depositor/bank) applies to all listed banks — this is <em>separate</em> from credit ratings (CRISIL, ICRA, IND). Credit ratings reflect overall financial strength; AA+ or AAA rated institutions are considered investment-grade.
+  <br/><br/>
+  <strong>Investor Guidance:</strong> For corpus safety &gt; ₹5 lakh, distribute across multiple banks. For NBFCs, restrict to AAA or AA+ rated issuers. Senior citizens should factor +0.50% additional rate offered by all institutions. Data sources: RBI, DICGC Act 1961, Paisabazaar, BusinessToday (Apr 24 2026).
+</div>
+
+</body>
+</html>
