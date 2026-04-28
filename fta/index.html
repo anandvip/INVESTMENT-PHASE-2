@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>India FTA Explorer 2026 | Entrepreneur Reference</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        details summary { cursor: pointer; }
+        .panel { transition: all 0.3s ease; }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <div class="max-w-7xl mx-auto px-6 py-10">
+        <h1 class="text-4xl font-bold text-gray-900 mb-2">India’s Free Trade Agreements Explorer</h1>
+        <p class="text-lg text-gray-600 mb-8">Alphabetical interactive reference for entrepreneurs. Filter by sector and explore opportunities in goods, services, and investment.</p>
+
+        <!-- Filters -->
+        <div class="bg-white shadow rounded-2xl p-6 mb-10">
+            <h2 class="text-xl font-semibold text-gray-800 mb-4">Filter by Sector of Interest</h2>
+            <div class="flex flex-wrap gap-3" id="filters">
+                <!-- Populated by JS -->
+            </div>
+            <button onclick="clearFilters()" class="mt-4 text-sm text-blue-600 hover:text-blue-700 font-medium">Clear All Filters</button>
+        </div>
+
+        <!-- Accordion Panels -->
+        <div id="panels-container" class="space-y-4">
+            <!-- Panels injected by JS or static; here static for self-containment -->
+            
+            <!-- ASEAN -->
+            **Summary:**
+
+                    <span>ASEAN (Brunei, Cambodia, Indonesia, Laos, Malaysia, Myanmar, Philippines, Singapore, Thailand, Vietnam) – Goods 2010 / Services 2015</span>
+                    <span class="text-blue-600 text-2xl leading-none">+</span>
+                
+                <div class="mt-4 text-sm text-gray-600">Established regional agreement providing tariff reductions and services liberalisation across Southeast Asia’s dynamic markets.</div>
+                <div class="mt-6 space-y-6">
+                    <div>
+                        <h3 class="font-medium text-gray-900">Key Trade Categories</h3>
+                        <ul class="list-disc pl-5 text-gray-700 mt-2">
+                            <li>Agriculture &amp; food products (palm oil, spices, processed foods)</li>
+                            <li>Electronics, machinery &amp; auto components</li>
+                            <li>Textiles, pharmaceuticals, and IT-enabled services</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="font-medium text-gray-900">Best Use Cases for Entrepreneurs</h3>
+                        <p class="text-gray-700 mt-2">Ideal for supply-chain integration in electronics and agri-processing. Exporters of pharmaceuticals and textiles benefit from cumulative rules of origin. Importers gain cost-effective access to raw materials and intermediate goods.</p>
+                    </div>
+                    <div class="text-xs text-gray-500">Utilisation tip: Review updated Rules of Origin via Indian Trade Portal for optimal duty benefits.</div>
+                </div>
+
+            <!-- Australia -->
+            **Summary:**
+
+                    <span>Australia – ECTA 2022</span>
+                    <span class="text-blue-600 text-2xl leading-none">+</span>
+                
+                <div class="mt-4 text-sm text-gray-600">Comprehensive agreement with near-100% tariff elimination on key Indian exports and critical minerals/energy resources from Australia.</div>
+                <div class="mt-6 space-y-6">
+                    <div>
+                        <h3 class="font-medium text-gray-900">Key Trade Categories</h3>
+                        <ul class="list-disc pl-5 text-gray-700 mt-2">
+                            <li>Pharmaceuticals, IT services, education, and professional services</li>
+                            <li>Critical minerals, energy, and agricultural inputs (import)</li>
+                            <li>Textiles, gems &amp; jewellery (export)</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="font-medium text-gray-900">Best Use Cases for Entrepreneurs</h3>
+                        <p class="text-gray-700 mt-2">Strong for tech and education service providers seeking Australian market entry. Agri-tech and food processing firms benefit from stable raw material imports. Export-focused SMEs in labour-intensive sectors gain tariff-free access.</p>
+                    </div>
+                </div>
+
+            <!-- EFTA -->
+            **Summary:**
+
+                    <span>EFTA (Iceland, Liechtenstein, Norway, Switzerland) – TEPA Oct 2025</span>
+                    <span class="text-blue-600 text-2xl leading-none">+</span>
+                
+                <div class="mt-4 text-sm text-gray-600">Includes binding US$100 billion investment commitment over 15 years alongside tariff preferences.</div>
+                <div class="mt-6 space-y-6">
+                    <div>
+                        <h3 class="font-medium text-gray-900">Key Trade Categories</h3>
+                        <ul class="list-disc pl-5 text-gray-700 mt-2">
+                            <li>Pharmaceuticals, precision machinery, chemicals</li>
+                            <li>High-tech equipment and services</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="font-medium text-gray-900">Best Use Cases for Entrepreneurs</h3>
+                        <p class="text-gray-700 mt-2">Exceptional for technology and pharma firms seeking European market access paired with direct foreign investment inflows. Engineering and innovation-driven startups benefit from capital and know-how transfer.</p>
+                    </div>
+                </div>
+
+            <!-- European Union -->
+            **Summary:**
+
+                    <span>European Union – FTA Jan 2026 (pending ratification)</span>
+                    <span class="text-blue-600 text-2xl leading-none">+</span>
+                
+                <div class="mt-4 text-sm text-gray-600">Largest-ever agreement covering 27 EU states with 97%+ tariff liberalisation on Indian exports.</div>
+                <div class="mt-6 space-y-6">
+                    <div>
+                        <h3 class="font-medium text-gray-900">Key Trade Categories</h3>
+                        <ul class="list-disc pl-5 text-gray-700 mt-2">
+                            <li>Textiles, apparel, gems &amp; jewellery, agriculture</li>
+                            <li>Pharmaceuticals, machinery, and services (IT, education)</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="font-medium text-gray-900">Best Use Cases for Entrepreneurs</h3>
+                        <p class="text-gray-700 mt-2">High-priority for labour-intensive exporters and agri-food processors. Technology and education service providers gain deep services liberalisation. Monitor ratification for immediate duty-free rollout.</p>
+                    </div>
+                </div>
+
+            <!-- Japan -->
+            **Summary:**
+
+                    <span>Japan – CEPA 2011</span>
+                    <span class="text-blue-600 text-2xl leading-none">+</span>
+                
+                <div class="mt-4 text-sm text-gray-600">Long-standing partnership focused on technology transfer and intermediate goods trade.</div>
+                <div class="mt-6 space-y-6">
+                    <div>
+                        <h3 class="font-medium text-gray-900">Key Trade Categories</h3>
+                        <ul class="list-disc pl-5 text-gray-700 mt-2">
+                            <li>Machinery, auto components, electronics</li>
+                            <li>Pharmaceuticals and chemicals</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="font-medium text-gray-900">Best Use Cases for Entrepreneurs</h3>
+                        <p class="text-gray-700 mt-2">Ideal for manufacturing and engineering firms pursuing joint ventures and supply-chain integration with Japanese partners.</p>
+                    </div>
+                </div>
+
+            <!-- Mauritius -->
+            **Summary:**
+
+                    <span>Mauritius – CECPA 2021</span>
+                    <span class="text-blue-600 text-2xl leading-none">+</span>
+                
+                <div class="mt-4 text-sm text-gray-600">Gateway agreement facilitating access to African markets via double taxation avoidance and investment protections.</div>
+                <div class="mt-6 space-y-6">
+                    <div>
+                        <h3 class="font-medium text-gray-900">Key Trade Categories</h3>
+                        <ul class="list-disc pl-5 text-gray-700 mt-2">
+                            <li>Textiles, pharmaceuticals, and agri-products</li>
+                            <li>Financial and IT services</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="font-medium text-gray-900">Best Use Cases for Entrepreneurs</h3>
+                        <p class="text-gray-700 mt-2">Strategic for Africa-focused exporters and investors using Mauritius as a hub for re-exports and regional expansion.</p>
+                    </div>
+                </div>
+
+            <!-- New Zealand -->
+            **Summary:**
+
+                    <span>New Zealand – FTA April 2026 (signed)</span>
+                    <span class="text-blue-600 text-2xl leading-none">+</span>
+                
+                <div class="mt-4 text-sm text-gray-600">100% duty-free access for the majority of Indian exports; fast-tracked agreement targeting bilateral trade doubling.</div>
+                <div class="mt-6 space-y-6">
+                    <div>
+                        <h3 class="font-medium text-gray-900">Key Trade Categories</h3>
+                        <ul class="list-disc pl-5 text-gray-700 mt-2">
+                            <li>Food processing, dairy alternatives, and agri-tech</li>
+                            <li>Education, IT, and professional services</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="font-medium text-gray-900">Best Use Cases for Entrepreneurs</h3>
+                        <p class="text-gray-700 mt-2">Excellent for agritech startups and food exporters. Education and technology service firms benefit from professional mobility provisions.</p>
+                    </div>
+                </div>
+
+            <!-- Oman -->
+            **Summary:**
+
+                    <span>Oman – CEPA December 2025</span>
+                    <span class="text-blue-600 text-2xl leading-none">+</span>
+                
+                <div class="mt-4 text-sm text-gray-600">Near-complete duty-free access for Indian textiles, gems, engineering, and food products into the Gulf.</div>
+                <div class="mt-6 space-y-6">
+                    <div>
+                        <h3 class="font-medium text-gray-900">Key Trade Categories</h3>
+                        <ul class="list-disc pl-5 text-gray-700 mt-2">
+                            <li>Textiles, leather, gems &amp; jewellery</li>
+                            <li>Agriculture, food processing, and engineering goods</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="font-medium text-gray-900">Best Use Cases for Entrepreneurs</h3>
+                        <p class="text-gray-700 mt-2">High-value for MSMEs in labour-intensive sectors seeking Gulf re-export hubs and diversified markets.</p>
+                    </div>
+                </div>
+
+            <!-- South Korea -->
+            **Summary:**
+
+                    <span>South Korea – CEPA 2010</span>
+                    <span class="text-blue-600 text-2xl leading-none">+</span>
+                
+                <div class="mt-4 text-sm text-gray-600">Broad tariff reductions supporting technology and manufacturing collaboration.</div>
+                <div class="mt-6 space-y-6">
+                    <div>
+                        <h3 class="font-medium text-gray-900">Key Trade Categories</h3>
+                        <ul class="list-disc pl-5 text-gray-700 mt-2">
+                            <li>Electronics, machinery, steel, and chemicals</li>
+                            <li>Pharmaceuticals and auto components</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="font-medium text-gray-900">Best Use Cases for Entrepreneurs</h3>
+                        <p class="text-gray-700 mt-2">Suitable for high-tech manufacturing and component exporters pursuing Korean supply-chain partnerships.</p>
+                    </div>
+                </div>
+
+            <!-- UAE -->
+            **Summary:**
+
+                    <span>United Arab Emirates – CEPA 2022</span>
+                    <span class="text-blue-600 text-2xl leading-none">+</span>
+                
+                <div class="mt-4 text-sm text-gray-600">Trade has exceeded US$100 billion annually with strong non-oil export growth.</div>
+                <div class="mt-6 space-y-6">
+                    <div>
+                        <h3 class="font-medium text-gray-900">Key Trade Categories</h3>
+                        <ul class="list-disc pl-5 text-gray-700 mt-2">
+                            <li>Textiles, gems &amp; jewellery, pharmaceuticals</li>
+                            <li>Food products and engineering goods</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="font-medium text-gray-900">Best Use Cases for Entrepreneurs</h3>
+                        <p class="text-gray-700 mt-2">Proven high-return gateway to Middle East and African markets. Ideal for gems, textiles, and food exporters leveraging re-export infrastructure.</p>
+                    </div>
+                </div>
+
+            <!-- United Kingdom -->
+            **Summary:**
+
+                    <span>United Kingdom – CETA July 2025 (in force \~April 2026)</span>
+                    <span class="text-blue-600 text-2xl leading-none">+</span>
+                
+                <div class="mt-4 text-sm text-gray-600">99% duty-free access with strong services and professional mobility provisions.</div>
+                <div class="mt-6 space-y-6">
+                    <div>
+                        <h3 class="font-medium text-gray-900">Key Trade Categories</h3>
+                        <ul class="list-disc pl-5 text-gray-700 mt-2">
+                            <li>Textiles, gems, pharmaceuticals, and food products</li>
+                            <li>IT/ITeS, financial services, and education</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="font-medium text-gray-900">Best Use Cases for Entrepreneurs</h3>
+                        <p class="text-gray-700 mt-2">Post-Brexit entry point for services exporters and labour-intensive manufacturers. Social security exemptions enhance mobility for professionals.</p>
+                    </div>
+                </div>
+        </div>
+    </div>
+
+    <script>
+        // Tailwind script already loaded
+        function initializeFilters() {
+            const sectors = [
+                {id: "agriculture", label: "Agriculture & Agritech"},
+                {id: "food", label: "Food & Beverages"},
+                {id: "technology", label: "Technology & AI"},
+                {id: "education", label: "Education & Professional Services"},
+                {id: "pharmaceuticals", label: "Pharmaceuticals & Chemicals"},
+                {id: "textiles", label: "Textiles & Apparel"},
+                {id: "engineering", label: "Engineering & Machinery"},
+                {id: "gems", label: "Gems & Jewellery"}
+            ];
+            const container = document.getElementById('filters');
+            sectors.forEach(s => {
+                const btn = document.createElement('button');
+                btn.className = 'px-4 py-2 bg-gray-100 hover:bg-blue-100 rounded-full text-sm font-medium transition-colors flex items-center gap-1';
+                btn.innerHTML = `<input type="checkbox" class="sector-checkbox" data-sector="${s.id}" onchange="applyFilters()"> ${s.label}`;
+                container.appendChild(btn);
+            });
+        }
+        
+        function applyFilters() {
+            const checked = Array.from(document.querySelectorAll('.sector-checkbox:checked')).map(cb => cb.dataset.sector);
+            const panels = document.querySelectorAll('.panel');
+            panels.forEach(panel => {
+                if (checked.length === 0) {
+                    panel.style.display = 'block';
+                    return;
+                }
+                const panelSectors = panel.dataset.sectors ? panel.dataset.sectors.split(' ') : [];
+                const match = checked.some(c => panelSectors.includes(c));
+                panel.style.display = match ? 'block' : 'none';
+            });
+        }
+        
+        function clearFilters() {
+            document.querySelectorAll('.sector-checkbox').forEach(cb => cb.checked = false);
+            applyFilters();
+        }
+        
+        // Initialize
+        window.onload = initializeFilters;
+    </script>
+</body>
+</html>
