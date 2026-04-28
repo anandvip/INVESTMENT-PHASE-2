@@ -621,6 +621,176 @@
         .colophon a { color: var(--indigo); }
 
         /* ============================================
+           ACRONYM TOOLTIPS
+           ============================================ */
+        abbr.gloss {
+            text-decoration: none;
+            border-bottom: 1px dotted var(--saffron);
+            cursor: help;
+            font-style: normal;
+            color: inherit;
+            transition: background 0.15s, border-color 0.15s;
+            padding: 0 1px;
+            border-radius: 2px;
+        }
+        abbr.gloss:hover, abbr.gloss:focus {
+            background: var(--saffron-bg);
+            border-bottom-color: var(--saffron);
+            outline: none;
+        }
+        abbr.gloss[aria-expanded="true"] {
+            background: var(--saffron-bg);
+            border-bottom-style: solid;
+        }
+
+        .tooltip-pop {
+            position: absolute;
+            max-width: 320px;
+            background: var(--ink);
+            color: var(--bg);
+            padding: 14px 16px 12px;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-lg);
+            font-family: var(--sans);
+            font-size: 13px;
+            line-height: 1.5;
+            z-index: 200;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: opacity 0.15s ease;
+        }
+        .tooltip-pop.show {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+        .tooltip-pop::after {
+            content: '';
+            position: absolute;
+            left: var(--arrow-left, 50%);
+            transform: translateX(-50%);
+            border: 7px solid transparent;
+        }
+        .tooltip-pop[data-pos="above"]::after {
+            top: 100%;
+            border-top-color: var(--ink);
+        }
+        .tooltip-pop[data-pos="below"]::after {
+            bottom: 100%;
+            border-bottom-color: var(--ink);
+        }
+        .tt-title {
+            font-family: var(--serif);
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 4px;
+            color: #FAE7C8;
+        }
+        .tt-full {
+            font-family: var(--sans);
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--bg);
+            opacity: 0.85;
+            font-style: italic;
+            display: block;
+            margin-top: 2px;
+        }
+        .tt-desc {
+            color: rgba(250,246,238,0.88);
+            margin: 8px 0 10px;
+        }
+        .tt-link {
+            display: inline-block;
+            font-family: var(--mono);
+            font-size: 11px;
+            letter-spacing: 0.05em;
+            color: #FAE7C8;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(250,231,200,0.4);
+            padding-bottom: 1px;
+        }
+        .tt-link:hover { color: var(--bg); border-bottom-color: var(--bg); }
+
+        /* ============================================
+           GLOSSARY SECTION
+           ============================================ */
+        .glossary {
+            margin-top: 56px;
+            padding: 40px 36px 44px;
+            background: var(--surface);
+            border: 1px solid var(--rule);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+        }
+        .glossary-h {
+            font-family: var(--serif);
+            font-size: 32px;
+            font-weight: 500;
+            margin-bottom: 6px;
+            font-variation-settings: "opsz" 144;
+        }
+        .glossary-deck {
+            font-size: 14.5px;
+            color: var(--ink-soft);
+            margin-bottom: 28px;
+            max-width: 64ch;
+            line-height: 1.55;
+        }
+        .glossary-group {
+            margin-bottom: 32px;
+        }
+        .glossary-group:last-child { margin-bottom: 0; }
+        .glossary-group-h {
+            font-family: var(--mono);
+            font-size: 11px;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--saffron);
+            margin: 0 0 16px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--saffron-bg);
+            font-weight: 500;
+        }
+        .glossary-entries {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 18px 28px;
+        }
+        .glossary-entry {
+            scroll-margin-top: 90px;
+            padding: 4px 0;
+            transition: background 0.6s ease;
+            border-radius: var(--radius-sm);
+            padding-left: 8px;
+            margin-left: -8px;
+        }
+        .glossary-entry.flash {
+            background: var(--saffron-bg);
+        }
+        .glossary-acr {
+            font-family: var(--serif);
+            font-size: 17px;
+            font-weight: 600;
+            color: var(--ink);
+        }
+        .glossary-full {
+            font-family: var(--sans);
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--saffron);
+            margin-bottom: 4px;
+            font-style: italic;
+        }
+        .glossary-desc {
+            font-size: 13.5px;
+            line-height: 1.55;
+            color: var(--ink-soft);
+            margin: 0;
+        }
+
+        /* ============================================
            UTILITY
            ============================================ */
         .visually-hidden {
@@ -739,6 +909,15 @@
             <h3>No agreements match these filters.</h3>
             <p>Try clearing one dimension, or use the search box for a broader query.</p>
         </div>
+
+        <!-- ============================================
+             GLOSSARY
+             ============================================ -->
+        <section class="glossary" id="glossary" aria-label="Glossary of trade terms">
+            <h2 class="glossary-h">Glossary</h2>
+            <p class="glossary-deck">Trade documents are dense with acronyms because they evolved among practitioners who already share the vocabulary. Hover or tap any underlined term in the panels above to see a quick explanation; below is the full reference, grouped by category.</p>
+            <div id="glossaryContent"></div>
+        </section>
 
         <!-- ============================================
              PIPELINE WATCH
@@ -1691,6 +1870,93 @@ const FTA_DATA = [
 ];
 
 /* ============================================
+   GLOSSARY — acronyms, full forms, descriptions
+   ============================================ */
+const GLOSSARY = {
+    /* Agreement types */
+    'FTA':    {full: 'Free Trade Agreement', desc: 'A treaty between two or more countries that reduces or eliminates tariffs and barriers on substantially all trade. Uses a "negative list" of excluded goods. India\'s Sri Lanka FTA is a classic example.', group: 'agreement'},
+    'PTA':    {full: 'Preferential Trade Agreement', desc: 'A narrower agreement that reduces tariffs on a "positive list" of specified products only. Less ambitious than an FTA but easier to negotiate. India\'s MERCOSUR PTA is an example.', group: 'agreement'},
+    'CEPA':   {full: 'Comprehensive Economic Partnership Agreement', desc: 'An integrated agreement covering goods, services, investment, and regulatory areas (IPR, competition, government procurement). Goes deeper than an FTA. India\'s UAE CEPA is the prototype.', group: 'agreement'},
+    'CECA':   {full: 'Comprehensive Economic Cooperation Agreement', desc: 'Similar in scope to a CEPA — covers goods, services, investment, and regulatory cooperation. India uses CECA terminology with Singapore and Malaysia.', group: 'agreement'},
+    'CECPA':  {full: 'Comprehensive Economic Cooperation and Partnership Agreement', desc: 'Variant naming used for the India-Mauritius agreement (2021). Functions like a CEPA/CECA hybrid.', group: 'agreement'},
+    'ECTA':   {full: 'Economic Cooperation and Trade Agreement', desc: 'A focused, "early-harvest" style agreement covering goods and selected services. India-Australia ECTA (2022) is a prelude to a fuller CECA.', group: 'agreement'},
+    'CETA':   {full: 'Comprehensive Economic and Trade Agreement', desc: 'Term used for the India-UK agreement (2025/26). Covers goods, services, investment, and includes a parallel social-security pact (the Double Contribution Convention).', group: 'agreement'},
+    'TEPA':   {full: 'Trade and Economic Partnership Agreement', desc: 'Term used for the India-EFTA agreement (signed 2024, in force 2025). Notable for a binding US$100 bn investment commitment from EFTA states.', group: 'agreement'},
+    'EHS':    {full: 'Early Harvest Scheme', desc: 'A limited initial agreement covering a small subset of products, intended as a precursor to a fuller FTA. India-Thailand EHS covers just 82 tariff lines.', group: 'agreement'},
+
+    /* Country / regional blocs */
+    'ASEAN':   {full: 'Association of Southeast Asian Nations', desc: '10-country bloc: Brunei, Cambodia, Indonesia, Laos, Malaysia, Myanmar, Philippines, Singapore, Thailand, Vietnam. ~660 million consumers.', group: 'regional'},
+    'APTA':    {full: 'Asia-Pacific Trade Agreement', desc: 'Formerly the Bangkok Agreement (1975). India\'s oldest preferential pact and only formal preferential channel with China. Members: Bangladesh, China, India, Laos, Mongolia, S. Korea, Sri Lanka.', group: 'regional'},
+    'SAFTA':   {full: 'South Asian Free Trade Area', desc: 'Bloc-level FTA among SAARC members: Afghanistan, Bangladesh, Bhutan, India, Maldives, Nepal, Pakistan, Sri Lanka. In force since 2006.', group: 'regional'},
+    'SAARC':   {full: 'South Asian Association for Regional Cooperation', desc: 'Regional intergovernmental organisation of 8 South Asian states. SAFTA is the trade arm.', group: 'regional'},
+    'MERCOSUR':{full: 'Mercado Común del Sur (Southern Common Market)', desc: 'South American trade bloc: Argentina, Brazil, Paraguay, Uruguay (Venezuela suspended). India has a PTA with this bloc since 2009.', group: 'regional'},
+    'EFTA':    {full: 'European Free Trade Association', desc: '4-state European bloc not in the EU: Iceland, Liechtenstein, Norway, Switzerland.', group: 'regional'},
+    'EU':      {full: 'European Union', desc: '27-state economic and political union. India\'s largest trading partner (~US$135 bn). FTA concluded January 2026, ratification pending end-2026.', group: 'regional'},
+    'UAE':     {full: 'United Arab Emirates', desc: 'Federation of seven Gulf emirates including Dubai and Abu Dhabi. India\'s third-largest trading partner.', group: 'regional'},
+    'BIMSTEC': {full: 'Bay of Bengal Initiative for Multi-Sectoral Technical and Economic Cooperation', desc: '7-state Bay-of-Bengal regional grouping: Bangladesh, Bhutan, India, Myanmar, Nepal, Sri Lanka, Thailand. Goods FTA framework long-pending.', group: 'regional'},
+    'GCC':     {full: 'Gulf Cooperation Council', desc: '6-state Gulf Arab bloc: Bahrain, Kuwait, Oman, Qatar, Saudi Arabia, UAE. Bloc-level FTA negotiations with India remain exploratory.', group: 'regional'},
+    'LDC':     {full: 'Least Developed Country', desc: 'UN-classified low-income developing nations. Receive more generous tariff concessions and longer phase-in timelines under SAFTA and APTA.', group: 'regional'},
+    'NLDC':    {full: 'Non-Least Developed Country', desc: 'Higher-income SAFTA members (India, Pakistan, Sri Lanka). Bound to faster tariff liberalisation than LDCs.', group: 'regional'},
+    'RCEP':    {full: 'Regional Comprehensive Economic Partnership', desc: '15-country mega-bloc (ASEAN + China, Japan, S. Korea, Australia, NZ). India withdrew in 2019 over concerns about trade deficit, dairy, and agriculture exposure.', group: 'regional'},
+
+    /* Trade mechanics */
+    'HS':   {full: 'Harmonised System (Harmonised Commodity Description and Coding System)', desc: 'WCO\'s global product-classification system. 6-digit codes group products into 99 chapters. "HS 30" = Pharmaceuticals; "HS 71" = Gems & Jewellery; "HS 84" = Machinery.', group: 'mechanics'},
+    'MFN':  {full: 'Most Favoured Nation', desc: 'WTO principle: a country\'s lowest-applied tariff to any partner must be extended to all WTO members. The "default" rate that FTA preferential rates undercut.', group: 'mechanics'},
+    'TRQ':  {full: 'Tariff Rate Quota', desc: 'A two-tier tariff: a low (or zero) rate applies up to a fixed quantity ("in-quota"); a higher rate applies beyond. Used for sensitive items like sugar or premium autos.', group: 'mechanics'},
+    'CTSH': {full: 'Change in Tariff Sub-Heading', desc: 'A Rules-of-Origin test: the final product must classify under a different 6-digit HS sub-heading than its non-originating inputs. Demonstrates substantial transformation.', group: 'mechanics'},
+    'RoO':  {full: 'Rules of Origin', desc: 'Criteria determining a product\'s "economic nationality". Without satisfying RoO, an exporter cannot claim preferential FTA tariffs even if their country has an FTA with the destination.', group: 'mechanics'},
+    'CoO':  {full: 'Certificate of Origin', desc: 'Document issued by an authorised body certifying that goods meet the FTA\'s Rules of Origin. Required for preferential-tariff claim at destination customs.', group: 'mechanics'},
+    'TLP':  {full: 'Tariff Liberalisation Programme', desc: 'The phased schedule by which FTA partners reduce tariffs over years to reach the agreed end-state.', group: 'mechanics'},
+    'EIF':  {full: 'Entry Into Force', desc: 'The date an agreement legally takes effect after signature, ratification, and exchange of instruments. Tariff cuts typically begin on this date.', group: 'mechanics'},
+    'NIC':  {full: 'National Insurance Contributions (UK)', desc: 'UK social-security tax on employers and employees. The India-UK Double Contribution Convention exempts short-term Indian assignees from UK NIC for up to 36 months — a major cost saving for IT services.', group: 'mechanics'},
+    'DTAA': {full: 'Double Taxation Avoidance Agreement', desc: 'A bilateral tax treaty preventing the same income being taxed in both jurisdictions. India has 94+ comprehensive DTAAs.', group: 'mechanics'},
+    'CBAM': {full: 'Carbon Border Adjustment Mechanism', desc: 'EU policy levying carbon costs on imports of carbon-intensive goods (cement, steel, fertilisers, aluminium, hydrogen, electricity) starting 2026. Will operate alongside the India-EU FTA — exporters need parallel carbon-accounting compliance.', group: 'mechanics'},
+    'MRA':  {full: 'Mutual Recognition Agreement', desc: 'Agreement where each party recognises the other\'s product testing/certification, reducing duplicate compliance costs. India-UK CETA includes pharma MRA via MHRA.', group: 'mechanics'},
+    'WTO':  {full: 'World Trade Organization', desc: '164-member multilateral body governing global trade rules. FTAs operate as exceptions to MFN under WTO\'s Article XXIV (goods) and Article V (services).', group: 'mechanics'},
+
+    /* Service modes (GATS) */
+    'Mode 1': {full: 'Mode 1 — Cross-border supply', desc: 'GATS service-trade mode: the service is delivered across borders without supplier or consumer moving (e.g., software developed in India for a UK client).', group: 'modes'},
+    'Mode 2': {full: 'Mode 2 — Consumption abroad', desc: 'GATS service-trade mode: the consumer travels to the supplier\'s country (e.g., an Indian student studying in Australia).', group: 'modes'},
+    'Mode 3': {full: 'Mode 3 — Commercial presence', desc: 'GATS service-trade mode: the supplier establishes a branch/subsidiary in the consumer\'s country (e.g., an Indian IT firm opening a London office).', group: 'modes'},
+    'Mode 4': {full: 'Mode 4 — Movement of natural persons', desc: 'GATS service-trade mode: individuals temporarily relocate to deliver services (e.g., Indian engineers on a short-term UK assignment).', group: 'modes'},
+
+    /* Indian and partner agencies */
+    'DGFT':   {full: 'Directorate General of Foreign Trade (India)', desc: 'Indian agency under MoCI administering import-export policy and issuing IEC codes, licences, and Certificates of Origin.', group: 'agency'},
+    'DGCI&S': {full: 'Directorate General of Commercial Intelligence and Statistics', desc: 'Indian agency producing official trade statistics and issuing CoOs under specific FTAs.', group: 'agency'},
+    'EIA':    {full: 'Export Inspection Agency (India)', desc: 'Indian statutory agency authorised to inspect and certify exports and to issue Certificates of Origin under various FTAs.', group: 'agency'},
+    'FIEO':   {full: 'Federation of Indian Export Organisations', desc: 'Apex export-promotion body. Issues CoOs and supports exporters with documentation.', group: 'agency'},
+    'MPEDA':  {full: 'Marine Products Export Development Authority', desc: 'Indian statutory body promoting marine-product exports (seafood, fisheries).', group: 'agency'},
+    'MEA':    {full: 'Ministry of External Affairs (India)', desc: 'Foreign-relations ministry. Handles diplomatic aspects of trade negotiations.', group: 'agency'},
+    'MoCI':   {full: 'Ministry of Commerce and Industry (India)', desc: 'Lead Indian ministry for trade policy and FTA negotiations.', group: 'agency'},
+    'MHRA':   {full: 'Medicines and Healthcare products Regulatory Agency (UK)', desc: 'UK drug regulator. India-UK CETA includes mutual-recognition provisions reducing duplicate clinical-trial requirements for Indian pharma.', group: 'agency'},
+
+    /* Specific agreement names */
+    'AITIGA': {full: 'ASEAN-India Trade in Goods Agreement', desc: 'Goods-pillar of the India-ASEAN FTA, in force since 2010. Currently under review for upgrade.', group: 'specific'},
+    'ISFTA':  {full: 'India-Sri Lanka Free Trade Agreement', desc: 'India\'s first proper FTA — signed 1998, in force 2000. Goods only; services-and-investment CEPA upgrade pending.', group: 'specific'},
+    'IJCEPA': {full: 'India-Japan Comprehensive Economic Partnership Agreement', desc: 'India-Japan CEPA, in force since 2011. Joint Committee meets periodically to review implementation.', group: 'specific'},
+    'MICECA': {full: 'Malaysia-India Comprehensive Economic Cooperation Agreement', desc: 'Bilateral CECA (2011) layered atop the ASEAN FTA, with deeper services and investment provisions specific to Malaysia.', group: 'specific'},
+
+    /* Common business terms */
+    'FDI':    {full: 'Foreign Direct Investment', desc: 'Cross-border investment establishing or acquiring a controlling interest in a business. Distinct from portfolio investment.', group: 'business'},
+    'MSME':   {full: 'Micro, Small and Medium Enterprises', desc: 'Indian classification of enterprises by investment and turnover thresholds. Many FTAs explicitly target MSME-friendly outcomes.', group: 'business'},
+    'OEM':    {full: 'Original Equipment Manufacturer', desc: 'A producer that makes parts/components incorporated into another company\'s end product (e.g., an auto-component supplier to Toyota).', group: 'business'},
+    'FMCG':   {full: 'Fast-Moving Consumer Goods', desc: 'High-volume, low-margin consumer products: food, beverages, toiletries, household goods.', group: 'business'},
+    'LNG':    {full: 'Liquefied Natural Gas', desc: 'Natural gas chilled to liquid form for transport. Major Indian import from Qatar, UAE, USA, and Australia.', group: 'business'},
+    'IT/ITeS':{full: 'Information Technology / IT-enabled Services', desc: 'Software development, BPO, KPO, and digital services. India\'s flagship services-export sector.', group: 'business'},
+    'AYUSH':  {full: 'Ayurveda, Yoga, Naturopathy, Unani, Siddha, Homoeopathy', desc: 'Indian traditional-medicine systems. Several FTAs include AYUSH market-access provisions for Indian practitioners and products.', group: 'business'}
+};
+
+const GLOSSARY_GROUPS = [
+    {id: 'agreement', label: 'Agreement Types'},
+    {id: 'regional',  label: 'Country & Regional Blocs'},
+    {id: 'mechanics', label: 'Trade Mechanics'},
+    {id: 'modes',     label: 'Services Trade Modes (GATS)'},
+    {id: 'agency',    label: 'Government Agencies & Regulators'},
+    {id: 'specific',  label: 'Specific Agreement Names'},
+    {id: 'business',  label: 'Business & Commercial Terms'}
+];
+
+/* ============================================
    FILTER TAXONOMY
    ============================================ */
 const FILTERS = {
@@ -1945,6 +2211,9 @@ function renderPanels() {
     list.innerHTML = filtered.map(renderPanel).join('');
     count.textContent = `${filtered.length} of ${FTA_DATA.length}`;
 
+    // Wrap acronyms in newly-rendered panels
+    wrapAcronyms(list);
+
     if (filtered.length === 0) {
         noRes.classList.add('show');
     } else {
@@ -1976,11 +2245,238 @@ function renderPanels() {
 }
 
 /* ============================================
+   ACRONYM WRAPPING + TOOLTIPS
+   ============================================ */
+const ACRONYMS_BY_LENGTH = Object.keys(GLOSSARY).sort((a, b) => b.length - a.length);
+
+function escapeRegex(str) {
+    return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+function slugForAcronym(acr) {
+    return acr.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+}
+
+function wrapAcronyms(rootEl) {
+    const skipTags = new Set(['ABBR', 'CODE', 'A', 'SCRIPT', 'STYLE', 'INPUT', 'BUTTON', 'SELECT']);
+
+    function processTextNode(node) {
+        const text = node.textContent;
+        const matches = [];
+
+        ACRONYMS_BY_LENGTH.forEach(acr => {
+            const escaped = escapeRegex(acr);
+            // Word-boundary regex; for "Mode 1" the space is internal
+            const regex = new RegExp(`(^|[^A-Za-z0-9])(${escaped})(?=$|[^A-Za-z0-9])`, 'g');
+            let m;
+            while ((m = regex.exec(text)) !== null) {
+                const start = m.index + m[1].length;
+                matches.push({start, length: acr.length, acr});
+            }
+        });
+
+        if (matches.length === 0) return;
+
+        // Filter overlaps — longest acronym wins (we already iterate longest-first, so first match at a position holds)
+        matches.sort((a, b) => a.start - b.start || b.length - a.length);
+        const filtered = [];
+        let lastEnd = 0;
+        matches.forEach(m => {
+            if (m.start >= lastEnd) {
+                filtered.push(m);
+                lastEnd = m.start + m.length;
+            }
+        });
+
+        if (filtered.length === 0) return;
+
+        const frag = document.createDocumentFragment();
+        let cursor = 0;
+        filtered.forEach(m => {
+            if (m.start > cursor) {
+                frag.appendChild(document.createTextNode(text.substring(cursor, m.start)));
+            }
+            const abbr = document.createElement('abbr');
+            abbr.className = 'gloss';
+            abbr.dataset.acr = m.acr;
+            abbr.setAttribute('title', GLOSSARY[m.acr].full);
+            abbr.setAttribute('tabindex', '0');
+            abbr.setAttribute('aria-expanded', 'false');
+            abbr.textContent = m.acr;
+            frag.appendChild(abbr);
+            cursor = m.start + m.length;
+        });
+        if (cursor < text.length) {
+            frag.appendChild(document.createTextNode(text.substring(cursor)));
+        }
+        node.parentNode.replaceChild(frag, node);
+    }
+
+    function walk(node) {
+        if (node.nodeType === Node.TEXT_NODE) {
+            processTextNode(node);
+            return;
+        }
+        if (node.nodeType !== Node.ELEMENT_NODE) return;
+        if (skipTags.has(node.tagName)) return;
+        // Snapshot children first since we will modify
+        const kids = [...node.childNodes];
+        kids.forEach(walk);
+    }
+
+    walk(rootEl);
+}
+
+/* ============================================
+   TOOLTIP SYSTEM
+   ============================================ */
+let tooltipEl = null;
+let activeAbbr = null;
+
+function ensureTooltip() {
+    if (tooltipEl) return tooltipEl;
+    tooltipEl = document.createElement('div');
+    tooltipEl.className = 'tooltip-pop';
+    tooltipEl.setAttribute('role', 'tooltip');
+    document.body.appendChild(tooltipEl);
+    return tooltipEl;
+}
+
+function showTooltip(abbr) {
+    const acr = abbr.dataset.acr;
+    const entry = GLOSSARY[acr];
+    if (!entry) return;
+    const tip = ensureTooltip();
+
+    tip.innerHTML = `
+        <div class="tt-title">${acr}<span class="tt-full">${entry.full}</span></div>
+        <div class="tt-desc">${entry.desc}</div>
+        <a class="tt-link" href="#glossary-${slugForAcronym(acr)}" data-glossary-link="${acr}">Learn more in glossary →</a>
+    `;
+
+    // Position
+    const rect = abbr.getBoundingClientRect();
+    tip.style.visibility = 'hidden';
+    tip.classList.add('show');
+    const tipRect = tip.getBoundingClientRect();
+
+    const showAbove = rect.top > tipRect.height + 20;
+    const left = Math.min(
+        Math.max(12, rect.left + rect.width / 2 - tipRect.width / 2),
+        window.innerWidth - tipRect.width - 12
+    );
+    const top = showAbove
+        ? rect.top + window.scrollY - tipRect.height - 12
+        : rect.bottom + window.scrollY + 12;
+
+    tip.style.left = `${left}px`;
+    tip.style.top = `${top}px`;
+    tip.dataset.pos = showAbove ? 'above' : 'below';
+
+    // Adjust arrow horizontal position
+    const arrowLeftPct = ((rect.left + rect.width / 2 - left) / tipRect.width) * 100;
+    tip.style.setProperty('--arrow-left', `${arrowLeftPct}%`);
+
+    tip.style.visibility = '';
+    abbr.setAttribute('aria-expanded', 'true');
+    activeAbbr = abbr;
+}
+
+function hideTooltip() {
+    if (!tooltipEl) return;
+    tooltipEl.classList.remove('show');
+    if (activeAbbr) {
+        activeAbbr.setAttribute('aria-expanded', 'false');
+        activeAbbr = null;
+    }
+}
+
+function setupTooltipHandlers() {
+    document.addEventListener('mouseover', e => {
+        const abbr = e.target.closest('abbr.gloss');
+        if (abbr && !('ontouchstart' in window)) showTooltip(abbr);
+    });
+    document.addEventListener('mouseout', e => {
+        const abbr = e.target.closest('abbr.gloss');
+        if (!abbr) return;
+        // Only auto-hide if not "pinned" by click
+        const related = e.relatedTarget;
+        if (related && tooltipEl && tooltipEl.contains(related)) return;
+        if (!('ontouchstart' in window)) hideTooltip();
+    });
+    document.addEventListener('click', e => {
+        const abbr = e.target.closest('abbr.gloss');
+        const insideTip = e.target.closest('.tooltip-pop');
+        if (abbr) {
+            e.preventDefault();
+            if (activeAbbr === abbr) {
+                hideTooltip();
+            } else {
+                showTooltip(abbr);
+            }
+        } else if (!insideTip && activeAbbr) {
+            hideTooltip();
+        }
+    });
+    document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') hideTooltip();
+    });
+    // Glossary link inside tooltip
+    document.addEventListener('click', e => {
+        const link = e.target.closest('[data-glossary-link]');
+        if (!link) return;
+        e.preventDefault();
+        const acr = link.dataset.glossaryLink;
+        const target = document.getElementById(`glossary-${slugForAcronym(acr)}`);
+        hideTooltip();
+        if (target) {
+            target.scrollIntoView({behavior: 'smooth', block: 'center'});
+            target.classList.add('flash');
+            setTimeout(() => target.classList.remove('flash'), 1800);
+        }
+    });
+}
+
+/* ============================================
+   GLOSSARY RENDERER
+   ============================================ */
+function renderGlossary() {
+    const container = document.getElementById('glossaryContent');
+    if (!container) return;
+    let html = '';
+    GLOSSARY_GROUPS.forEach(group => {
+        const entries = Object.entries(GLOSSARY)
+            .filter(([_, v]) => v.group === group.id)
+            .sort(([a], [b]) => a.localeCompare(b));
+        if (entries.length === 0) return;
+        html += `<div class="glossary-group">
+            <h3 class="glossary-group-h">${group.label}</h3>
+            <div class="glossary-entries">`;
+        entries.forEach(([acr, def]) => {
+            const slug = slugForAcronym(acr);
+            html += `<div class="glossary-entry" id="glossary-${slug}">
+                <div class="glossary-acr">${acr}</div>
+                <div class="glossary-full">${def.full}</div>
+                <p class="glossary-desc">${def.desc}</p>
+            </div>`;
+        });
+        html += `</div></div>`;
+    });
+    container.innerHTML = html;
+}
+
+/* ============================================
    INIT
    ============================================ */
 function init() {
     renderFilterChips();
+    renderGlossary();
     renderPanels();
+
+    // Wrap acronyms in static sections (masthead, pipeline, footer)
+    document.querySelectorAll('.masthead, .pipeline, .colophon').forEach(wrapAcronyms);
+
+    setupTooltipHandlers();
 
     document.getElementById('search').addEventListener('input', e => {
         state.searchQuery = e.target.value.trim();
