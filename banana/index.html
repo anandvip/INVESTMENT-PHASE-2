@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KhetSe — Master Research Prompts</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Mono:wght@300;400;500&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --soil: #2C1A0E;
+    --bark: #4A2C17;
+    --harvest: #C8873A;
+    --leaf: #3D6B35;
+    --sprout: #7AB648;
+    --peel: #F5D060;
+    --cream: #FAF5E9;
+    --fog: #EDE8DC;
+    --mist: #D6CDB8;
+    --ink: #1A1208;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--soil);
+    padding: 60px 48px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(200,135,58,0.18) 0%, transparent 70%);
+  }
+  header::after {
+    content: 'KS';
+    position: absolute;
+    bottom: -20px; right: 40px;
+    font-family: 'Playfair Display', serif;
+    font-size: 140px;
+    font-weight: 900;
+    color: rgba(255,255,255,0.04);
+    letter-spacing: -4px;
+  }
+  .header-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--harvest);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 5vw, 52px);
+    font-weight: 900;
+    color: var(--cream);
+    line-height: 1.1;
+    margin-bottom: 12px;
+  }
+  header h1 span { color: var(--harvest); }
+  .header-sub {
+    color: var(--mist);
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    max-width: 540px;
+  }
+
+  /* ── LAYOUT ── */
+  .container { max-width: 960px; margin: 0 auto; padding: 0 32px 80px; }
+
+  /* ── UNIT BADGES ── */
+  .unit-nav {
+    display: flex;
+    gap: 12px;
+    padding: 32px 0 0;
+    flex-wrap: wrap;
+  }
+  .badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    padding: 8px 18px;
+    border-radius: 2px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .badge-banana { background: var(--peel); color: var(--soil); }
+  .badge-green  { background: var(--sprout); color: #fff; }
+  .badge-note   { background: transparent; border: 1px solid var(--mist); color: var(--bark); }
+
+  /* ── SECTION DIVIDER ── */
+  .unit-header {
+    margin-top: 56px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--soil);
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+  }
+  .unit-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 64px;
+    font-weight: 900;
+    line-height: 1;
+    color: var(--fog);
+    flex-shrink: 0;
+    margin-top: -8px;
+  }
+  .unit-header-text h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--soil);
+    line-height: 1.2;
+  }
+  .unit-header-text p {
+    font-size: 13px;
+    color: var(--bark);
+    margin-top: 6px;
+    font-style: italic;
+  }
+
+  /* ── PROMPT BLOCK ── */
+  .prompt-wrap {
+    margin-top: 32px;
+    background: var(--soil);
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 8px 40px rgba(44,26,14,0.12);
+  }
+  .prompt-toolbar {
+    background: var(--bark);
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .prompt-toolbar-left {
+    display: flex; align-items: center; gap: 8px;
+  }
+  .dot { width: 10px; height: 10px; border-radius: 50%; }
+  .dot-r { background: #FF5F57; }
+  .dot-y { background: #FEBC2E; }
+  .dot-g { background: #28C840; }
+  .prompt-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--mist);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  .copy-btn {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 6px;
+    transition: background 0.18s;
+    outline: none;
+    flex-shrink: 0;
+  }
+  .copy-btn:hover { background: rgba(214,205,184,0.10); }
+  .copy-btn:active { background: rgba(214,205,184,0.18); }
+
+  /* overlapping rectangles icon */
+  .copy-icon {
+    position: relative;
+    width: 18px;
+    height: 20px;
+    flex-shrink: 0;
+  }
+  .copy-icon .rect-back {
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 13px; height: 15px;
+    border: 1.8px solid rgba(214,205,184,0.55);
+    border-radius: 3px;
+    background: transparent;
+  }
+  .copy-icon .rect-front {
+    position: absolute;
+    top: 0; right: 0;
+    width: 13px; height: 15px;
+    border: 1.8px solid rgba(214,205,184,0.55);
+    border-radius: 3px;
+    background: var(--bark);
+  }
+  .copy-btn:hover .rect-back,
+  .copy-btn:hover .rect-front {
+    border-color: rgba(214,205,184,0.90);
+  }
+
+  .copy-btn-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: rgba(214,205,184,0.55);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    transition: color 0.18s;
+    white-space: nowrap;
+  }
+  .copy-btn:hover .copy-btn-label { color: rgba(214,205,184,0.95); }
+
+  .copy-btn.copied .copy-btn-label { color: var(--sprout); }
+  .copy-btn.copied .rect-back,
+  .copy-btn.copied .rect-front { border-color: var(--sprout); }
+  .prompt-body {
+    padding: 28px 32px 36px;
+    font-family: 'DM Mono', monospace;
+    font-size: 12.5px;
+    line-height: 1.9;
+    color: #D6CDB8;
+    white-space: pre-wrap;
+    overflow-x: auto;
+  }
+
+  /* ── COLOUR-CODED LINES ── */
+  .prompt-body .section-head { color: var(--harvest); font-weight: 500; }
+  .prompt-body .verified     { color: var(--sprout); }
+  .prompt-body .field-check  { color: var(--peel); }
+  .prompt-body .action       { color: #A8D8EA; }
+  .prompt-body .comment      { color: rgba(214,205,184,0.4); font-style: italic; }
+
+  /* ── INSIGHT CARDS ── */
+  .insight-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+    margin-top: 28px;
+  }
+  .insight-card {
+    background: var(--fog);
+    border-left: 3px solid var(--harvest);
+    padding: 18px 20px;
+    border-radius: 2px;
+  }
+  .insight-card.green { border-left-color: var(--sprout); }
+  .insight-card h4 {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--bark);
+    margin-bottom: 8px;
+  }
+  .insight-card p {
+    font-size: 13px;
+    color: var(--soil);
+    line-height: 1.6;
+  }
+  .insight-card strong { color: var(--bark); font-weight: 700; }
+
+  /* ── LEGEND ── */
+  .legend {
+    margin-top: 48px;
+    background: var(--fog);
+    border-radius: 4px;
+    padding: 24px 28px;
+  }
+  .legend h3 {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--bark);
+    margin-bottom: 16px;
+  }
+  .legend-items {
+    display: flex; flex-wrap: wrap; gap: 20px;
+  }
+  .legend-item {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 12px; color: var(--soil);
+  }
+  .legend-dot {
+    width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--mist);
+    padding: 32px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    background: var(--cream);
+  }
+  footer p {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--mist);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 600px) {
+    header { padding: 40px 24px 36px; }
+    .container { padding: 0 20px 60px; }
+    .prompt-body { padding: 20px; font-size: 11px; }
+    footer { padding: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-tag">KhetSe Agri-Enterprise · Pehowa, Haryana</div>
+  <h1>Master Research<br><span>Prompts</span></h1>
+  <p class="header-sub">Two parallel DPR-grade research prompts — Banana Zero-Waste Processing Unit &amp; Microgreens / Sprouts Subsidiary. Use each independently in a fresh Claude session.</p>
+</header>
+
+<div class="container">
+
+  <div class="unit-nav">
+    <span class="badge badge-banana">Unit A — Banana Processing</span>
+    <span class="badge badge-green">Unit B — Microgreens &amp; Sprouts</span>
+    <span class="badge badge-note">Two Separate DPRs</span>
+    <span class="badge badge-note">Mandi Procurement</span>
+  </div>
+
+  <!-- ════════════════════════════════════════
+       UNIT A — BANANA
+  ════════════════════════════════════════ -->
+  <div class="unit-header">
+    <div class="unit-number">A</div>
+    <div class="unit-header-text">
+      <h2>Banana Zero-Waste Processing Unit<br>— Full DPR Research Prompt</h2>
+      <p>Flour · Peel Extract · Fine Fiber · Organic Fertilizer · FSSAI · Subsidies · Bank Pitch</p>
+    </div>
+  </div>
+
+  <div class="insight-row">
+    <div class="insight-card">
+      <h4>Raw Material</h4>
+      <p><strong>Mandi procurement.</strong> Build ±30% seasonal price buffer into financials. No farm dependency.</p>
+    </div>
+    <div class="insight-card">
+      <h4>Primary Subsidy Route</h4>
+      <p><strong>PM-FME scheme</strong> (MoFPI) — up to ₹10L grant for micro/small food processing units.</p>
+    </div>
+    <div class="insight-card">
+      <h4>FSSAI Track</h4>
+      <p>Peel extract = <strong>Health Supplement Regs 2022.</strong> Flour = food grade. Fiber = non-food. Three separate tracks.</p>
+    </div>
+    <div class="insight-card">
+      <h4>Anchor Buyers</h4>
+      <p>Sami-Sabinsa, Dabur Bio-Resources (Ghaziabad), Himalaya, Patanjali — already in your contact directory.</p>
+    </div>
+  </div>
+
+  <div class="prompt-wrap">
+    <div class="prompt-toolbar">
+      <div class="prompt-toolbar-left">
+        <div class="dot dot-r"></div>
+        <div class="dot dot-y"></div>
+        <div class="dot dot-g"></div>
+        <span class="prompt-label">Unit A · Banana Processing · DPR Prompt</span>
+      </div>
+      <button class="copy-btn" onclick="copyPrompt('prompt-a', this)" title="Copy prompt">
+        <div class="copy-icon">
+          <div class="rect-back"></div>
+          <div class="rect-front"></div>
+        </div>
+        <span class="copy-btn-label">Copy</span>
+      </button>
+    </div>
+    <div class="prompt-body" id="prompt-a"><span class="comment"># ═══════════════════════════════════════════════════════════════
+# KHETSE UNIT A — BANANA ZERO-WASTE PROCESSING
+# Detailed Project Report Research Prompt
+# Location: Pehowa, Kurukshetra, Haryana
+# Scale: Micro-to-Small (₹25L–₹2Cr entry)
+# ═══════════════════════════════════════════════════════════════</span>
+
+<span class="section-head">ROLE</span>
+You are a senior agri-business analyst and DPR architect specialising
+in food processing and nutraceuticals for Indian SME contexts.
+Run all research agents below in parallel. Synthesise into a complete
+bank-ready Detailed Project Report. Label every fact using this system:
+
+  <span class="verified">✓ VERIFIED</span>  — sourced from government gazette, manufacturer catalog,
+           or FSSAI regulation
+  <span class="field-check">⚠ FIELD CONFIRM</span> — industry estimate; validate with supplier quotes
+           or site visits before submitting to bank
+  <span class="action">📌 NEXT STEP</span>   — action item for the farmer-entrepreneur to execute
+
+<span class="section-head">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+PROJECT IDENTITY
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span>
+Name          : KhetSe Banana Zero-Waste Processing Unit
+Location      : Pehowa, Kurukshetra District, Haryana
+Initiator     : Farmer-entrepreneur, 5–15 acres, paddy-wheat base,
+                transitioning to nutraceutical and agro-processing
+Scale Entry   : Micro-to-small (₹25L–₹2Cr CAPEX)
+Raw Material  : Mandi procurement (no farm dependency)
+                >> Build ±30% seasonal price fluctuation buffer
+                   into all financial projections
+Philosophy    : Complete utilisation of every part of the banana —
+                zero waste, posterity-focused, training embedded
+                into the production model
+
+<span class="section-head">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+PRODUCT STREAM CASCADE (Zero-Waste)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span>
+Research machinery, yield, cost, and buyers for ALL four streams:
+
+STREAM 1 — FRUIT CORE
+  → Green banana flour (food grade, FSSAI licensed)
+  → Ripe banana powder (nutraceutical / supplement grade)
+
+STREAM 2 — PEEL (primary innovation stream)
+  → Peel nutrition extraction: polyphenols, pectin, dietary fiber
+  → Peel flour (bakery / pharma excipient grade)
+  >> FSSAI track: Health Supplement Regulations 2022 — NOT standard
+     food license. Identify specific schedule and documentation.
+
+STREAM 3 — FINE FIBER
+  → Pseudo-stem + peel fiber (textile / paper / composite grade)
+  → Dry fiber bales for industrial B2B buyers
+  >> Non-food product — separate compliance pathway, not FSSAI
+
+STREAM 4 — RESIDUAL WASTE
+  → Vermicomposting → certified organic fertilizer (FCO 1985)
+  → Biogas capture feasibility at this scale
+
+For EACH stream output:
+  - Yield per 100 kg raw banana input (kg of finished product)
+  - Machinery required (name, capacity, Indian supplier, price band)
+  - CAPEX and OPEX per stream
+  - Target buyer category and indicative selling price/kg
+  - Certification required before first sale
+
+<span class="section-head">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+AGENT 1 — MACHINERY & EQUIPMENT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span>
+For each stage, provide: equipment name · function · capacity (kg/hr)
+· Indian supplier name + city + approx. price · power requirement (kW)
+· FSSAI/BIS compliance status · scalability note
+
+Processing sequence to cover:
+  1.  Receiving, washing, and grading
+  2.  Mechanical peeling (fruit-peel separation)
+  3.  Blanching / steam treatment (enzyme inactivation)
+  4.  Slicing, grinding, pulping
+  5.  Drying — compare: spray drying vs drum drying vs tray drying
+      (flag which is viable at micro-to-small scale and why)
+  6.  Fiber extraction: decorticator, retting, scutching
+  7.  Bioactive extraction: aqueous vs solvent
+      (flag supercritical CO2 as Phase 2 upgrade only)
+  8.  Pelletizing / composting unit for residue
+  9.  Basic in-house QC lab instruments (pH meter, moisture analyzer,
+      spectrophotometer — minimum viable set)
+  10. Packaging line: filling, sealing, labeling
+      (food grade consumer packs + industrial bulk bags)
+
+<span class="section-head">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+AGENT 2 — FSSAI LICENSING ROADMAP
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span>
+Provide a stream-by-stream compliance table:
+
+  Stream 1 (flour/powder)    → License category, schedule, documents
+  Stream 2 (peel extract)    → Health Supplement Regs 2022 specifics
+  Stream 3 (fiber)           → Non-food; what applies instead
+  Stream 4 (fertilizer)      → FCO 1985 + NPOP/PGS-India organic cert
+
+Also cover:
+  - Basic vs State vs Central license threshold (turnover-based)
+  - Facility layout hygiene requirements for food processing
+  - FoSTaC Food Safety Supervisor — which roles are mandatory
+  - Haryana State food department approvals needed in addition to FSSAI
+  - NABL-accredited lab testing requirement for B2B institutional sales
+  - Timeline: application to first legal sale (in weeks, stream by stream)
+  - Trademark registration opportunity for brand protection
+
+<span class="section-head">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+AGENT 3 — FINANCIAL PROJECTIONS (DPR FORMAT)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span>
+A. CAPITAL EXPENDITURE
+   - Land development + processing shed (Haryana construction rates/sqft)
+   - Machinery itemized by stream
+   - Utilities: electrical load, borewell, STP if required
+   - Pre-operative: licensing, training, consultancy
+   - Contingency: 10% of total CAPEX
+
+B. WORKING CAPITAL (monthly, then annualized)
+   - Raw banana procurement cost/tonne (Haryana mandi avg + seasonal range)
+   - Labour: Haryana minimum wage rates 2024-25 (skilled vs unskilled)
+   - Utilities: power (per unit cost Haryana), water, fuel
+   - Packaging materials per stream
+   - Quality testing costs
+
+C. REVENUE PROJECTIONS — 3-year horizon
+   - Selling price/kg per stream (B2B wholesale vs B2C retail)
+   - Capacity utilisation ramp: 40% Yr1 · 65% Yr2 · 85% Yr3
+   - Conservative / Base / Optimistic scenarios
+
+D. PROFITABILITY METRICS
+   - Gross margin per stream
+   - Break-even point in months
+   - IRR and payback period
+   - Sensitivity: raw material ±30%, selling price ±15%
+
+<span class="section-head">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+AGENT 4 — SUBSIDIES & FUNDING SCHEMES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span>
+For each scheme: eligibility · subsidy % · maximum ceiling ·
+nodal agency · DPR mandatory? · application window
+
+Priority schemes:
+  1. PM-FME (MoFPI) — primary route for micro food processing
+  2. NABARD Agri-Business Development Facility
+  3. PMEGP (KVIC) — employment generation
+  4. SFAC Venture Capital Fund (small farmer agri-business)
+  5. HSIIDC — industrial plot / shed subsidy, Haryana
+  6. National Horticulture Mission (NHM) — post-harvest infrastructure
+  7. MoFPI Food Processing Fund (term loan at concessional rate)
+  8. APEDA export development grant (if export stream planned Phase 2)
+  9. Haryana Udyam Sakhi (if women co-promoter involved)
+  10. MSME Cluster Development Programme
+
+Also identify: which schemes can be STACKED (combined) and which
+are mutually exclusive. Banks need this clarity upfront.
+
+<span class="section-head">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+AGENT 5 — MARKET & INDUSTRIAL BUYERS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span>
+Map B2B bulk buyers for each stream with volume requirements and
+entry pathway (empanelment, tender, direct PO):
+
+  Flour/powder    : Bakeries, baby food mfg, gluten-free brands,
+                    pharma excipient buyers, export to EU/Middle East
+  Peel extract    : Nutraceutical brands — Dabur Bio-Resources
+                    (Ghaziabad), Sami-Sabinsa, Himalaya, Patanjali
+                    >> Note: approach procurement arms, not retail
+  Fiber           : Paper mills, composite board mfg, eco-packaging
+                    startups, textile innovators
+  Organic fertilizer: Agri-input distributors, organic farming
+                    clusters, NAFED empanelment
+
+Also identify:
+  - Ninjacart / Agrizy / DeHaat as aggregator-to-buyer pathways
+  - Private label / contract manufacturing opportunity
+  - Export certification needed per stream (APEDA, FSSAI export cert)
+
+<span class="section-head">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+AGENT 6 — ORG STRUCTURE & TRAINING
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span>
+A. HIERARCHICAL STRUCTURE
+   Phase 1 (launch): Owner → Plant Manager → QC Supervisor
+                     → Line Operators (stream-wise) → Support
+   Phase 2 (scale) : Add Export/Sales Manager, R&D Officer
+   Provide headcount per phase with monthly salary estimates
+
+B. TRAINING FRAMEWORK
+   - FSSAI FoSTaC certification — mandatory roles identified
+   - CSIR-CIMAP Lucknow — bioactive extraction training
+   - NIFTEM Kundli (Haryana, Sonipat) — food technology programs
+   - CFTRI Mysore — advanced processing (Phase 2)
+   - Skill India / PMKVY — semi-skilled worker onboarding
+   - Internal SOP documentation system (legacy objective):
+     batch records, process manuals, training videos
+
+C. KhetSe Website Integration
+   - Identify which verified process steps can be published as
+     public knowledge resource on KhetSe website
+   - This serves dual purpose: bank pitch credibility + public legacy
+
+<span class="section-head">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+REQUIRED OUTPUT — DPR STRUCTURE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span>
+Deliver in this exact sequence:
+
+  1.  Executive Summary (1 page, bank-ready language, no jargon)
+  2.  Project Background & Sustainability Vision
+  3.  Product & Process Description (stream-by-stream cascade)
+  4.  Machinery & Technology Plan (supplier table included)
+  5.  FSSAI & Regulatory Compliance Roadmap (stream-wise table)
+  6.  Financial Projections (CAPEX · OPEX · Revenue · P&L · Break-even)
+  7.  Subsidy & Funding Strategy (scheme-wise table, stackability noted)
+  8.  Market Analysis & Buyer Directory
+  9.  Organisational Structure & HR Plan
+  10. Training & Capacity Building Framework
+  11. Risk Analysis & Mitigation (minimum 8 risks, rated High/Med/Low)
+  12. Implementation Timeline — Gantt format, 18 months
+  13. Annexures:
+      A — Equipment quotation checklist
+      B — FSSAI application checklist per stream
+      C — Institutional buyer contact directory
+      D — Subsidy application sequence and deadlines
+
+Tone: Professional, factual, suitable for NABARD district officers
+and bank branch managers. Flag every assumption explicitly.
+Avoid aspirational language. Distinguish verified from estimated.
+</div>
+  </div>
+
+  <!-- ════════════════════════════════════════
+       UNIT B — MICROGREENS
+  ════════════════════════════════════════ -->
+  <div class="unit-header" style="margin-top: 72px; border-bottom-color: var(--leaf);">
+    <div class="unit-number" style="color: #C8EBB0;">B</div>
+    <div class="unit-header-text">
+      <h2>Microgreens &amp; Sprouts Subsidiary<br>— Full DPR Research Prompt</h2>
+      <p>Setup from Zero · Cold Chain · Retail Platform Strategy · Haryana + India Buyer Map · FSSAI</p>
+    </div>
+  </div>
+
+  <div class="insight-row">
+    <div class="insight-card green">
+      <h4>Critical Constraint</h4>
+      <p>Shelf life <strong>5–8 days</strong> (microgreens) · <strong>3–5 days</strong> (sprouts). Distribution radius caps at ~150 km without cold chain partner.</p>
+    </div>
+    <div class="insight-card green">
+      <h4>Retail Entry Sequence</h4>
+      <p><strong>Offline local first</strong> → Chandigarh regional → Quick-commerce (Blinkit/Zepto) only once dark store proximity confirmed.</p>
+    </div>
+    <div class="insight-card green">
+      <h4>FSSAI Track</h4>
+      <p>Fresh produce — <strong>lighter compliance</strong> than processed food. Basic license likely sufficient at entry scale.</p>
+    </div>
+    <div class="insight-card green">
+      <h4>Revenue Stability</h4>
+      <p>Institutional buyers (hotels, hospitals, corporates) give <strong>weekly POs</strong> — more bankable than platform-dependent sales.</p>
+    </div>
+  </div>
+
+  <div class="prompt-wrap">
+    <div class="prompt-toolbar" style="background: #1A3A1A;">
+      <div class="prompt-toolbar-left">
+        <div class="dot dot-r"></div>
+        <div class="dot dot-y"></div>
+        <div class="dot dot-g"></div>
+        <span class="prompt-label" style="color: #7AB648;">Unit B · Microgreens &amp; Sprouts · DPR Prompt</span>
+      </div>
+      <button class="copy-btn" onclick="copyPrompt('prompt-b', this)" title="Copy prompt">
+        <div class="copy-icon">
+          <div class="rect-back"></div>
+          <div class="rect-front"></div>
+        </div>
+        <span class="copy-btn-label">Copy</span>
+      </button>
+    </div>
+    <div class="prompt-body" style="background: #0D1F0D;" id="prompt-b"><span class="comment"># ═══════════════════════════════════════════════════════════════
+# KHETSE UNIT B — MICROGREENS & SPROUTS SUBSIDIARY
+# Detailed Project Report Research Prompt
+# Location: Pehowa, Kurukshetra, Haryana
+# Status: Starting from zero — nothing set up yet
+# Scale: Micro (under ₹25L entry), scalable to ₹1Cr
+# ═══════════════════════════════════════════════════════════════</span>
+
+<span class="section-head">ROLE</span>
+You are a controlled-environment agriculture (CEA) specialist and
+agri-business DPR architect with expertise in fresh produce retail
+channels in India. Run all agents below in parallel and deliver a
+bank-ready Detailed Project Report.
+
+Label every fact:
+  <span class="verified">✓ VERIFIED</span>  — sourced from government data, supplier catalog, platform
+           terms, or published retail data
+  <span class="field-check">⚠ FIELD CONFIRM</span> — estimate; validate before bank submission
+  <span class="action">📌 NEXT STEP</span>   — action item for the entrepreneur to execute
+
+<span class="section-head">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+PROJECT IDENTITY
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span>
+Name         : KhetSe Greens — Microgreens & Sprouts Subsidiary
+Location     : Pehowa, Kurukshetra District, Haryana
+Relationship : Parallel subsidiary to KhetSe Banana Processing Unit
+               (separate DPR; shared brand identity and premises)
+Status       : Nothing started — need complete setup plan from zero
+Scale Entry  : Micro under ₹25L; must be profitable before scaling
+Critical fact: Shelf life is the central operational constraint.
+               EVERY decision — packaging, buyers, logistics,
+               pricing — must account for:
+               · Microgreens: 5–8 days post-harvest
+               · Sprouts    : 3–5 days post-harvest
+
+<span class="section-head">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+PRODUCT SCOPE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span>
+Phase 1 (launch, months 1–6):
+  Sprouts:     Moong · Methi · Chana · Masoor · Radish
+  Microgreens: Pea shoots · Radish · Sunflower · Mustard · Wheatgrass
+
+Phase 2 (months 7–18):
+  Premium microgreens: Amaranth · Broccoli · Basil
+  Value-add: Sprout + microgreen mixed packs · wheatgrass shots
+
+For each variety:
+  - Grow cycle duration (days from seed to harvest)
+  - Yield per tray / per sq ft growing area
+  - Input cost per tray (seed + substrate + water + electricity)
+  - Selling price range (retail vs institutional vs platform)
+  - Shelf life post-harvest and packaging requirement
+
+<span class="section-head">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+AGENT 1 — GROW SETUP & EQUIPMENT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span>
+Design a complete grow setup for a micro-scale operation.
+Specify for each item: function · Indian supplier + city · price band
+· power requirement · CAPEX vs recurring cost
+
+Infrastructure:
+  - Grow room / polyhouse / shade net structure options
+    (compare: indoor shelving vs low-cost polyhouse for Haryana climate)
+  - Racking / shelving system (commercial grade)
+  - Lighting: natural light vs LED grow lights (compare ROI)
+  - Climate control: fan + exhaust (minimum viable for North India summers)
+  - Irrigation: hand mist vs drip vs fogger for trays
+  - Water source and filtration (TDS requirement for sprouting)
+
+Equipment:
+  - Seed soaking tanks / germination trays
+  - Growing trays (food-grade, stackable)
+  - Substrate: coco coir vs soil vs hydroponics (cost and yield compare)
+  - Harvest tools: scissors, harvest knife, tray rinse station
+  - Washing and drying station (centrifugal spinner or air-dry rack)
+
+Post-harvest / Packaging:
+  - Cold storage unit (minimum size for daily harvest cycle)
+    >> Specify temperature: 2–4°C for microgreens, 4–8°C for sprouts
+  - Packaging options (compare all for shelf life extension):
+    · Clamshell containers (PET, food-grade)
+    · Modified Atmosphere Packaging (MAP) — cost vs benefit at micro scale
+    · Zip-lock stand-up pouches with ventilation
+    · Bulk packaging for institutional buyers (food-grade bags, kg packs)
+  - Labeling: FSSAI label requirements, best-before date printing
+  - Weighing and sealing machine (semi-auto vs manual at entry scale)
+
+Delivery:
+  - Insulated delivery box options (thermocol vs EPS vs reusable cooler)
+  - Cold chain vehicle requirement: own vs outsource
+    >> Flag: Pehowa to Chandigarh = ~120 km. Calculate max delivery
+       radius without cold chain vehicle (with insulated boxes only)
+
+<span class="section-head">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+AGENT 2 — FSSAI LICENSING FOR FRESH PRODUCE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span>
+  - Correct FSSAI license category for sprouts and microgreens
+    (Basic vs State — based on turnover threshold)
+  - Specific food safety standards for fresh sprouts
+    (Salmonella, E. coli testing — platform buyers will demand this)
+  - Label mandatory fields: net weight, best-before, unit address,
+    FSSAI license number, batch code
+  - Haryana state agriculture / horticulture department registration
+    (if required for commercial grow operation)
+  - Organic certification pathway (PGS-India vs NPOP) — cost and
+    timeline. Flag: PGS-India is faster and cheaper for small growers.
+  - Pesticide residue testing: which labs in Haryana are NABL accredited
+    for fresh produce? (Required for Reliance Fresh, BigBasket onboarding)
+  - Food safety bond / liability insurance — is this required by platforms?
+
+<span class="section-head">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+AGENT 3 — RETAIL CHANNEL STRATEGY
+(Shelf-Life Aware — Most Critical Section)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span>
+Map ALL viable retail and institutional channels. For each channel:
+  - Onboarding process and timeline
+  - Margin / commission structure (what % does the platform take?)
+  - Minimum supply commitment (kg/week or packs/day)
+  - Cold chain requirement from supplier end
+  - Distance constraint from Pehowa (flag channels that require a
+    cold chain partner or local depot to be viable)
+  - Payment terms (weekly / fortnightly / credit period)
+  - FSSAI and testing documentation required for onboarding
+
+<span class="section-head">TIER 1 — LOCAL HARYANA (priority, lowest risk)</span>
+  → Reliance Smart Bazaar / Reliance Fresh
+    (locations: Kurukshetra, Karnal, Panipat, Ambala)
+  → Local kiryana stores (organic section — identify Chandigarh stores)
+  → Chandigarh Sector 8, 17, 35 organic / health food stores
+  → Panchkula and Mohali health food retailers
+
+<span class="section-head">TIER 2 — QUICK COMMERCE (research dark store locations)</span>
+  → Blinkit — identify active dark store nodes in Ambala, Karnal,
+    Panchkula, Chandigarh. Is Pehowa within 30-minute supply radius?
+  → Zepto — same dark store proximity analysis
+  → Swiggy Instamart — Chandigarh / Panchkula node status
+  >> FLAG: Quick commerce requires daily or every-other-day supply
+     to dark store. Calculate logistics cost vs revenue at micro scale.
+
+<span class="section-head">TIER 3 — NATIONAL PLATFORMS (medium-term, 6+ months)</span>
+  → BigBasket BB Daily (subscription model — good fit for sprouts)
+  → Amazon Fresh (cold chain packaging compliance mandatory)
+  → Jiomart (Reliance ecosystem — leverage if already with Reliance Fresh)
+  → Flipkart Supermart (assess fresh produce maturity on platform)
+
+<span class="section-head">TIER 4 — INSTITUTIONAL B2B (most stable revenue, prioritise early)</span>
+  → Hotels: Chandigarh / Karnal belt (5-star + business hotels)
+    Identify properties by name with chef contact approach strategy
+  → Hospital dietary departments: PGIMER Chandigarh, AIIMS Bathinda,
+    Kalpana Chawla Medical College Karnal — dietician procurement process
+  → Corporate cafeterias: IT parks Chandigarh / Mohali (Quark City, etc.)
+  → School / college canteens: post FSSAI certification
+  → Ayurvedic clinics and wellness centres (wheatgrass shots — premium)
+  → Ninjacart and DeHaat as B2B aggregator-to-restaurant channels
+
+<span class="section-head">TIER 5 — DIRECT-TO-CONSUMER (low overhead, high margin)</span>
+  → WhatsApp subscription model: weekly box delivery, local Pehowa /
+    Kurukshetra / Karnal customers
+  → Instagram / social commerce (document the grow journey on KhetSe)
+  → Farmer market / weekend organic haats (Chandigarh sector markets)
+
+<span class="section-head">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+AGENT 4 — FINANCIAL PROJECTIONS (DPR FORMAT)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span>
+A. CAPITAL EXPENDITURE
+   - Grow room setup (shed modification or polyhouse)
+   - Racking, trays, lighting, irrigation
+   - Cold storage unit
+   - Packaging and sealing equipment
+   - Delivery equipment (insulated boxes; vehicle if owned)
+   - Pre-operative: FSSAI licensing, organic cert, testing
+   - Contingency 10%
+
+B. WORKING CAPITAL (monthly)
+   - Seeds (variety-wise cost/kg, monthly requirement)
+   - Substrate (coco coir / soil — monthly consumption)
+   - Packaging materials (trays, labels, pouches)
+   - Power consumption (grow lights, cold storage, fans)
+   - Water
+   - Labour (1–2 persons Phase 1 — Haryana minimum wage)
+   - Logistics / delivery cost per channel tier
+
+C. REVENUE PROJECTIONS — 18 months
+   Selling price benchmarks to research and include:
+   - Microgreens retail: ₹/100g pack (platform vs offline vs direct)
+   - Sprouts retail: ₹/250g pack
+   - Institutional bulk: ₹/kg (hotel / hospital rate)
+   - WhatsApp subscription box: ₹/week
+   Capacity: trays/day → grams/day → revenue/day at full utilisation
+
+D. PROFITABILITY METRICS
+   - Gross margin per channel (platform margin vs institutional vs direct)
+   - Break-even (trays/day required to cover all fixed costs)
+   - Payback period
+   - Sensitivity: platform commission changes ±10%, wastage rate ±15%
+
+<span class="section-head">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+AGENT 5 — SUBSIDIES & SCHEMES FOR FRESH PRODUCE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span>
+  1. PM-FME (MoFPI) — does fresh produce / sprouts qualify?
+  2. National Horticulture Mission (NHM) — protected cultivation subsidy
+     for polyhouse / shade net structure (Haryana state component)
+  3. Haryana Horticulture Department — identify state-specific schemes
+     for vegetable / fresh produce growers
+  4. PMEGP (KVIC) — employment generation (micro enterprise)
+  5. NABARD — rural agri-business financing
+  6. Startup India recognition (if incorporated as Pvt Ltd / LLP)
+     — tax benefits and easier bank credit access
+  7. Haryana Udhyam Memorandum (Udyam Registration) — MSME benefits
+
+For each: eligibility · subsidy quantum · nodal agency ·
+DPR required? · can it be stacked with PM-FME?
+
+<span class="section-head">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+AGENT 6 — OPERATIONS & TRAINING
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span>
+A. DAILY OPERATIONS SCHEDULE
+   Design a 7-day rolling grow-harvest-pack-deliver cycle that
+   ensures continuous daily supply to retail and institutional buyers.
+   Include: sowing day → harvest day → pack day → delivery day
+   per variety. Show how staggered sowing eliminates supply gaps.
+
+B. QUALITY CONTROL PROTOCOL
+   - Visual grading standards (what gets rejected)
+   - Microbial testing frequency (in-house vs external lab)
+   - Cold chain break detection and response SOP
+   - Wastage tracking and reduction targets
+
+C. STAFFING
+   Phase 1: Owner + 1 helper (family or hired)
+   Phase 2: Add 1 delivery person, 1 packing assistant
+   Identify: which tasks require trained food handler certification
+
+D. TRAINING RESOURCES
+   - ICAR-IARI New Delhi — sprout and microgreen production training
+   - SAU (CCS Haryana Agricultural University, Hisar) — proximity
+     advantage; check if CEA / microgreen modules exist
+   - Online: identify credible Indian CEA training programs
+   - SOP documentation for KhetSe website (legacy objective)
+
+E. RISK MITIGATION
+   List minimum 8 risks with rating (High / Med / Low) and response:
+   Include: crop failure, cold chain breakdown, platform de-listing,
+   payment delays from platforms, seasonal demand drop, competition,
+   water quality issue, packaging supply shortage
+
+<span class="section-head">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+REQUIRED OUTPUT — DPR STRUCTURE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span>
+  1.  Executive Summary (1 page — bank and investor ready)
+  2.  Project Background & Vision
+  3.  Product Scope & Grow Cycle Details
+  4.  Grow Setup & Equipment Plan (with supplier table)
+  5.  FSSAI & Regulatory Compliance (fresh produce specific)
+  6.  Retail Channel Strategy (tiered, shelf-life aware)
+  7.  Financial Projections (CAPEX · OPEX · Revenue · Break-even)
+  8.  Subsidy & Funding Strategy
+  9.  Operations Schedule (7-day rolling cycle)
+  10. Staffing & Training Plan
+  11. Risk Analysis & Mitigation
+  12. Implementation Timeline — 18 months, Gantt format
+  13. Annexures:
+      A — Platform onboarding checklist (Blinkit, BigBasket, Amazon Fresh)
+      B — FSSAI application checklist (fresh produce)
+      C — Institutional buyer approach script and contact targets
+      D — Staggered sowing calendar (Excel-ready format)
+
+Tone: Professional, factual, suitable for bank branch managers and
+Haryana state horticulture department officers.
+Flag all assumptions. Shelf life implications must be noted wherever
+they affect a decision — packaging, logistics, buyer selection,
+pricing, or wastage projections.
+</div>
+  </div>
+
+  <!-- LEGEND -->
+  <div class="legend">
+    <h3>Labelling Convention — Used Throughout Both DPRs</h3>
+    <div class="legend-items">
+      <div class="legend-item">
+        <div class="legend-dot" style="background: var(--sprout);"></div>
+        <span><strong>✓ VERIFIED</strong> — government gazette, manufacturer catalog, FSSAI regulation</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background: var(--peel);"></div>
+        <span><strong>⚠ FIELD CONFIRM</strong> — industry estimate; validate before bank submission</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background: #A8D8EA;"></div>
+        <span><strong>📌 NEXT STEP</strong> — action item for the entrepreneur to execute</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p>KhetSe · Pehowa, Kurukshetra, Haryana</p>
+  <p>Unit A: Banana Zero-Waste · Unit B: Microgreens &amp; Sprouts</p>
+  <p>Two DPRs · One Enterprise · Posterity-Focused</p>
+</footer>
+
+<script>
+  function copyPrompt(id, btn) {
+    const el = document.getElementById(id);
+    // Extract plain text (strip HTML tags)
+    const text = el.innerText || el.textContent;
+    navigator.clipboard.writeText(text).then(() => {
+      btn.classList.add('copied');
+      const label = btn.querySelector('.copy-btn-label');
+      label.textContent = 'Copied!';
+      setTimeout(() => {
+        btn.classList.remove('copied');
+        label.textContent = 'Copy';
+      }, 2200);
+    }).catch(() => {
+      // Fallback for older browsers
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      btn.classList.add('copied');
+      const label = btn.querySelector('.copy-btn-label');
+      label.textContent = 'Copied!';
+      setTimeout(() => {
+        btn.classList.remove('copied');
+        label.textContent = 'Copy';
+      }, 2200);
+    });
+  }
+</script>
+</body>
+</html>
