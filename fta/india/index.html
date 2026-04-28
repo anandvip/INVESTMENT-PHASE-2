@@ -1,0 +1,2498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>India Trade Atlas — Free Trade Agreements Reference, April 2026</title>
+    <meta name="description" content="A comprehensive, filterable reference of India's 22 active and recently-concluded free trade agreements for entrepreneurs, CAs, and tax professionals." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..900&family=Manrope:wght@300..800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <style>
+        /* ============================================
+           DESIGN TOKENS
+           ============================================ */
+        :root {
+            --bg:           #FAF6EE;
+            --bg-alt:       #F2EBDB;
+            --surface:      #FFFFFF;
+            --surface-warm: #FCF9F2;
+            --ink:          #1A1715;
+            --ink-soft:     #4B4540;
+            --ink-mute:     #7A7268;
+            --rule:         #D9CCB0;
+            --rule-soft:    #E8DEC9;
+
+            --saffron:      #C9621D;
+            --saffron-bg:   #FBE9D1;
+            --indigo:       #1F3A5F;
+            --indigo-bg:    #DCE3EC;
+            --moss:         #4A7858;
+            --moss-bg:      #E2EDDB;
+
+            /* region accents */
+            --r-south-asia:     #6B6B3F; /* olive */
+            --r-southeast-asia: #6B7F6F; /* sage */
+            --r-east-asia:      #6E4D6B; /* plum */
+            --r-gulf:           #B87E5E; /* terracotta */
+            --r-europe:         #4A6884; /* slate */
+            --r-americas:       #4A7858; /* forest */
+            --r-oceania:        #BC8C42; /* ochre */
+            --r-multi:          #7A6F8C; /* lilac-grey */
+            --r-africa:         #8B6F47; /* sienna */
+
+            --status-est:    #6B7F6F;
+            --status-recent: #C9621D;
+            --status-pend:   #B89A52;
+
+            --shadow-sm:    0 1px 2px rgba(26,23,21,0.04), 0 1px 1px rgba(26,23,21,0.03);
+            --shadow-md:    0 4px 12px rgba(26,23,21,0.06), 0 2px 4px rgba(26,23,21,0.03);
+            --shadow-lg:    0 12px 32px rgba(26,23,21,0.08);
+
+            --radius-sm:    4px;
+            --radius-md:    8px;
+            --radius-lg:    14px;
+
+            --serif:        'Fraunces', 'Georgia', serif;
+            --sans:         'Manrope', 'Helvetica Neue', sans-serif;
+            --mono:         'JetBrains Mono', 'SF Mono', monospace;
+        }
+
+        /* ============================================
+           BASE
+           ============================================ */
+        *, *::before, *::after { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            margin: 0;
+            font-family: var(--sans);
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--ink);
+            background: var(--bg);
+            background-image:
+                radial-gradient(circle at 18% 12%, rgba(201,98,29,0.04), transparent 40%),
+                radial-gradient(circle at 82% 88%, rgba(31,58,95,0.04), transparent 45%);
+            background-attachment: fixed;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        ::selection { background: var(--saffron-bg); color: var(--ink); }
+
+        h1, h2, h3, h4 {
+            font-family: var(--serif);
+            font-weight: 500;
+            color: var(--ink);
+            letter-spacing: -0.015em;
+            margin: 0;
+        }
+
+        button { font-family: inherit; cursor: pointer; }
+
+        /* ============================================
+           LAYOUT
+           ============================================ */
+        .container { max-width: 1240px; margin: 0 auto; padding: 0 28px; }
+
+        /* ============================================
+           MASTHEAD
+           ============================================ */
+        .masthead {
+            border-bottom: 1px solid var(--rule);
+            padding: 56px 0 44px;
+            position: relative;
+            overflow: hidden;
+        }
+        .masthead::before {
+            content: '';
+            position: absolute; inset: 0;
+            background-image:
+                linear-gradient(180deg, rgba(250,246,238,0) 0%, rgba(250,246,238,0.4) 100%);
+            pointer-events: none;
+        }
+        .eyebrow {
+            font-family: var(--mono);
+            font-size: 11px;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--saffron);
+            margin-bottom: 14px;
+            display: flex; align-items: center; gap: 12px;
+        }
+        .eyebrow::before {
+            content: '';
+            width: 28px; height: 1px;
+            background: var(--saffron);
+            display: inline-block;
+        }
+        .title {
+            font-size: clamp(38px, 5.5vw, 64px);
+            line-height: 1.04;
+            font-weight: 400;
+            font-variation-settings: "opsz" 144, "SOFT" 50;
+            margin-bottom: 18px;
+            max-width: 18ch;
+        }
+        .title em {
+            font-style: italic;
+            font-weight: 300;
+            color: var(--saffron);
+            font-variation-settings: "opsz" 144, "SOFT" 100;
+        }
+        .deck {
+            font-size: 18px;
+            line-height: 1.55;
+            color: var(--ink-soft);
+            max-width: 62ch;
+            margin-bottom: 32px;
+        }
+        .meta-row {
+            display: flex; flex-wrap: wrap; gap: 32px;
+            padding-top: 24px;
+            border-top: 1px solid var(--rule-soft);
+        }
+        .stat {
+            display: flex; flex-direction: column; gap: 4px;
+        }
+        .stat-num {
+            font-family: var(--serif);
+            font-size: 32px;
+            font-weight: 500;
+            line-height: 1;
+            color: var(--ink);
+            font-variant-numeric: tabular-nums;
+        }
+        .stat-label {
+            font-family: var(--mono);
+            font-size: 11px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--ink-mute);
+        }
+
+        /* ============================================
+           CONTROLS BAR
+           ============================================ */
+        .controls {
+            position: sticky; top: 0; z-index: 50;
+            background: rgba(250,246,238,0.92);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--rule);
+            padding: 18px 0;
+            margin-top: 0;
+        }
+        .controls-inner {
+            display: flex; flex-wrap: wrap; gap: 16px;
+            align-items: center;
+        }
+        .search-wrap {
+            flex: 1 1 280px;
+            position: relative;
+        }
+        .search-wrap::before {
+            content: '⌕';
+            position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
+            color: var(--ink-mute);
+            font-size: 18px;
+        }
+        .search-input {
+            width: 100%;
+            font-family: var(--sans);
+            font-size: 14px;
+            padding: 10px 16px 10px 38px;
+            border: 1px solid var(--rule);
+            background: var(--surface);
+            border-radius: var(--radius-md);
+            color: var(--ink);
+            transition: border-color 0.15s, box-shadow 0.15s;
+        }
+        .search-input:focus {
+            outline: none;
+            border-color: var(--saffron);
+            box-shadow: 0 0 0 3px var(--saffron-bg);
+        }
+
+        .sort-select, .clear-btn {
+            font-family: var(--mono);
+            font-size: 11px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 10px 14px;
+            border: 1px solid var(--rule);
+            background: var(--surface);
+            color: var(--ink);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        .clear-btn { color: var(--ink-soft); }
+        .clear-btn:hover { background: var(--saffron-bg); color: var(--saffron); border-color: var(--saffron); }
+        .sort-select:focus { outline: none; border-color: var(--saffron); }
+        .result-count {
+            font-family: var(--mono);
+            font-size: 12px;
+            color: var(--ink-mute);
+            margin-left: auto;
+            font-variant-numeric: tabular-nums;
+        }
+
+        /* ============================================
+           FILTER PANELS
+           ============================================ */
+        .filters {
+            background: var(--surface-warm);
+            border-bottom: 1px solid var(--rule);
+            padding: 28px 0 32px;
+        }
+        .filter-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 28px;
+        }
+        .filter-group h3 {
+            font-family: var(--mono);
+            font-size: 11px;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--ink-mute);
+            margin-bottom: 12px;
+            font-weight: 500;
+        }
+        .filter-chips {
+            display: flex; flex-wrap: wrap; gap: 6px;
+        }
+        .chip {
+            font-family: var(--sans);
+            font-size: 13px;
+            font-weight: 500;
+            padding: 6px 12px;
+            background: var(--surface);
+            border: 1px solid var(--rule);
+            border-radius: 999px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            color: var(--ink-soft);
+            user-select: none;
+        }
+        .chip:hover { border-color: var(--ink-soft); color: var(--ink); }
+        .chip.active {
+            background: var(--ink);
+            color: var(--bg);
+            border-color: var(--ink);
+        }
+        .chip[data-dimension="region"].active { background: var(--indigo); border-color: var(--indigo); }
+        .chip[data-dimension="status"].active { background: var(--saffron); border-color: var(--saffron); }
+        .chip[data-dimension="direction"].active { background: var(--moss); border-color: var(--moss); }
+
+        /* ============================================
+           PANEL LIST
+           ============================================ */
+        main { padding: 48px 0 80px; }
+        .panel-list { display: flex; flex-direction: column; gap: 14px; }
+
+        .panel {
+            background: var(--surface);
+            border: 1px solid var(--rule);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+            transition: box-shadow 0.2s, border-color 0.2s;
+        }
+        .panel:hover { box-shadow: var(--shadow-md); border-color: var(--rule); }
+        .panel.open { box-shadow: var(--shadow-md); }
+
+        .panel-header {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 20px;
+            align-items: center;
+            padding: 22px 26px;
+            cursor: pointer;
+            user-select: none;
+            position: relative;
+        }
+
+        .region-mark {
+            width: 6px; height: 64px;
+            border-radius: 3px;
+            background: var(--r-multi);
+            flex-shrink: 0;
+        }
+        .panel[data-region="south-asia"] .region-mark { background: var(--r-south-asia); }
+        .panel[data-region="southeast-asia"] .region-mark { background: var(--r-southeast-asia); }
+        .panel[data-region="east-asia"] .region-mark { background: var(--r-east-asia); }
+        .panel[data-region="gulf"] .region-mark { background: var(--r-gulf); }
+        .panel[data-region="europe"] .region-mark { background: var(--r-europe); }
+        .panel[data-region="americas"] .region-mark { background: var(--r-americas); }
+        .panel[data-region="oceania"] .region-mark { background: var(--r-oceania); }
+        .panel[data-region="multi-region"] .region-mark { background: var(--r-multi); }
+        .panel[data-region="africa-io"] .region-mark { background: var(--r-africa); }
+
+        .header-content { min-width: 0; }
+        .header-top {
+            display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap;
+            margin-bottom: 6px;
+        }
+        .country-name {
+            font-family: var(--serif);
+            font-size: 26px;
+            line-height: 1.15;
+            font-weight: 500;
+            font-variation-settings: "opsz" 144;
+        }
+        .agreement-tag {
+            font-family: var(--mono);
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            color: var(--saffron);
+            background: var(--saffron-bg);
+            padding: 3px 8px;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+        .year-tag {
+            font-family: var(--mono);
+            font-size: 12px;
+            color: var(--ink-mute);
+            font-variant-numeric: tabular-nums;
+        }
+        .tagline {
+            font-size: 14.5px;
+            line-height: 1.5;
+            color: var(--ink-soft);
+            margin: 0;
+            max-width: 78ch;
+        }
+
+        .header-meta {
+            display: flex; flex-direction: column; gap: 8px;
+            align-items: flex-end;
+            flex-shrink: 0;
+        }
+        .status-pill {
+            font-family: var(--mono);
+            font-size: 10px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            padding: 4px 9px;
+            border-radius: 999px;
+            font-weight: 500;
+        }
+        .status-in-force-established { background: #E2EDDB; color: var(--moss); }
+        .status-in-force-recent { background: var(--saffron-bg); color: var(--saffron); }
+        .status-signed-pending { background: #F4ECD7; color: #8A6E2F; }
+
+        .toggle-icon {
+            font-family: var(--serif);
+            font-size: 22px;
+            color: var(--ink-mute);
+            line-height: 1;
+            transition: transform 0.25s ease, color 0.15s;
+            flex-shrink: 0;
+        }
+        .panel.open .toggle-icon { transform: rotate(45deg); color: var(--saffron); }
+
+        /* ============================================
+           PANEL BODY (EXPANDED)
+           ============================================ */
+        .panel-body {
+            display: none;
+            padding: 0 26px 28px;
+            border-top: 1px solid var(--rule-soft);
+            margin-top: 0;
+        }
+        .panel.open .panel-body { display: block; }
+
+        .body-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 28px 36px;
+            padding-top: 26px;
+        }
+        @media (max-width: 760px) {
+            .body-grid { grid-template-columns: 1fr; gap: 22px; }
+        }
+
+        .body-grid .full { grid-column: 1 / -1; }
+
+        .section-h {
+            font-family: var(--mono);
+            font-size: 11px;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--ink-mute);
+            margin: 0 0 10px;
+            display: flex; align-items: center; gap: 8px;
+            font-weight: 500;
+        }
+        .section-h::before {
+            content: '';
+            width: 14px; height: 1px;
+            background: var(--ink-mute);
+        }
+        .section-h.export::before { background: var(--moss); }
+        .section-h.import::before { background: var(--indigo); }
+        .section-h.export { color: var(--moss); }
+        .section-h.import { color: var(--indigo); }
+
+        .body-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex; flex-direction: column; gap: 6px;
+        }
+        .body-list li {
+            font-size: 14px;
+            line-height: 1.55;
+            color: var(--ink);
+            padding-left: 16px;
+            position: relative;
+        }
+        .body-list li::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 9px;
+            width: 5px; height: 5px;
+            border-radius: 50%;
+            background: var(--rule);
+        }
+        .body-list.export li::before { background: var(--moss); opacity: 0.7; }
+        .body-list.import li::before { background: var(--indigo); opacity: 0.6; }
+        .body-list code {
+            font-family: var(--mono);
+            font-size: 11.5px;
+            color: var(--ink-mute);
+            background: var(--bg-alt);
+            padding: 1px 5px;
+            border-radius: 3px;
+            margin-left: 4px;
+        }
+
+        .prose {
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--ink);
+            margin: 0;
+        }
+        .prose strong { font-weight: 600; color: var(--ink); }
+
+        .stat-card {
+            background: var(--bg-alt);
+            border-radius: var(--radius-md);
+            padding: 16px 18px;
+            border-left: 3px solid var(--saffron);
+        }
+        .stat-card .label {
+            font-family: var(--mono);
+            font-size: 10px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--ink-mute);
+            margin-bottom: 4px;
+        }
+        .stat-card .value {
+            font-family: var(--serif);
+            font-size: 18px;
+            font-weight: 500;
+            color: var(--ink);
+            line-height: 1.3;
+        }
+
+        .resources {
+            display: flex; flex-wrap: wrap; gap: 8px;
+        }
+        .resource-link {
+            font-family: var(--mono);
+            font-size: 11px;
+            letter-spacing: 0.06em;
+            text-decoration: none;
+            color: var(--indigo);
+            background: var(--indigo-bg);
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: all 0.15s;
+            border: 1px solid transparent;
+        }
+        .resource-link:hover {
+            background: var(--surface);
+            border-color: var(--indigo);
+        }
+        .resource-link::after {
+            content: ' ↗';
+            opacity: 0.6;
+        }
+
+        .members-list {
+            font-size: 13px;
+            color: var(--ink-mute);
+            line-height: 1.5;
+            font-style: italic;
+            margin-top: 4px;
+        }
+
+        /* ============================================
+           NO RESULTS
+           ============================================ */
+        .no-results {
+            text-align: center;
+            padding: 80px 20px;
+            color: var(--ink-mute);
+            font-style: italic;
+            display: none;
+        }
+        .no-results.show { display: block; }
+        .no-results h3 {
+            font-family: var(--serif);
+            font-size: 24px;
+            margin-bottom: 8px;
+            color: var(--ink-soft);
+            font-style: normal;
+        }
+
+        /* ============================================
+           PIPELINE WATCH
+           ============================================ */
+        .pipeline {
+            margin-top: 56px;
+            padding: 36px 32px;
+            background: linear-gradient(135deg, var(--surface-warm) 0%, var(--bg-alt) 100%);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--rule);
+            position: relative;
+        }
+        .pipeline-h {
+            font-family: var(--serif);
+            font-size: 28px;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+        .pipeline-deck {
+            font-size: 14.5px;
+            color: var(--ink-soft);
+            margin-bottom: 24px;
+            max-width: 60ch;
+        }
+        .pipeline-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 18px;
+        }
+        .pipeline-card {
+            background: var(--surface);
+            padding: 18px 20px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--rule-soft);
+        }
+        .pipeline-card h4 {
+            font-family: var(--serif);
+            font-size: 18px;
+            margin-bottom: 6px;
+        }
+        .pipeline-card .pipe-status {
+            font-family: var(--mono);
+            font-size: 10px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--saffron);
+            margin-bottom: 8px;
+        }
+        .pipeline-card p {
+            font-size: 13px;
+            color: var(--ink-soft);
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        /* ============================================
+           COLOPHON / FOOTER
+           ============================================ */
+        .colophon {
+            margin-top: 80px;
+            padding: 32px 0 60px;
+            border-top: 1px solid var(--rule);
+            font-size: 13px;
+            color: var(--ink-mute);
+            line-height: 1.6;
+        }
+        .colophon strong { color: var(--ink-soft); }
+        .colophon a { color: var(--indigo); }
+
+        /* ============================================
+           ACRONYM TOOLTIPS
+           ============================================ */
+        abbr.gloss {
+            text-decoration: none;
+            border-bottom: 1px dotted var(--saffron);
+            cursor: help;
+            font-style: normal;
+            color: inherit;
+            transition: background 0.15s, border-color 0.15s;
+            padding: 0 1px;
+            border-radius: 2px;
+        }
+        abbr.gloss:hover, abbr.gloss:focus {
+            background: var(--saffron-bg);
+            border-bottom-color: var(--saffron);
+            outline: none;
+        }
+        abbr.gloss[aria-expanded="true"] {
+            background: var(--saffron-bg);
+            border-bottom-style: solid;
+        }
+
+        .tooltip-pop {
+            position: absolute;
+            max-width: 320px;
+            background: var(--ink);
+            color: var(--bg);
+            padding: 14px 16px 12px;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-lg);
+            font-family: var(--sans);
+            font-size: 13px;
+            line-height: 1.5;
+            z-index: 200;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: opacity 0.15s ease;
+        }
+        .tooltip-pop.show {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+        .tooltip-pop::after {
+            content: '';
+            position: absolute;
+            left: var(--arrow-left, 50%);
+            transform: translateX(-50%);
+            border: 7px solid transparent;
+        }
+        .tooltip-pop[data-pos="above"]::after {
+            top: 100%;
+            border-top-color: var(--ink);
+        }
+        .tooltip-pop[data-pos="below"]::after {
+            bottom: 100%;
+            border-bottom-color: var(--ink);
+        }
+        .tt-title {
+            font-family: var(--serif);
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 4px;
+            color: #FAE7C8;
+        }
+        .tt-full {
+            font-family: var(--sans);
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--bg);
+            opacity: 0.85;
+            font-style: italic;
+            display: block;
+            margin-top: 2px;
+        }
+        .tt-desc {
+            color: rgba(250,246,238,0.88);
+            margin: 8px 0 10px;
+        }
+        .tt-link {
+            display: inline-block;
+            font-family: var(--mono);
+            font-size: 11px;
+            letter-spacing: 0.05em;
+            color: #FAE7C8;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(250,231,200,0.4);
+            padding-bottom: 1px;
+        }
+        .tt-link:hover { color: var(--bg); border-bottom-color: var(--bg); }
+
+        /* ============================================
+           GLOSSARY SECTION
+           ============================================ */
+        .glossary {
+            margin-top: 56px;
+            padding: 40px 36px 44px;
+            background: var(--surface);
+            border: 1px solid var(--rule);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+        }
+        .glossary-h {
+            font-family: var(--serif);
+            font-size: 32px;
+            font-weight: 500;
+            margin-bottom: 6px;
+            font-variation-settings: "opsz" 144;
+        }
+        .glossary-deck {
+            font-size: 14.5px;
+            color: var(--ink-soft);
+            margin-bottom: 28px;
+            max-width: 64ch;
+            line-height: 1.55;
+        }
+        .glossary-group {
+            margin-bottom: 32px;
+        }
+        .glossary-group:last-child { margin-bottom: 0; }
+        .glossary-group-h {
+            font-family: var(--mono);
+            font-size: 11px;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--saffron);
+            margin: 0 0 16px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--saffron-bg);
+            font-weight: 500;
+        }
+        .glossary-entries {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 18px 28px;
+        }
+        .glossary-entry {
+            scroll-margin-top: 90px;
+            padding: 4px 0;
+            transition: background 0.6s ease;
+            border-radius: var(--radius-sm);
+            padding-left: 8px;
+            margin-left: -8px;
+        }
+        .glossary-entry.flash {
+            background: var(--saffron-bg);
+        }
+        .glossary-acr {
+            font-family: var(--serif);
+            font-size: 17px;
+            font-weight: 600;
+            color: var(--ink);
+        }
+        .glossary-full {
+            font-family: var(--sans);
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--saffron);
+            margin-bottom: 4px;
+            font-style: italic;
+        }
+        .glossary-desc {
+            font-size: 13.5px;
+            line-height: 1.55;
+            color: var(--ink-soft);
+            margin: 0;
+        }
+
+        /* ============================================
+           UTILITY
+           ============================================ */
+        .visually-hidden {
+            position: absolute;
+            width: 1px; height: 1px;
+            padding: 0; margin: -1px; overflow: hidden;
+            clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+        }
+
+        /* responsive niceties */
+        @media (max-width: 720px) {
+            .container { padding: 0 18px; }
+            .panel-header {
+                grid-template-columns: auto 1fr;
+                gap: 14px;
+                padding: 18px 18px;
+            }
+            .header-meta {
+                grid-column: 2 / -1;
+                flex-direction: row;
+                align-items: center;
+                gap: 10px;
+            }
+            .toggle-icon {
+                position: absolute;
+                top: 18px; right: 18px;
+            }
+            .country-name { font-size: 21px; }
+            .panel-body { padding: 0 18px 22px; }
+            .controls-inner > * { font-size: 11px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ============================================
+     MASTHEAD
+     ============================================ -->
+<header class="masthead">
+    <div class="container">
+        <div class="eyebrow">Trade Atlas — April 2026 Edition</div>
+        <h1 class="title">India's <em>Free Trade</em> Agreements: an entrepreneur's reference.</h1>
+        <p class="deck">A filterable, structured guide to twenty-two trade pacts that govern preferential market access between India and 38+ partner economies. Built for entrepreneurs, chartered accountants, and tax professionals navigating goods, services, and investment opportunities.</p>
+        <div class="meta-row">
+            <div class="stat">
+                <div class="stat-num">22</div>
+                <div class="stat-label">Active Agreements</div>
+            </div>
+            <div class="stat">
+                <div class="stat-num">38+</div>
+                <div class="stat-label">Partner Economies</div>
+            </div>
+            <div class="stat">
+                <div class="stat-num">9</div>
+                <div class="stat-label">Comprehensive (CEPA/CECA)</div>
+            </div>
+            <div class="stat">
+                <div class="stat-num">5</div>
+                <div class="stat-label">Concluded 2024–26</div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- ============================================
+     STICKY CONTROLS
+     ============================================ -->
+<section class="controls" aria-label="Search and sort controls">
+    <div class="container controls-inner">
+        <div class="search-wrap">
+            <input type="search" id="search" class="search-input" placeholder="Search by country, agreement, sector, or product…" aria-label="Search agreements" />
+        </div>
+        <select id="sort" class="sort-select" aria-label="Sort order">
+            <option value="alpha">Sort: A–Z</option>
+            <option value="newest">Sort: Newest first</option>
+            <option value="oldest">Sort: Oldest first</option>
+        </select>
+        <button class="clear-btn" id="clearAll">Clear filters</button>
+        <div class="result-count" id="resultCount">22 of 22</div>
+    </div>
+</section>
+
+<!-- ============================================
+     FILTERS
+     ============================================ -->
+<section class="filters" aria-label="Filter panels">
+    <div class="container">
+        <div class="filter-grid">
+            <div class="filter-group">
+                <h3>Sector</h3>
+                <div class="filter-chips" data-dimension="sector" id="sectorChips"></div>
+            </div>
+            <div class="filter-group">
+                <h3>Region</h3>
+                <div class="filter-chips" data-dimension="region" id="regionChips"></div>
+            </div>
+            <div class="filter-group">
+                <h3>Status</h3>
+                <div class="filter-chips" data-dimension="status" id="statusChips"></div>
+            </div>
+            <div class="filter-group">
+                <h3>Trade Direction</h3>
+                <div class="filter-chips" data-dimension="direction" id="directionChips"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================
+     PANEL LIST
+     ============================================ -->
+<main>
+    <div class="container">
+        <div class="panel-list" id="panelList"></div>
+        <div class="no-results" id="noResults">
+            <h3>No agreements match these filters.</h3>
+            <p>Try clearing one dimension, or use the search box for a broader query.</p>
+        </div>
+
+        <!-- ============================================
+             GLOSSARY
+             ============================================ -->
+        <section class="glossary" id="glossary" aria-label="Glossary of trade terms">
+            <h2 class="glossary-h">Glossary</h2>
+            <p class="glossary-deck">Trade documents are dense with acronyms because they evolved among practitioners who already share the vocabulary. Hover or tap any underlined term in the panels above to see a quick explanation; below is the full reference, grouped by category.</p>
+            <div id="glossaryContent"></div>
+        </section>
+
+        <!-- ============================================
+             PIPELINE WATCH
+             ============================================ -->
+        <section class="pipeline" aria-label="Pipeline of upcoming agreements">
+            <h2 class="pipeline-h">Pipeline Watch</h2>
+            <p class="pipeline-deck">Active negotiations and frameworks that may move into force over 2026–2027. Worth tracking but not yet operational.</p>
+            <div class="pipeline-grid">
+                <div class="pipeline-card">
+                    <div class="pipe-status">Framework — 7 Feb 2026</div>
+                    <h4>United States</h4>
+                    <p>Interim trade-agreement framework released. Full negotiations on hold pending US tariff-policy clarity. Watch for digital-services and pharma resolutions.</p>
+                </div>
+                <div class="pipeline-card">
+                    <div class="pipe-status">Launched — 2 Mar 2026</div>
+                    <h4>Canada (CEPA)</h4>
+                    <p>Formal negotiations re-launched after a 2023 pause. Strong potential in critical minerals, education services, and pulses trade.</p>
+                </div>
+                <div class="pipeline-card">
+                    <div class="pipe-status">Active</div>
+                    <h4>Peru</h4>
+                    <p>Negotiations ongoing. Targeting Latin-American market gateway with focus on minerals, agri-products, and pharmaceuticals.</p>
+                </div>
+                <div class="pipeline-card">
+                    <div class="pipe-status">Active</div>
+                    <h4>GCC (Gulf Cooperation Council)</h4>
+                    <p>Bloc-level negotiations exploratory. Saudi Arabia, Qatar, Kuwait, Bahrain remaining; UAE and Oman already covered bilaterally.</p>
+                </div>
+                <div class="pipeline-card">
+                    <div class="pipe-status">Exploratory</div>
+                    <h4>Israel</h4>
+                    <p>Long-stalled negotiations. Defence-tech, water-tech, and agri-tech cooperation potential.</p>
+                </div>
+                <div class="pipeline-card">
+                    <div class="pipe-status">Pending</div>
+                    <h4>BIMSTEC FTA</h4>
+                    <p>Bay-of-Bengal regional pact (Bangladesh, Bhutan, India, Myanmar, Nepal, Sri Lanka, Thailand). Goods framework long-pending finalisation.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================
+             COLOPHON
+             ============================================ -->
+        <footer class="colophon">
+            <p><strong>Methodology &amp; sources.</strong> Data compiled from Ministry of Commerce &amp; Industry (PIB releases, March 2026), India-Briefing FTA Tracker 2026, Indian Trade Portal, EEPC India FTA briefs, and chapter-by-chapter summaries published by partner-country trade ministries (UK DBT, EU Commission, Australia DFAT, etc.). Trade volume figures are approximate and reflect most-recent available periods. Tariff highlights are illustrative — entrepreneurs must verify against current notifications via DGFT and the Indian Trade Portal before commercial decisions.</p>
+            <p style="margin-top:14px;"><strong>Disclaimer.</strong> This reference is informational. It is not legal, tax, or commercial advice. Rules of Origin compliance, certificate-of-origin procedures, and product-specific tariff rates require verification with qualified trade counsel and current DGFT notifications.</p>
+            <p style="margin-top:14px; font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em;">Compiled April 2026 · Single-file reference document · No external dependencies beyond Google Fonts</p>
+        </footer>
+    </div>
+</main>
+
+<!-- ============================================
+     DATA + LOGIC
+     ============================================ -->
+<script>
+/* ============================================
+   FTA DATA — 22 agreements, alphabetical
+   ============================================ */
+const FTA_DATA = [
+    {
+        id: 'afghanistan',
+        name: 'Afghanistan',
+        fullTitle: 'India–Afghanistan Preferential Trade Agreement',
+        type: 'PTA',
+        yearSigned: 2003,
+        yearInForce: 2003,
+        status: 'in-force-established',
+        region: 'south-asia',
+        members: null,
+        tagline: 'Limited preferential access on a positive list of products. Bilateral trade volatile post-2021 but corridor remains formally open.',
+        sectors: ['agriculture', 'food', 'pharmaceuticals', 'textiles'],
+        direction: 'balanced',
+        expansion: {
+            exportFromIndia: [
+                'Pharmaceuticals & medicines <code>HS 30</code>',
+                'Cotton textiles & garments <code>HS 52, 61–62</code>',
+                'Tea, sugar, machinery <code>HS 09, 17, 84</code>'
+            ],
+            importToIndia: [
+                'Dried fruits, raisins, almonds, pistachios <code>HS 08</code>',
+                'Saffron, asafoetida (hing), spices <code>HS 09</code>',
+                'Fresh fruits, pomegranates <code>HS 08</code>'
+            ],
+            bestUseCases: [
+                'Spice & dry-fruit importers — meaningful tariff savings vs. MFN rates',
+                'Pharma exporters seeking landlocked Central-Asia entry point',
+                'Limited utility for services or technology businesses'
+            ],
+            tariffHighlights: 'Positive-list approach. India offers tariff concessions on ~38 lines (50–100% margin of preference); Afghanistan reciprocates on a smaller list. Not a comprehensive FTA — only listed products benefit.',
+            rulesOfOrigin: 'Wholly-obtained or substantially-transformed criteria. Minimum 50% domestic value addition. Certificate of Origin from Afghan Chamber of Commerce or Indian DGFT.',
+            tradeVolume: 'US$0.7–1.4 bn annual; significantly volatile post-2021. Trade now largely via Iran (Chabahar) corridor.',
+            resources: [
+                {label: 'DGFT', url: 'https://www.dgft.gov.in'},
+                {label: 'India Trade Portal', url: 'https://www.indiantradeportal.in'}
+            ]
+        }
+    },
+    {
+        id: 'apta',
+        name: 'APTA — Asia-Pacific Trade Agreement',
+        fullTitle: 'Asia-Pacific Trade Agreement (formerly Bangkok Agreement)',
+        type: 'PTA',
+        yearSigned: 1975,
+        yearInForce: 1976,
+        status: 'in-force-established',
+        region: 'multi-region',
+        members: ['Bangladesh', 'China', 'India', 'Laos', 'Mongolia', 'South Korea', 'Sri Lanka'],
+        tagline: 'India\'s oldest trade pact and its only operational preferential arrangement with China. Modest concessions but useful selective access.',
+        sectors: ['textiles', 'engineering', 'chemicals', 'agriculture', 'pharmaceuticals'],
+        direction: 'balanced',
+        expansion: {
+            exportFromIndia: [
+                'Iron & steel, engineering goods <code>HS 72–73, 84</code>',
+                'Cotton yarn & textiles <code>HS 52</code>',
+                'Pharmaceuticals & chemicals <code>HS 28–30</code>'
+            ],
+            importToIndia: [
+                'Chemicals & specialty intermediates <code>HS 28–29</code>',
+                'Industrial machinery components <code>HS 84–85</code>',
+                'Silk & silk yarn <code>HS 50</code>'
+            ],
+            bestUseCases: [
+                'Only mechanism for tariff concessions on limited China-sourced inputs — relevant for chemicals importers',
+                'Bangladesh and Sri Lanka exporters layering APTA over SAFTA where APTA rates are lower',
+                'Korean trade better routed via dedicated CEPA (deeper concessions)'
+            ],
+            tariffHighlights: 'Selective concessions on ~10–13% of tariff lines per partner. Margin of preference 5–100% depending on product. India\'s APTA list includes ~570 tariff lines.',
+            rulesOfOrigin: 'Minimum 35% local content (45% for LDCs). Cumulation allowed across APTA members. Certificate of Origin issued by DGCI&S (Indian exporters) or designated bodies abroad.',
+            tradeVolume: 'India\'s preferential trade share under APTA ~18% of imports, ~11% of exports historically (largely China-driven imports).',
+            resources: [
+                {label: 'APTA Secretariat (UNESCAP)', url: 'https://www.unescap.org/apta'},
+                {label: 'India Trade Portal', url: 'https://www.indiantradeportal.in'}
+            ]
+        }
+    },
+    {
+        id: 'asean',
+        name: 'ASEAN',
+        fullTitle: 'India–ASEAN Trade in Goods Agreement (AITIGA) + Trade in Services and Investment',
+        type: 'FTA',
+        yearSigned: 2009,
+        yearInForce: 2010,
+        yearServices: 2015,
+        status: 'in-force-established',
+        region: 'southeast-asia',
+        members: ['Brunei', 'Cambodia', 'Indonesia', 'Laos', 'Malaysia', 'Myanmar', 'Philippines', 'Singapore', 'Thailand', 'Vietnam'],
+        tagline: 'India\'s most consequential regional FTA covering 660 million consumers. Goods 2010, Services & Investment 2015. Currently under review for AITIGA upgrade.',
+        sectors: ['agriculture', 'food', 'textiles', 'engineering', 'electronics-it', 'chemicals', 'automotive'],
+        direction: 'import-heavy',
+        expansion: {
+            exportFromIndia: [
+                'Iron & steel, vehicles, machinery <code>HS 72–73, 84–87</code>',
+                'Pharmaceuticals & organic chemicals <code>HS 29–30</code>',
+                'Cotton, marine products, refined petroleum <code>HS 52, 03, 27</code>'
+            ],
+            importToIndia: [
+                'Palm oil & vegetable oils <code>HS 15</code> (Indonesia, Malaysia)',
+                'Electronics, semiconductors, telecom equipment <code>HS 84–85</code>',
+                'Coal, natural rubber, copper <code>HS 27, 40, 74</code>'
+            ],
+            bestUseCases: [
+                'Supply-chain integration for electronics & auto-component manufacturers',
+                'Agri-processing firms importing palm oil, rubber as inputs',
+                'Pharma exporters reaching ASEAN public-procurement markets',
+                'Caution: trade deficit with ASEAN has widened — review chapter by chapter'
+            ],
+            tariffHighlights: 'India eliminated tariffs on ~74% of tariff lines; ASEAN ~71%. Sensitive list (~1,279 lines for India) protects key agriculture & manufacturing. Excluded list ~485 lines (negative list).',
+            rulesOfOrigin: 'Twin-test: 35% regional value content + change in tariff sub-heading (CTSH). Cumulation across ASEAN+India. Form AI Certificate of Origin issued by EIA, MPEDA, FIEO, etc.',
+            tradeVolume: 'US$130+ bn bilateral trade. India\'s deficit ~US$45 bn — driving the AITIGA review.',
+            resources: [
+                {label: 'AITIGA Review Notification', url: 'https://www.commerce.gov.in'},
+                {label: 'ASEAN Trade Portal', url: 'https://www.asean.org'},
+                {label: 'India Trade Portal', url: 'https://www.indiantradeportal.in'}
+            ]
+        }
+    },
+    {
+        id: 'australia',
+        name: 'Australia',
+        fullTitle: 'India–Australia Economic Cooperation and Trade Agreement (Ind-Aus ECTA)',
+        type: 'ECTA',
+        yearSigned: 2022,
+        yearInForce: 2022,
+        status: 'in-force-established',
+        region: 'oceania',
+        members: null,
+        tagline: 'Interim agreement covering goods and selected services. Comprehensive CECA negotiations continue. Strong wins for Indian textiles, gems, and IT services.',
+        sectors: ['textiles', 'gems-jewellery', 'pharmaceuticals', 'electronics-it', 'education-services', 'food', 'energy-minerals', 'agriculture'],
+        direction: 'balanced',
+        expansion: {
+            exportFromIndia: [
+                'Textiles, leather, gems & jewellery <code>HS 50–63, 41–43, 71</code>',
+                'Pharmaceuticals & medical devices <code>HS 30, 90</code>',
+                'IT/ITeS services, professional services (cross-border)'
+            ],
+            importToIndia: [
+                'Coal, LNG, critical minerals (lithium, cobalt, manganese) <code>HS 27, 26</code>',
+                'Wool, lentils, almonds, wines <code>HS 51, 07, 08, 22</code>',
+                'Education services (Mode 2 — Indian students in Australia)'
+            ],
+            bestUseCases: [
+                'Textile, garment & jewellery exporters: zero-duty access from Day 1 on 96% of exports by value',
+                'IT services firms: post-study work visas for Indian graduates; double-tax avoidance for short-stay professionals',
+                'Agritech and food-processing firms importing pulses & wool',
+                'Energy-transition manufacturers sourcing critical minerals'
+            ],
+            tariffHighlights: 'Australia: 100% tariff lines duty-free (96% from Day 1). India: 70% tariff lines (85% at full implementation). Sensitive carve-outs: dairy, wheat, sugar (India); some manufactured goods (Australia).',
+            rulesOfOrigin: 'Product-specific rules. General CTSH or 35% qualifying value content. Self-certification permitted (Approved Exporter scheme). Form AANZ-equivalent CoO.',
+            tradeVolume: 'US$26+ bn bilateral. Indian exports doubled within 2 years of ECTA implementation. Target: US$100 bn by 2030.',
+            resources: [
+                {label: 'DFAT (Australia)', url: 'https://www.dfat.gov.au/trade/agreements/in-force/ind-aus-ecta'},
+                {label: 'India MoCI', url: 'https://www.commerce.gov.in'},
+                {label: 'India Trade Portal', url: 'https://www.indiantradeportal.in'}
+            ]
+        }
+    },
+    {
+        id: 'bhutan',
+        name: 'Bhutan',
+        fullTitle: 'India–Bhutan Agreement on Trade, Commerce and Transit',
+        type: 'FTA',
+        yearSigned: 1972,
+        yearInForce: 1972,
+        yearLatestRenewal: 2016,
+        status: 'in-force-established',
+        region: 'south-asia',
+        members: null,
+        tagline: 'India\'s deepest trade integration with any neighbour: free movement of goods, transit rights, and INR-Ngultrum 1:1 peg. Renewed every decade.',
+        sectors: ['agriculture', 'food', 'energy-minerals', 'engineering'],
+        direction: 'export-heavy',
+        expansion: {
+            exportFromIndia: [
+                'Petroleum products, vehicles, machinery <code>HS 27, 84–87</code>',
+                'Foodgrains, vegetables, processed foods <code>HS 07, 10, 19–22</code>',
+                'Construction materials, electronics <code>HS 25, 84–85</code>'
+            ],
+            importToIndia: [
+                'Hydroelectric power (largest single import category)',
+                'Cement & boulders <code>HS 25</code>',
+                'Cardamom, oranges, dolomite <code>HS 09, 08, 25</code>'
+            ],
+            bestUseCases: [
+                'Indian construction, engineering & power-equipment firms — Bhutan\'s hydropower build-out',
+                'FMCG and agri-processed-food exporters — dominant Indian market share',
+                'Tourism & hospitality cross-investments',
+                'Caution: Bhutan\'s gross national happiness framework limits aggressive market penetration'
+            ],
+            tariffHighlights: 'Free trade regime — zero duty on most goods. Specific exclusions on a small negative list. Indian Rupee accepted alongside Ngultrum (1:1 peg).',
+            rulesOfOrigin: 'Goods produced in Bhutan or India qualify. Certificate of Origin from Bhutan Chamber of Commerce or Indian DGFT.',
+            tradeVolume: 'US$1.5+ bn annual. India accounts for ~80% of Bhutan\'s trade. Hydropower exports to India dominate Bhutan\'s GDP contribution from external trade.',
+            resources: [
+                {label: 'India MEA — Bhutan', url: 'https://www.mea.gov.in'},
+                {label: 'India Trade Portal', url: 'https://www.indiantradeportal.in'}
+            ]
+        }
+    },
+    {
+        id: 'chile',
+        name: 'Chile',
+        fullTitle: 'India–Chile Preferential Trade Agreement (Expanded)',
+        type: 'PTA',
+        yearSigned: 2007,
+        yearInForce: 2007,
+        yearExpanded: 2017,
+        status: 'in-force-established',
+        region: 'americas',
+        members: null,
+        tagline: 'Expanded in 2017 to cover ~3,100 tariff lines. India\'s primary preferential gateway into Latin America for textiles, pharmaceuticals, and engineering goods.',
+        sectors: ['textiles', 'pharmaceuticals', 'engineering', 'agriculture', 'food', 'energy-minerals', 'chemicals'],
+        direction: 'balanced',
+        expansion: {
+            exportFromIndia: [
+                'Textiles, garments, leather <code>HS 50–63, 41–43</code>',
+                'Pharmaceuticals & medical devices <code>HS 30, 90</code>',
+                'Auto parts, machinery, transport equipment <code>HS 84–87</code>'
+            ],
+            importToIndia: [
+                'Copper & copper articles <code>HS 74</code> (largest import)',
+                'Lithium carbonate (battery-grade) <code>HS 28</code>',
+                'Iodine, molybdenum, fishmeal <code>HS 28, 23</code>',
+                'Wines, fresh fruits (cherries, kiwis) <code>HS 22, 08</code>'
+            ],
+            bestUseCases: [
+                'EV-battery and energy-transition manufacturers — preferential lithium access',
+                'Pharma & generics exporters — Chile\'s harmonised regulatory framework facilitates LATAM expansion',
+                'Textile & jewellery exporters using Chile as Pacific Alliance gateway',
+                'Wine & specialty-food importers benefiting from reduced tariffs'
+            ],
+            tariffHighlights: 'India offers concessions on 1,798 tariff lines (margin of preference 10–100%); Chile on 1,031 lines. Expanded 2017 deal added ~3,100 lines combined.',
+            rulesOfOrigin: '40% qualifying value content + change in tariff classification. Direct consignment requirement. Form CL Certificate of Origin.',
+            tradeVolume: 'US$3.5+ bn bilateral. Strong upside potential under negotiated CEPA upgrade.',
+            resources: [
+                {label: 'Chile DIRECON', url: 'https://www.subrei.gob.cl'},
+                {label: 'India Trade Portal', url: 'https://www.indiantradeportal.in'}
+            ]
+        }
+    },
+    {
+        id: 'efta',
+        name: 'EFTA — Iceland, Liechtenstein, Norway, Switzerland',
+        fullTitle: 'India–EFTA Trade and Economic Partnership Agreement (TEPA)',
+        type: 'TEPA',
+        yearSigned: 2024,
+        yearInForce: 2025,
+        status: 'in-force-recent',
+        region: 'europe',
+        members: ['Iceland', 'Liechtenstein', 'Norway', 'Switzerland'],
+        tagline: 'India\'s first FTA with a binding investment commitment: US$100 bn over 15 years from EFTA in exchange for tariff preferences. Entered into force October 2025.',
+        sectors: ['pharmaceuticals', 'engineering', 'electronics-it', 'chemicals', 'gems-jewellery', 'agriculture', 'financial-services', 'education-services'],
+        direction: 'balanced',
+        expansion: {
+            exportFromIndia: [
+                'Pharmaceuticals, organic chemicals <code>HS 28–30</code>',
+                'Textiles, garments, gems & jewellery <code>HS 50–63, 71</code>',
+                'IT services, professional services (Mode 1, 4)'
+            ],
+            importToIndia: [
+                'Precision machinery, watches, medical instruments <code>HS 84, 90, 91</code>',
+                'Pharmaceuticals (high-end therapeutics) <code>HS 30</code>',
+                'Specialty chemicals, dairy products <code>HS 28–29, 04</code>',
+                'Gold (Switzerland — refining hub) <code>HS 71</code>'
+            ],
+            bestUseCases: [
+                'Pharma, biotech, and precision-engineering startups seeking Swiss/Nordic capital + market entry',
+                'Indian financial-services firms — Switzerland\'s wealth-management corridor',
+                'Education-services partnerships — Norwegian/Swiss research collaborations',
+                'Capital-intensive manufacturers benefiting from inbound EFTA FDI commitment'
+            ],
+            tariffHighlights: 'EFTA eliminates duties on 92.2% of tariff lines (~99.6% of India\'s exports). India eliminates on 82.7% over 10 years. Switzerland\'s gold imports excluded from tariff cuts (sensitive).',
+            rulesOfOrigin: 'Product-specific rules with cumulation across EFTA. Approved Exporter self-certification available. EUR.1 / origin declaration on commercial invoice.',
+            tradeVolume: 'US$25 bn annual (Switzerland alone US$22 bn). Investment commitment unique among India\'s FTAs.',
+            resources: [
+                {label: 'EFTA Secretariat', url: 'https://www.efta.int/free-trade/free-trade-agreements/india'},
+                {label: 'India MoCI TEPA Portal', url: 'https://www.commerce.gov.in'},
+                {label: 'India Trade Portal', url: 'https://www.indiantradeportal.in'}
+            ]
+        }
+    },
+    {
+        id: 'eu',
+        name: 'European Union',
+        fullTitle: 'India–EU Free Trade Agreement (concluded, awaiting ratification)',
+        type: 'FTA',
+        yearSigned: 2026,
+        yearInForce: null,
+        status: 'signed-pending',
+        region: 'europe',
+        members: ['27 EU Member States'],
+        tagline: 'Concluded 27 January 2026 — India\'s most ambitious FTA ever. 90.7% of India\'s EU exports to become duty-free at entry into force. Ratification expected end-2026.',
+        sectors: ['textiles', 'pharmaceuticals', 'engineering', 'electronics-it', 'agriculture', 'food', 'gems-jewellery', 'leather', 'chemicals', 'automotive', 'education-services', 'financial-services'],
+        direction: 'balanced',
+        expansion: {
+            exportFromIndia: [
+                'Textiles, apparel, leather, footwear <code>HS 41–43, 50–64</code>',
+                'Engineering goods, auto components <code>HS 84–87</code>',
+                'Gems, jewellery, pharmaceuticals <code>HS 71, 30</code>',
+                'Marine products, processed foods, organics <code>HS 03, 16, 19–22</code>'
+            ],
+            importToIndia: [
+                'Wines, spirits (high-tariff reductions: 150%→30–50%), olive oil <code>HS 22, 15</code>',
+                'Machinery, automobiles, aerospace components <code>HS 84–88</code>',
+                'Specialty chemicals, pharmaceuticals <code>HS 28–30</code>',
+                'Dairy products, pet food, processed foods (staged tariff cuts)'
+            ],
+            bestUseCases: [
+                'Labour-intensive exporters (textiles, leather, gems) — 27-country single duty-free zone',
+                'IT/ITeS firms — deep services market access in 137+ EU sub-sectors (mirrors UK CETA template)',
+                'Agri-food processors — preferential access to Europe\'s premium retail markets',
+                'EV and renewables manufacturers — staged tariff harmonisation with EU Green Deal',
+                'CRITICAL: Carbon Border Adjustment Mechanism (CBAM) compliance becomes operational concern in parallel'
+            ],
+            tariffHighlights: 'EU: ~97% tariff-line liberalisation (90.7% of trade value duty-free at EIF). India: lower share with sensitive carve-outs on dairy, sugar, autos. Tariff Rate Quotas (TRQs) for sensitive items. Staging up to 10 years.',
+            rulesOfOrigin: 'EU-style product-specific rules. Origin declaration on invoice for shipments below threshold; EUR.1 above. Cumulation provisions under negotiation.',
+            tradeVolume: 'US$135+ bn bilateral (largest trading partner). Services trade adds another US$50+ bn.',
+            resources: [
+                {label: 'EU Commission FTA Page', url: 'https://policy.trade.ec.europa.eu/eu-trade-relationships-country-and-region/countries-and-regions/india'},
+                {label: 'EU FTA Chapter Summary', url: 'https://policy.trade.ec.europa.eu/eu-trade-relationships-country-and-region/countries-and-regions/india/eu-india-agreements/memo-eu-india-free-trade-agreement-chapter-chapter-summary_en'},
+                {label: 'India MoCI', url: 'https://www.commerce.gov.in'}
+            ]
+        }
+    },
+    {
+        id: 'japan',
+        name: 'Japan',
+        fullTitle: 'India–Japan Comprehensive Economic Partnership Agreement (IJCEPA)',
+        type: 'CEPA',
+        yearSigned: 2011,
+        yearInForce: 2011,
+        status: 'in-force-established',
+        region: 'east-asia',
+        members: null,
+        tagline: 'Long-standing comprehensive partnership covering goods, services, investment, and movement of natural persons. Joint Committee Meeting March 2026 reviewed implementation gaps.',
+        sectors: ['automotive', 'electronics-it', 'engineering', 'pharmaceuticals', 'chemicals', 'agriculture'],
+        direction: 'import-heavy',
+        expansion: {
+            exportFromIndia: [
+                'Marine products, agricultural products <code>HS 03, 07–10</code>',
+                'Pharmaceuticals, chemicals, organic compounds <code>HS 28–30</code>',
+                'Iron ore, gems & jewellery, cotton textiles <code>HS 26, 71, 52</code>'
+            ],
+            importToIndia: [
+                'Automobiles & components <code>HS 87</code>',
+                'Industrial machinery, robotics, precision equipment <code>HS 84</code>',
+                'Electronics, semiconductors, copper products <code>HS 85, 74</code>',
+                'Specialty steel & chemicals <code>HS 72, 28–29</code>'
+            ],
+            bestUseCases: [
+                'Auto-component manufacturers — Japanese OEM tier-1/2 supply integration',
+                'Engineering & robotics joint ventures — capital and technology transfer',
+                'Pharmaceutical firms — rigorous regulatory pathway as global quality benchmark',
+                'Marine-product and agri-product exporters into Japan\'s premium markets'
+            ],
+            tariffHighlights: '~94% of tariff lines liberalised over 10 years from EIF. India\'s sensitive list includes auto, agriculture, fisheries; Japan\'s includes some agri & marine products.',
+            rulesOfOrigin: 'Product-specific rules. Generally CTSH + qualifying value content (varies). Form JI Certificate of Origin from EIA, FIEO, or designated bodies.',
+            tradeVolume: 'US$22 bn bilateral. Trade has been described as "underperforming potential" — Japanese investment in India is the bigger story (~US$40 bn cumulative FDI).',
+            resources: [
+                {label: 'METI Japan', url: 'https://www.meti.go.jp'},
+                {label: 'India MoCI IJCEPA', url: 'https://www.commerce.gov.in'},
+                {label: 'India Trade Portal', url: 'https://www.indiantradeportal.in'}
+            ]
+        }
+    },
+    {
+        id: 'malaysia',
+        name: 'Malaysia',
+        fullTitle: 'India–Malaysia Comprehensive Economic Cooperation Agreement (MICECA)',
+        type: 'CECA',
+        yearSigned: 2011,
+        yearInForce: 2011,
+        status: 'in-force-established',
+        region: 'southeast-asia',
+        members: null,
+        tagline: 'Bilateral CECA layered atop ASEAN FTA. Adds deeper services market access and investment provisions specific to Malaysia.',
+        sectors: ['textiles', 'engineering', 'pharmaceuticals', 'electronics-it', 'agriculture', 'energy-minerals', 'food'],
+        direction: 'import-heavy',
+        expansion: {
+            exportFromIndia: [
+                'Petroleum products, machinery, iron & steel <code>HS 27, 84, 72–73</code>',
+                'Cotton, garments, pharmaceuticals <code>HS 52, 61–62, 30</code>',
+                'IT services, accountancy, architecture (Mode 1)'
+            ],
+            importToIndia: [
+                'Palm oil & palm-oil derivatives <code>HS 15</code> (largest single category)',
+                'Electronics, telecommunications equipment <code>HS 84–85</code>',
+                'Crude petroleum, LNG, chemicals <code>HS 27, 28–29</code>',
+                'Natural rubber, processed wood <code>HS 40, 44</code>'
+            ],
+            bestUseCases: [
+                'Edible-oil refiners — single largest sourcing channel (often more efficient than ASEAN-route)',
+                'Service-sector firms (architecture, accountancy, IT) using deeper Mode 1 access',
+                'Halal-certified exporters into Malaysia\'s domestic and re-export markets',
+                'Investors using Malaysia as Islamic-finance gateway to broader Southeast Asia'
+            ],
+            tariffHighlights: 'Layers preferential rates onto ASEAN FTA where MICECA is more generous. Malaysia eliminated duties on 88% of tariff lines from India; India on 78% of Malaysian exports.',
+            rulesOfOrigin: 'Generally CTSH + 35% qualifying value content; product-specific rules apply. Form MI Certificate of Origin. Cumulation with ASEAN possible under specific conditions.',
+            tradeVolume: 'US$20 bn bilateral. Palm oil typically 30–40% of India\'s imports.',
+            resources: [
+                {label: 'MITI Malaysia', url: 'https://www.miti.gov.my'},
+                {label: 'India MoCI MICECA', url: 'https://www.commerce.gov.in'},
+                {label: 'India Trade Portal', url: 'https://www.indiantradeportal.in'}
+            ]
+        }
+    },
+    {
+        id: 'mauritius',
+        name: 'Mauritius',
+        fullTitle: 'India–Mauritius Comprehensive Economic Cooperation and Partnership Agreement (CECPA)',
+        type: 'CECPA',
+        yearSigned: 2021,
+        yearInForce: 2021,
+        status: 'in-force-established',
+        region: 'africa-io',
+        members: null,
+        tagline: 'India\'s first trade pact with an African country. Strategic Indian-Ocean and Africa-gateway agreement with strong DTAA linkages.',
+        sectors: ['agriculture', 'food', 'textiles', 'pharmaceuticals', 'electronics-it', 'financial-services'],
+        direction: 'export-heavy',
+        expansion: {
+            exportFromIndia: [
+                'Pharmaceuticals, agri-products, processed foods <code>HS 30, 07–22</code>',
+                'Textiles, leather, gems & jewellery <code>HS 50–63, 41–43, 71</code>',
+                'IT services, financial services (Mode 1, 3)'
+            ],
+            importToIndia: [
+                'Sugar (preferential TRQ) <code>HS 17</code>',
+                'Frozen fish, beer, fresh fruit <code>HS 03, 22, 08</code>',
+                'Specialty chemicals (limited)'
+            ],
+            bestUseCases: [
+                'Africa-focused exporters — Mauritius as logistical and re-export hub',
+                'Financial services firms — leverage India-Mauritius DTAA + CECPA together',
+                'Pharma and FMCG firms — Mauritius as soft-launch market for African expansion',
+                'IT/ITeS firms targeting Francophone Africa via Mauritian operations'
+            ],
+            tariffHighlights: 'India offers preferential market access on 310 tariff lines; Mauritius on 615. Sugar preferential TRQ ~7,500 metric tonnes.',
+            rulesOfOrigin: 'Wholly-obtained or substantial-transformation criteria. 40% qualifying value content for non-wholly-obtained goods. Form Certificate of Origin issued by Mauritius Chamber or Indian DGFT.',
+            tradeVolume: 'US$0.85 bn bilateral. CECPA significance is asymmetric — Mauritius matters far more as investment-and-services gateway than as trade volume.',
+            resources: [
+                {label: 'Mauritius Trade Portal', url: 'https://www.mauritiustrade.mu'},
+                {label: 'India MoCI', url: 'https://www.commerce.gov.in'},
+                {label: 'India Trade Portal', url: 'https://www.indiantradeportal.in'}
+            ]
+        }
+    },
+    {
+        id: 'mercosur',
+        name: 'MERCOSUR — Argentina, Brazil, Paraguay, Uruguay',
+        fullTitle: 'India–MERCOSUR Preferential Trade Agreement',
+        type: 'PTA',
+        yearSigned: 2004,
+        yearInForce: 2009,
+        status: 'in-force-established',
+        region: 'americas',
+        members: ['Argentina', 'Brazil', 'Paraguay', 'Uruguay'],
+        tagline: 'Limited preferential agreement covering ~450 tariff lines on each side. Negotiations to deepen into a CECA have been intermittent.',
+        sectors: ['pharmaceuticals', 'chemicals', 'engineering', 'agriculture', 'textiles'],
+        direction: 'balanced',
+        expansion: {
+            exportFromIndia: [
+                'Pharmaceuticals & medicines <code>HS 30</code>',
+                'Organic & inorganic chemicals <code>HS 28–29</code>',
+                'Textiles, machinery, auto components <code>HS 50–63, 84–87</code>'
+            ],
+            importToIndia: [
+                'Vegetable oils (soybean), pulses <code>HS 15, 07</code>',
+                'Iron ore, copper, agro-commodities <code>HS 26, 74, 10</code>',
+                'Beef, leather, hides <code>HS 02, 41–43</code>'
+            ],
+            bestUseCases: [
+                'Pharmaceutical and chemical exporters — primary entry to South American markets',
+                'Pulses and edible-oil importers — counter-seasonal sourcing',
+                'Limited utility outside listed products — broader CECA negotiations should be tracked'
+            ],
+            tariffHighlights: 'India offers concessions on 450 lines (margin of preference 10–100%); MERCOSUR on 452 lines. Coverage is narrow — only listed products benefit.',
+            rulesOfOrigin: '60% non-MERCOSUR/India-content threshold (i.e., ≤60% imported content allowed). Direct consignment required. Form MN Certificate of Origin.',
+            tradeVolume: 'US$15+ bn bilateral (Brazil dominates). Significant headroom under deepened agreement.',
+            resources: [
+                {label: 'MERCOSUR Secretariat', url: 'https://www.mercosur.int'},
+                {label: 'India Trade Portal', url: 'https://www.indiantradeportal.in'}
+            ]
+        }
+    },
+    {
+        id: 'nepal',
+        name: 'Nepal',
+        fullTitle: 'India–Nepal Treaty of Trade (revised)',
+        type: 'FTA',
+        yearSigned: 1996,
+        yearInForce: 1996,
+        yearLatestRenewal: 2009,
+        status: 'in-force-established',
+        region: 'south-asia',
+        members: null,
+        tagline: 'India\'s deepest land-trade integration. Most goods flow duty-free; transit rights guaranteed for landlocked Nepal. Auto-renewing with periodic revisions.',
+        sectors: ['agriculture', 'food', 'textiles', 'engineering', 'energy-minerals'],
+        direction: 'export-heavy',
+        expansion: {
+            exportFromIndia: [
+                'Petroleum products, machinery, vehicles <code>HS 27, 84–87</code>',
+                'Foodgrains, agricultural produce, FMCG <code>HS 07–22</code>',
+                'Iron & steel, cement, electrical equipment <code>HS 72–73, 25, 85</code>'
+            ],
+            importToIndia: [
+                'Cardamom, ginger, large cardamom <code>HS 09</code>',
+                'Vegetable oils, pulses, ghee <code>HS 15, 07, 04</code>',
+                'Jute products, handicrafts, tea <code>HS 53, 09</code>'
+            ],
+            bestUseCases: [
+                'Indian FMCG, food-processing, and consumer-durables firms — dominant Indian market presence',
+                'Construction & infrastructure firms — Nepal\'s ongoing infrastructure programs',
+                'Tourism and hospitality cross-flows',
+                'Caution: India accounts for ~64% of Nepal\'s trade — political-economy sensitivities apply'
+            ],
+            tariffHighlights: 'Free movement of most goods. Limited negative list (alcoholic beverages, tobacco, perfumes, cosmetics — Nepal restricts). Indian Rupee freely accepted.',
+            rulesOfOrigin: 'Manufacturing in Nepal qualifies. Certificate of Origin from Nepal Chamber of Commerce. Special provisions for Nepal-origin goods exported to India.',
+            tradeVolume: 'US$8.5+ bn bilateral. India is Nepal\'s largest trading partner by an order of magnitude.',
+            resources: [
+                {label: 'India MEA — Nepal', url: 'https://www.mea.gov.in'},
+                {label: 'India Trade Portal', url: 'https://www.indiantradeportal.in'}
+            ]
+        }
+    },
+    {
+        id: 'new-zealand',
+        name: 'New Zealand',
+        fullTitle: 'India–New Zealand Free Trade Agreement (announced)',
+        type: 'FTA',
+        yearSigned: 2025,
+        yearInForce: null,
+        status: 'signed-pending',
+        region: 'oceania',
+        members: null,
+        tagline: 'Announced 22 December 2025 after fast-tracked negotiation. Ratification and entry into force expected during 2026. Targets bilateral trade doubling.',
+        sectors: ['agriculture', 'food', 'education-services', 'electronics-it', 'pharmaceuticals', 'textiles'],
+        direction: 'balanced',
+        expansion: {
+            exportFromIndia: [
+                'Pharmaceuticals, textiles, engineering goods <code>HS 30, 50–63, 84</code>',
+                'IT/ITeS, professional services (Mode 1 & 4)',
+                'Agri-products, processed foods <code>HS 07–22</code>'
+            ],
+            importToIndia: [
+                'Wool, wood products, kiwifruit, honey <code>HS 51, 44, 08, 04</code>',
+                'Dairy alternatives & specialty foods <code>HS 04, 19</code>',
+                'Education services (Mode 2 — Indian students in NZ)',
+                'Wine (Marlborough region) <code>HS 22</code>'
+            ],
+            bestUseCases: [
+                'Agritech and food-processing startups — NZ\'s deep agri-tech R&D ecosystem',
+                'Education-services consultants — post-study work pathways for Indian students',
+                'IT services firms — professional-mobility provisions',
+                'Wool & specialty-textile importers — premium fibre sourcing'
+            ],
+            tariffHighlights: 'Indicative: 100% duty-free access for the majority of Indian exports targeted; NZ-side full liberalisation. India\'s sensitive carve-outs on dairy expected. Final text under legal-scrubbing as of April 2026.',
+            rulesOfOrigin: 'Expected to mirror Australia ECTA template — product-specific rules with self-certification option for approved exporters.',
+            tradeVolume: 'US$1.7 bn bilateral. Target: ~US$5 bn within five years of EIF.',
+            resources: [
+                {label: 'NZ MFAT', url: 'https://www.mfat.govt.nz'},
+                {label: 'India MoCI', url: 'https://www.commerce.gov.in'}
+            ]
+        }
+    },
+    {
+        id: 'oman',
+        name: 'Oman',
+        fullTitle: 'India–Oman Comprehensive Economic Partnership Agreement (CEPA)',
+        type: 'CEPA',
+        yearSigned: 2025,
+        yearInForce: 2026,
+        status: 'in-force-recent',
+        region: 'gulf',
+        members: null,
+        tagline: 'Signed December 2025; in force early 2026. 98% of Indian exports gain duty-free access. Strategic Gulf-corridor complement to UAE CEPA.',
+        sectors: ['textiles', 'gems-jewellery', 'engineering', 'food', 'pharmaceuticals', 'chemicals', 'leather'],
+        direction: 'export-heavy',
+        expansion: {
+            exportFromIndia: [
+                'Textiles, leather, gems & jewellery <code>HS 50–63, 41–43, 71</code>',
+                'Engineering goods, auto components <code>HS 84–87</code>',
+                'Pharmaceuticals, processed foods, basmati rice <code>HS 30, 19–22, 10</code>'
+            ],
+            importToIndia: [
+                'Crude petroleum, LNG, urea <code>HS 27, 31</code>',
+                'Polyethylene, methanol, specialty chemicals <code>HS 28–29, 39</code>',
+                'Dates, frankincense (Boswellia) <code>HS 08, 13</code>'
+            ],
+            bestUseCases: [
+                'MSME exporters in labour-intensive sectors — duty-free Gulf access',
+                'Engineering and auto-component firms diversifying Gulf supply chains',
+                'Refiners and petrochemical players sourcing feedstock',
+                'Construction & specialty-goods firms riding Oman Vision 2040 infrastructure push'
+            ],
+            tariffHighlights: 'Oman: 98% of tariff lines duty-free for Indian exports. India: significant tariff cuts on hydrocarbon and petrochemical imports. Phased over 10 years for sensitive items.',
+            rulesOfOrigin: 'Modelled on UAE CEPA framework. Generally CTSH + 35% qualifying value content. Self-certification for Approved Exporters.',
+            tradeVolume: 'US$10+ bn bilateral. Target: significant growth on non-oil bilateral trade.',
+            resources: [
+                {label: 'Oman Ministry of Commerce', url: 'https://moci.gov.om'},
+                {label: 'India MoCI Oman CEPA', url: 'https://www.commerce.gov.in'},
+                {label: 'India Trade Portal', url: 'https://www.indiantradeportal.in'}
+            ]
+        }
+    },
+    {
+        id: 'safta',
+        name: 'SAFTA — South Asian Free Trade Area',
+        fullTitle: 'Agreement on South Asian Free Trade Area',
+        type: 'FTA',
+        yearSigned: 2004,
+        yearInForce: 2006,
+        status: 'in-force-established',
+        region: 'south-asia',
+        members: ['Afghanistan', 'Bangladesh', 'Bhutan', 'India', 'Maldives', 'Nepal', 'Pakistan', 'Sri Lanka'],
+        tagline: 'Regional bloc-level FTA covering all of South Asia. Tariff Liberalisation Programme largely completed; sensitive lists remain protective.',
+        sectors: ['agriculture', 'food', 'textiles', 'pharmaceuticals', 'engineering'],
+        direction: 'export-heavy',
+        expansion: {
+            exportFromIndia: [
+                'Cotton textiles, garments <code>HS 50–63</code>',
+                'Pharmaceuticals, automobiles <code>HS 30, 87</code>',
+                'Engineering goods, foodgrains <code>HS 84, 10</code>'
+            ],
+            importToIndia: [
+                'Garments (Bangladesh) <code>HS 61–62</code>',
+                'Jute & jute products (Bangladesh) <code>HS 53</code>',
+                'Tea (Sri Lanka), spices <code>HS 09</code>',
+                'Various LDC-origin products under preferential rates'
+            ],
+            bestUseCases: [
+                'Indian exporters — broad regional duty-free access (subject to negative lists)',
+                'Bangladeshi garment manufacturers — preferential India access',
+                'Sri Lankan tea & spice exporters — layered with bilateral ISFTA',
+                'Limited utility for India–Pakistan trade due to political restrictions'
+            ],
+            tariffHighlights: 'NLDCs (India, Pakistan, Sri Lanka) brought tariffs to 0–5% over 5–6 years; LDCs over 8 years. Sensitive lists remain (India\'s ~614 lines for LDCs, ~865 for NLDCs).',
+            rulesOfOrigin: '40% qualifying value content (30% for LDCs). Cumulation across SAFTA members. Form SAFTA Certificate of Origin.',
+            tradeVolume: 'India\'s intra-SAARC trade ~3% of total — bloc remains under-utilised relative to potential.',
+            resources: [
+                {label: 'SAARC Secretariat', url: 'https://www.saarc-sec.org'},
+                {label: 'India Trade Portal', url: 'https://www.indiantradeportal.in'}
+            ]
+        }
+    },
+    {
+        id: 'singapore',
+        name: 'Singapore',
+        fullTitle: 'India–Singapore Comprehensive Economic Cooperation Agreement (CECA)',
+        type: 'CECA',
+        yearSigned: 2005,
+        yearInForce: 2005,
+        status: 'in-force-established',
+        region: 'southeast-asia',
+        members: null,
+        tagline: 'India\'s first comprehensive CECA. Goods, services, investment, and air-services coverage. Singapore is a top FDI source into India and a wealth-management hub.',
+        sectors: ['electronics-it', 'pharmaceuticals', 'engineering', 'financial-services', 'education-services', 'gems-jewellery', 'agriculture'],
+        direction: 'balanced',
+        expansion: {
+            exportFromIndia: [
+                'Refined petroleum, gems & jewellery, machinery <code>HS 27, 71, 84</code>',
+                'Pharmaceuticals, chemicals, marine products <code>HS 30, 28–29, 03</code>',
+                'IT services, financial services, education (Modes 1, 3, 4)'
+            ],
+            importToIndia: [
+                'Electronics, semiconductors, telecom equipment <code>HS 84–85</code>',
+                'Refined petroleum, plastics, organic chemicals <code>HS 27, 39, 29</code>',
+                'Specialty machinery, medical devices <code>HS 84, 90</code>',
+                'Financial services, treasury services'
+            ],
+            bestUseCases: [
+                'Tech & SaaS startups — Singapore as Asia HQ for global expansion',
+                'Family-office and wealth-management cross-structuring (DTAA + CECA layered)',
+                'Financial-services firms — banking, asset-management mobility provisions',
+                'Pharmaceutical firms using Singapore as regional clinical-trial and regulatory hub',
+                'NOTE: India has historically given more tariff concessions than received — still strategically valuable for services and FDI'
+            ],
+            tariffHighlights: 'Singapore: zero MFN duty on most products (already free). India: phased tariff elimination on listed products. Real value sits in services and investment chapters — not goods tariffs.',
+            rulesOfOrigin: 'Twin test: 40% qualifying value content + change in tariff classification. Form SI Certificate of Origin.',
+            tradeVolume: 'US$35+ bn bilateral goods + significant services trade. Singapore is consistently a top-3 FDI source into India.',
+            resources: [
+                {label: 'Enterprise Singapore', url: 'https://www.enterprisesg.gov.sg'},
+                {label: 'India MoCI CECA', url: 'https://www.commerce.gov.in'},
+                {label: 'India Trade Portal', url: 'https://www.indiantradeportal.in'}
+            ]
+        }
+    },
+    {
+        id: 'south-korea',
+        name: 'South Korea',
+        fullTitle: 'India–South Korea Comprehensive Economic Partnership Agreement (CEPA)',
+        type: 'CEPA',
+        yearSigned: 2009,
+        yearInForce: 2010,
+        status: 'in-force-established',
+        region: 'east-asia',
+        members: null,
+        tagline: 'Comprehensive partnership covering goods, services, and investment. Currently under upgrade negotiation to address India\'s widening trade deficit.',
+        sectors: ['automotive', 'electronics-it', 'engineering', 'pharmaceuticals', 'chemicals', 'textiles'],
+        direction: 'import-heavy',
+        expansion: {
+            exportFromIndia: [
+                'Naphtha, mineral oils, iron & steel <code>HS 27, 72</code>',
+                'Cotton, garments, marine products <code>HS 52, 61–62, 03</code>',
+                'Aluminium, organic chemicals <code>HS 76, 29</code>'
+            ],
+            importToIndia: [
+                'Steel & specialty steel products <code>HS 72</code>',
+                'Auto parts, machinery, electronics <code>HS 84–87</code>',
+                'Petrochemicals, plastics, organic chemicals <code>HS 39, 28–29</code>'
+            ],
+            bestUseCases: [
+                'Auto-component and steel-using manufacturers — Korean OEM supply integration',
+                'Electronics and appliance firms — Korean technology partnerships',
+                'Pharma and chemical firms exporting to South Korea\'s regulated market',
+                'Caution: Trade deficit has widened — upgrade negotiations target rebalancing'
+            ],
+            tariffHighlights: '~84% tariff lines liberalised (India), ~93% (South Korea). Sensitive lists preserve agricultural and labour-intensive carve-outs on Indian side.',
+            rulesOfOrigin: 'Product-specific rules with CTSH + 35% qualifying value content (general rule). Form KI Certificate of Origin.',
+            tradeVolume: 'US$25+ bn bilateral. Trade deficit widening — driving upgrade talks.',
+            resources: [
+                {label: 'Korea MOTIE', url: 'https://www.motie.go.kr'},
+                {label: 'India MoCI CEPA', url: 'https://www.commerce.gov.in'},
+                {label: 'India Trade Portal', url: 'https://www.indiantradeportal.in'}
+            ]
+        }
+    },
+    {
+        id: 'sri-lanka',
+        name: 'Sri Lanka',
+        fullTitle: 'India–Sri Lanka Free Trade Agreement (ISFTA)',
+        type: 'FTA',
+        yearSigned: 1998,
+        yearInForce: 2000,
+        status: 'in-force-established',
+        region: 'south-asia',
+        members: null,
+        tagline: 'India\'s first proper FTA. Tariff Liberalisation Programme fully implemented since 2008. Goods-only — services and investment talks (CEPA upgrade) remain pending.',
+        sectors: ['agriculture', 'food', 'textiles', 'engineering', 'pharmaceuticals'],
+        direction: 'export-heavy',
+        expansion: {
+            exportFromIndia: [
+                'Refined petroleum, vehicles, machinery <code>HS 27, 87, 84</code>',
+                'Cotton, foodgrains, sugar <code>HS 52, 10, 17</code>',
+                'Pharmaceuticals, iron & steel <code>HS 30, 72–73</code>'
+            ],
+            importToIndia: [
+                'Black & green tea <code>HS 09</code>',
+                'Spices (cinnamon, cardamom, pepper) <code>HS 09</code>',
+                'Coconut products, rubber, gems <code>HS 14, 40, 71</code>',
+                'Garments under preferential quotas <code>HS 61–62</code>'
+            ],
+            bestUseCases: [
+                'Indian FMCG, automobile, and pharmaceutical exporters — dominant Indian market position',
+                'Tea, spice, and coconut-product importers — preferential rates over MFN',
+                'Garment manufacturers using Sri Lanka as platform for premium-segment European-bound exports',
+                'Caution: pepper transhipment via Sri Lanka has been a known compliance flashpoint — verify origin diligently'
+            ],
+            tariffHighlights: 'India: zero duty on ~95% of tariff lines (since 2008). Sri Lanka: zero duty on ~80% of lines. Negative lists protect agriculture (both) and small industries (Sri Lanka).',
+            rulesOfOrigin: '35% qualifying value content (25% with cumulation). Direct consignment required. Form ISFTA Certificate of Origin from designated chambers/agencies.',
+            tradeVolume: 'US$5.4 bn bilateral. India is Sri Lanka\'s largest trading partner.',
+            resources: [
+                {label: 'Sri Lanka Department of Commerce', url: 'https://www.doc.gov.lk'},
+                {label: 'India MoCI ISFTA', url: 'https://www.commerce.gov.in'},
+                {label: 'India Trade Portal', url: 'https://www.indiantradeportal.in'}
+            ]
+        }
+    },
+    {
+        id: 'thailand',
+        name: 'Thailand',
+        fullTitle: 'India–Thailand Free Trade Agreement (Early Harvest Scheme)',
+        type: 'EHS',
+        yearSigned: 2003,
+        yearInForce: 2004,
+        status: 'in-force-established',
+        region: 'southeast-asia',
+        members: null,
+        tagline: 'Limited Early Harvest Scheme covering 82 tariff lines. Broader FTA negotiations have been pending. Thailand is now primarily covered via ASEAN FTA.',
+        sectors: ['electronics-it', 'engineering', 'agriculture', 'food', 'gems-jewellery'],
+        direction: 'import-heavy',
+        expansion: {
+            exportFromIndia: [
+                'Diamonds (cut & polished), processed foods <code>HS 71, 19–22</code>',
+                'Cotton, machinery components <code>HS 52, 84</code>'
+            ],
+            importToIndia: [
+                'Polycarbonate, polyethylene, ABS plastics <code>HS 39</code>',
+                'Air-conditioner & refrigerator components <code>HS 84</code>',
+                'Frozen seafood, longan, durian <code>HS 03, 08</code>'
+            ],
+            bestUseCases: [
+                'Marginal incremental benefit — most Thailand trade now flows under ASEAN FTA (broader coverage)',
+                'Specialty plastics and AC-component importers — verify EHS vs ASEAN tariffs case-by-case',
+                'Watch space: full bilateral FTA negotiations may revive given regional trade architecture shifts'
+            ],
+            tariffHighlights: 'EHS covers only 82 specified tariff lines — duty-free between India and Thailand. ASEAN FTA covers a much broader basket and is generally the preferred channel.',
+            rulesOfOrigin: '40% qualifying value content + change in tariff classification. Form TI Certificate of Origin.',
+            tradeVolume: 'US$15 bn bilateral (most under ASEAN routing). Standalone EHS volume modest.',
+            resources: [
+                {label: 'Thailand DTN', url: 'https://api.dtn.go.th'},
+                {label: 'India Trade Portal', url: 'https://www.indiantradeportal.in'}
+            ]
+        }
+    },
+    {
+        id: 'uae',
+        name: 'United Arab Emirates',
+        fullTitle: 'India–UAE Comprehensive Economic Partnership Agreement (CEPA)',
+        type: 'CEPA',
+        yearSigned: 2022,
+        yearInForce: 2022,
+        status: 'in-force-established',
+        region: 'gulf',
+        members: null,
+        tagline: 'Negotiated in just 88 days — India\'s fastest FTA. Bilateral trade now exceeds US$100 bn. Anchor of India\'s Gulf and Africa-gateway strategy.',
+        sectors: ['textiles', 'gems-jewellery', 'food', 'pharmaceuticals', 'engineering', 'electronics-it', 'agriculture', 'leather', 'energy-minerals', 'financial-services'],
+        direction: 'balanced',
+        expansion: {
+            exportFromIndia: [
+                'Gems & jewellery (largest category) <code>HS 71</code>',
+                'Refined petroleum, mineral fuels <code>HS 27</code>',
+                'Pharmaceuticals, food products, textiles <code>HS 30, 19–22, 50–63</code>',
+                'Engineering goods, electronics, processed agri <code>HS 84–85, 07–10</code>'
+            ],
+            importToIndia: [
+                'Crude petroleum, LNG, gold <code>HS 27, 71</code>',
+                'Polymers, polyethylene, urea <code>HS 39, 31</code>',
+                'Aluminium, copper, dates, dried fruit <code>HS 76, 74, 08</code>'
+            ],
+            bestUseCases: [
+                'Highest-impact CEPA in India\'s portfolio — proven commercial utility',
+                'Gems & jewellery exporters — UAE is largest single market (~US$10+ bn flow)',
+                'MSME exporters in labour-intensive sectors — duty-free Gulf access',
+                'Re-export entrepreneurs using UAE as Africa/Middle East logistics hub',
+                'Pharma firms — preferential entry into Gulf and East African markets',
+                'Sourcing capital goods and intermediates for value-add re-export to Africa/Europe'
+            ],
+            tariffHighlights: 'UAE: elimination of duties on 97% of tariff lines (99% of imports from India). India: covers 90% of UAE-origin goods. ~US$26 bn of Indian exports previously subject to 5% UAE duty now duty-free.',
+            rulesOfOrigin: 'Generally 40% qualifying value content; product-specific rules apply. Self-certification for Approved Exporters. Form UAE-CEPA Certificate of Origin.',
+            tradeVolume: 'US$100+ bn bilateral (exceeded target ahead of schedule). Non-oil trade exceeded US$60 bn.',
+            resources: [
+                {label: 'UAE Ministry of Economy', url: 'https://www.moec.gov.ae'},
+                {label: 'India MoCI UAE CEPA', url: 'https://www.commerce.gov.in'},
+                {label: 'India Trade Portal', url: 'https://www.indiantradeportal.in'}
+            ]
+        }
+    },
+    {
+        id: 'uk',
+        name: 'United Kingdom',
+        fullTitle: 'India–UK Comprehensive Economic and Trade Agreement (CETA) + Double Contribution Convention',
+        type: 'CETA',
+        yearSigned: 2025,
+        yearInForce: 2026,
+        status: 'in-force-recent',
+        region: 'europe',
+        members: null,
+        tagline: 'Signed July 2025; in force April 2026. 99% of Indian exports duty-free. Includes social-security exemption for short-term Indian professionals — a landmark services win.',
+        sectors: ['textiles', 'pharmaceuticals', 'electronics-it', 'gems-jewellery', 'leather', 'food', 'engineering', 'education-services', 'financial-services'],
+        direction: 'balanced',
+        expansion: {
+            exportFromIndia: [
+                'Textiles, leather, footwear, gems & jewellery <code>HS 41–43, 50–64, 71</code>',
+                'Pharmaceuticals, marine products, processed foods <code>HS 30, 03, 19–22</code>',
+                'Engineering goods, auto components <code>HS 84–87</code>',
+                'IT/ITeS, professional services (137 sub-sectors of UK market access)'
+            ],
+            importToIndia: [
+                'Whisky & spirits (high-tariff reductions: 150%→75% then phased) <code>HS 22</code>',
+                'Automobiles & components (TRQ for premium segments) <code>HS 87</code>',
+                'Machinery, medical devices, aerospace components <code>HS 84, 90, 88</code>',
+                'Specialty foods, confectionery (staged cuts)'
+            ],
+            bestUseCases: [
+                'Textile, leather, gems exporters — 47.3% of tariff lines newly duty-free (was at MFN)',
+                'IT/ITeS firms — Double Contribution Convention exempts short-term assignees from UK NIC for up to 36 months (huge cost saving)',
+                'Pharmaceutical firms — MHRA mutual recognition reduces regulatory friction',
+                '1,000 Working Holiday Visas annually for young Indians',
+                'Education-services firms — deeper UK market access; UK universities expanding India campuses',
+                'Specialty-spirit and premium-food importers — gradual tariff normalisation'
+            ],
+            tariffHighlights: 'UK: 99% tariff lines duty-free (90% of UK imports from India). India: 90% tariff lines covered (85% of UK exports to India). Whisky tariff cut from 150% to 75% Day 1, then to 40% over 10 years. Automobile TRQ for premium segments.',
+            rulesOfOrigin: 'Origin declaration on commercial invoice (no separate CoO for shipments below £6,000). Above threshold, Approved Exporter or competent-authority CoO. Bilateral cumulation provisions.',
+            tradeVolume: 'US$22 bn bilateral. Target: doubling by 2030. Services trade adds ~US$25 bn.',
+            resources: [
+                {label: 'UK Department for Business and Trade', url: 'https://www.gov.uk/government/collections/india-uk-trade-deal'},
+                {label: 'India MoCI CETA', url: 'https://www.commerce.gov.in'},
+                {label: 'India Trade Portal', url: 'https://www.indiantradeportal.in'}
+            ]
+        }
+    }
+];
+
+/* ============================================
+   GLOSSARY — acronyms, full forms, descriptions
+   ============================================ */
+const GLOSSARY = {
+    /* Agreement types */
+    'FTA':    {full: 'Free Trade Agreement', desc: 'A treaty between two or more countries that reduces or eliminates tariffs and barriers on substantially all trade. Uses a "negative list" of excluded goods. India\'s Sri Lanka FTA is a classic example.', group: 'agreement'},
+    'PTA':    {full: 'Preferential Trade Agreement', desc: 'A narrower agreement that reduces tariffs on a "positive list" of specified products only. Less ambitious than an FTA but easier to negotiate. India\'s MERCOSUR PTA is an example.', group: 'agreement'},
+    'CEPA':   {full: 'Comprehensive Economic Partnership Agreement', desc: 'An integrated agreement covering goods, services, investment, and regulatory areas (IPR, competition, government procurement). Goes deeper than an FTA. India\'s UAE CEPA is the prototype.', group: 'agreement'},
+    'CECA':   {full: 'Comprehensive Economic Cooperation Agreement', desc: 'Similar in scope to a CEPA — covers goods, services, investment, and regulatory cooperation. India uses CECA terminology with Singapore and Malaysia.', group: 'agreement'},
+    'CECPA':  {full: 'Comprehensive Economic Cooperation and Partnership Agreement', desc: 'Variant naming used for the India-Mauritius agreement (2021). Functions like a CEPA/CECA hybrid.', group: 'agreement'},
+    'ECTA':   {full: 'Economic Cooperation and Trade Agreement', desc: 'A focused, "early-harvest" style agreement covering goods and selected services. India-Australia ECTA (2022) is a prelude to a fuller CECA.', group: 'agreement'},
+    'CETA':   {full: 'Comprehensive Economic and Trade Agreement', desc: 'Term used for the India-UK agreement (2025/26). Covers goods, services, investment, and includes a parallel social-security pact (the Double Contribution Convention).', group: 'agreement'},
+    'TEPA':   {full: 'Trade and Economic Partnership Agreement', desc: 'Term used for the India-EFTA agreement (signed 2024, in force 2025). Notable for a binding US$100 bn investment commitment from EFTA states.', group: 'agreement'},
+    'EHS':    {full: 'Early Harvest Scheme', desc: 'A limited initial agreement covering a small subset of products, intended as a precursor to a fuller FTA. India-Thailand EHS covers just 82 tariff lines.', group: 'agreement'},
+
+    /* Country / regional blocs */
+    'ASEAN':   {full: 'Association of Southeast Asian Nations', desc: '10-country bloc: Brunei, Cambodia, Indonesia, Laos, Malaysia, Myanmar, Philippines, Singapore, Thailand, Vietnam. ~660 million consumers.', group: 'regional'},
+    'APTA':    {full: 'Asia-Pacific Trade Agreement', desc: 'Formerly the Bangkok Agreement (1975). India\'s oldest preferential pact and only formal preferential channel with China. Members: Bangladesh, China, India, Laos, Mongolia, S. Korea, Sri Lanka.', group: 'regional'},
+    'SAFTA':   {full: 'South Asian Free Trade Area', desc: 'Bloc-level FTA among SAARC members: Afghanistan, Bangladesh, Bhutan, India, Maldives, Nepal, Pakistan, Sri Lanka. In force since 2006.', group: 'regional'},
+    'SAARC':   {full: 'South Asian Association for Regional Cooperation', desc: 'Regional intergovernmental organisation of 8 South Asian states. SAFTA is the trade arm.', group: 'regional'},
+    'MERCOSUR':{full: 'Mercado Común del Sur (Southern Common Market)', desc: 'South American trade bloc: Argentina, Brazil, Paraguay, Uruguay (Venezuela suspended). India has a PTA with this bloc since 2009.', group: 'regional'},
+    'EFTA':    {full: 'European Free Trade Association', desc: '4-state European bloc not in the EU: Iceland, Liechtenstein, Norway, Switzerland.', group: 'regional'},
+    'EU':      {full: 'European Union', desc: '27-state economic and political union. India\'s largest trading partner (~US$135 bn). FTA concluded January 2026, ratification pending end-2026.', group: 'regional'},
+    'UAE':     {full: 'United Arab Emirates', desc: 'Federation of seven Gulf emirates including Dubai and Abu Dhabi. India\'s third-largest trading partner.', group: 'regional'},
+    'BIMSTEC': {full: 'Bay of Bengal Initiative for Multi-Sectoral Technical and Economic Cooperation', desc: '7-state Bay-of-Bengal regional grouping: Bangladesh, Bhutan, India, Myanmar, Nepal, Sri Lanka, Thailand. Goods FTA framework long-pending.', group: 'regional'},
+    'GCC':     {full: 'Gulf Cooperation Council', desc: '6-state Gulf Arab bloc: Bahrain, Kuwait, Oman, Qatar, Saudi Arabia, UAE. Bloc-level FTA negotiations with India remain exploratory.', group: 'regional'},
+    'LDC':     {full: 'Least Developed Country', desc: 'UN-classified low-income developing nations. Receive more generous tariff concessions and longer phase-in timelines under SAFTA and APTA.', group: 'regional'},
+    'NLDC':    {full: 'Non-Least Developed Country', desc: 'Higher-income SAFTA members (India, Pakistan, Sri Lanka). Bound to faster tariff liberalisation than LDCs.', group: 'regional'},
+    'RCEP':    {full: 'Regional Comprehensive Economic Partnership', desc: '15-country mega-bloc (ASEAN + China, Japan, S. Korea, Australia, NZ). India withdrew in 2019 over concerns about trade deficit, dairy, and agriculture exposure.', group: 'regional'},
+
+    /* Trade mechanics */
+    'HS':   {full: 'Harmonised System (Harmonised Commodity Description and Coding System)', desc: 'WCO\'s global product-classification system. 6-digit codes group products into 99 chapters. "HS 30" = Pharmaceuticals; "HS 71" = Gems & Jewellery; "HS 84" = Machinery.', group: 'mechanics'},
+    'MFN':  {full: 'Most Favoured Nation', desc: 'WTO principle: a country\'s lowest-applied tariff to any partner must be extended to all WTO members. The "default" rate that FTA preferential rates undercut.', group: 'mechanics'},
+    'TRQ':  {full: 'Tariff Rate Quota', desc: 'A two-tier tariff: a low (or zero) rate applies up to a fixed quantity ("in-quota"); a higher rate applies beyond. Used for sensitive items like sugar or premium autos.', group: 'mechanics'},
+    'CTSH': {full: 'Change in Tariff Sub-Heading', desc: 'A Rules-of-Origin test: the final product must classify under a different 6-digit HS sub-heading than its non-originating inputs. Demonstrates substantial transformation.', group: 'mechanics'},
+    'RoO':  {full: 'Rules of Origin', desc: 'Criteria determining a product\'s "economic nationality". Without satisfying RoO, an exporter cannot claim preferential FTA tariffs even if their country has an FTA with the destination.', group: 'mechanics'},
+    'CoO':  {full: 'Certificate of Origin', desc: 'Document issued by an authorised body certifying that goods meet the FTA\'s Rules of Origin. Required for preferential-tariff claim at destination customs.', group: 'mechanics'},
+    'TLP':  {full: 'Tariff Liberalisation Programme', desc: 'The phased schedule by which FTA partners reduce tariffs over years to reach the agreed end-state.', group: 'mechanics'},
+    'EIF':  {full: 'Entry Into Force', desc: 'The date an agreement legally takes effect after signature, ratification, and exchange of instruments. Tariff cuts typically begin on this date.', group: 'mechanics'},
+    'NIC':  {full: 'National Insurance Contributions (UK)', desc: 'UK social-security tax on employers and employees. The India-UK Double Contribution Convention exempts short-term Indian assignees from UK NIC for up to 36 months — a major cost saving for IT services.', group: 'mechanics'},
+    'DTAA': {full: 'Double Taxation Avoidance Agreement', desc: 'A bilateral tax treaty preventing the same income being taxed in both jurisdictions. India has 94+ comprehensive DTAAs.', group: 'mechanics'},
+    'CBAM': {full: 'Carbon Border Adjustment Mechanism', desc: 'EU policy levying carbon costs on imports of carbon-intensive goods (cement, steel, fertilisers, aluminium, hydrogen, electricity) starting 2026. Will operate alongside the India-EU FTA — exporters need parallel carbon-accounting compliance.', group: 'mechanics'},
+    'MRA':  {full: 'Mutual Recognition Agreement', desc: 'Agreement where each party recognises the other\'s product testing/certification, reducing duplicate compliance costs. India-UK CETA includes pharma MRA via MHRA.', group: 'mechanics'},
+    'WTO':  {full: 'World Trade Organization', desc: '164-member multilateral body governing global trade rules. FTAs operate as exceptions to MFN under WTO\'s Article XXIV (goods) and Article V (services).', group: 'mechanics'},
+
+    /* Service modes (GATS) */
+    'Mode 1': {full: 'Mode 1 — Cross-border supply', desc: 'GATS service-trade mode: the service is delivered across borders without supplier or consumer moving (e.g., software developed in India for a UK client).', group: 'modes'},
+    'Mode 2': {full: 'Mode 2 — Consumption abroad', desc: 'GATS service-trade mode: the consumer travels to the supplier\'s country (e.g., an Indian student studying in Australia).', group: 'modes'},
+    'Mode 3': {full: 'Mode 3 — Commercial presence', desc: 'GATS service-trade mode: the supplier establishes a branch/subsidiary in the consumer\'s country (e.g., an Indian IT firm opening a London office).', group: 'modes'},
+    'Mode 4': {full: 'Mode 4 — Movement of natural persons', desc: 'GATS service-trade mode: individuals temporarily relocate to deliver services (e.g., Indian engineers on a short-term UK assignment).', group: 'modes'},
+
+    /* Indian and partner agencies */
+    'DGFT':   {full: 'Directorate General of Foreign Trade (India)', desc: 'Indian agency under MoCI administering import-export policy and issuing IEC codes, licences, and Certificates of Origin.', group: 'agency'},
+    'DGCI&S': {full: 'Directorate General of Commercial Intelligence and Statistics', desc: 'Indian agency producing official trade statistics and issuing CoOs under specific FTAs.', group: 'agency'},
+    'EIA':    {full: 'Export Inspection Agency (India)', desc: 'Indian statutory agency authorised to inspect and certify exports and to issue Certificates of Origin under various FTAs.', group: 'agency'},
+    'FIEO':   {full: 'Federation of Indian Export Organisations', desc: 'Apex export-promotion body. Issues CoOs and supports exporters with documentation.', group: 'agency'},
+    'MPEDA':  {full: 'Marine Products Export Development Authority', desc: 'Indian statutory body promoting marine-product exports (seafood, fisheries).', group: 'agency'},
+    'MEA':    {full: 'Ministry of External Affairs (India)', desc: 'Foreign-relations ministry. Handles diplomatic aspects of trade negotiations.', group: 'agency'},
+    'MoCI':   {full: 'Ministry of Commerce and Industry (India)', desc: 'Lead Indian ministry for trade policy and FTA negotiations.', group: 'agency'},
+    'MHRA':   {full: 'Medicines and Healthcare products Regulatory Agency (UK)', desc: 'UK drug regulator. India-UK CETA includes mutual-recognition provisions reducing duplicate clinical-trial requirements for Indian pharma.', group: 'agency'},
+
+    /* Specific agreement names */
+    'AITIGA': {full: 'ASEAN-India Trade in Goods Agreement', desc: 'Goods-pillar of the India-ASEAN FTA, in force since 2010. Currently under review for upgrade.', group: 'specific'},
+    'ISFTA':  {full: 'India-Sri Lanka Free Trade Agreement', desc: 'India\'s first proper FTA — signed 1998, in force 2000. Goods only; services-and-investment CEPA upgrade pending.', group: 'specific'},
+    'IJCEPA': {full: 'India-Japan Comprehensive Economic Partnership Agreement', desc: 'India-Japan CEPA, in force since 2011. Joint Committee meets periodically to review implementation.', group: 'specific'},
+    'MICECA': {full: 'Malaysia-India Comprehensive Economic Cooperation Agreement', desc: 'Bilateral CECA (2011) layered atop the ASEAN FTA, with deeper services and investment provisions specific to Malaysia.', group: 'specific'},
+
+    /* Common business terms */
+    'FDI':    {full: 'Foreign Direct Investment', desc: 'Cross-border investment establishing or acquiring a controlling interest in a business. Distinct from portfolio investment.', group: 'business'},
+    'MSME':   {full: 'Micro, Small and Medium Enterprises', desc: 'Indian classification of enterprises by investment and turnover thresholds. Many FTAs explicitly target MSME-friendly outcomes.', group: 'business'},
+    'OEM':    {full: 'Original Equipment Manufacturer', desc: 'A producer that makes parts/components incorporated into another company\'s end product (e.g., an auto-component supplier to Toyota).', group: 'business'},
+    'FMCG':   {full: 'Fast-Moving Consumer Goods', desc: 'High-volume, low-margin consumer products: food, beverages, toiletries, household goods.', group: 'business'},
+    'LNG':    {full: 'Liquefied Natural Gas', desc: 'Natural gas chilled to liquid form for transport. Major Indian import from Qatar, UAE, USA, and Australia.', group: 'business'},
+    'IT/ITeS':{full: 'Information Technology / IT-enabled Services', desc: 'Software development, BPO, KPO, and digital services. India\'s flagship services-export sector.', group: 'business'},
+    'AYUSH':  {full: 'Ayurveda, Yoga, Naturopathy, Unani, Siddha, Homoeopathy', desc: 'Indian traditional-medicine systems. Several FTAs include AYUSH market-access provisions for Indian practitioners and products.', group: 'business'}
+};
+
+const GLOSSARY_GROUPS = [
+    {id: 'agreement', label: 'Agreement Types'},
+    {id: 'regional',  label: 'Country & Regional Blocs'},
+    {id: 'mechanics', label: 'Trade Mechanics'},
+    {id: 'modes',     label: 'Services Trade Modes (GATS)'},
+    {id: 'agency',    label: 'Government Agencies & Regulators'},
+    {id: 'specific',  label: 'Specific Agreement Names'},
+    {id: 'business',  label: 'Business & Commercial Terms'}
+];
+
+/* ============================================
+   FILTER TAXONOMY
+   ============================================ */
+const FILTERS = {
+    sector: [
+        {id: 'agriculture', label: 'Agriculture'},
+        {id: 'agritech', label: 'Agritech'},
+        {id: 'food', label: 'Food & Beverages'},
+        {id: 'textiles', label: 'Textiles & Apparel'},
+        {id: 'pharmaceuticals', label: 'Pharma & Healthcare'},
+        {id: 'chemicals', label: 'Chemicals'},
+        {id: 'engineering', label: 'Engineering & Machinery'},
+        {id: 'automotive', label: 'Automotive'},
+        {id: 'electronics-it', label: 'Electronics & IT'},
+        {id: 'gems-jewellery', label: 'Gems & Jewellery'},
+        {id: 'leather', label: 'Leather & Footwear'},
+        {id: 'energy-minerals', label: 'Energy & Minerals'},
+        {id: 'education-services', label: 'Education Services'},
+        {id: 'financial-services', label: 'Financial Services'}
+    ],
+    region: [
+        {id: 'south-asia', label: 'South Asia'},
+        {id: 'southeast-asia', label: 'Southeast Asia'},
+        {id: 'east-asia', label: 'East Asia'},
+        {id: 'gulf', label: 'Middle East / Gulf'},
+        {id: 'europe', label: 'Europe'},
+        {id: 'americas', label: 'Americas'},
+        {id: 'oceania', label: 'Oceania'},
+        {id: 'africa-io', label: 'Africa / Indian Ocean'},
+        {id: 'multi-region', label: 'Multi-region'}
+    ],
+    status: [
+        {id: 'in-force-established', label: 'In-force (Established)'},
+        {id: 'in-force-recent', label: 'In-force (Recent: 2024–26)'},
+        {id: 'signed-pending', label: 'Signed, Pending Implementation'}
+    ],
+    direction: [
+        {id: 'export-heavy', label: 'Export-led from India'},
+        {id: 'import-heavy', label: 'Import-led to India'},
+        {id: 'balanced', label: 'Balanced trade'}
+    ]
+};
+
+/* ============================================
+   STATE
+   ============================================ */
+const state = {
+    activeFilters: {
+        sector: new Set(),
+        region: new Set(),
+        status: new Set(),
+        direction: new Set()
+    },
+    searchQuery: '',
+    sortBy: 'alpha',
+    openPanels: new Set()
+};
+
+/* ============================================
+   RENDERERS
+   ============================================ */
+function statusLabel(status) {
+    const map = {
+        'in-force-established': 'In-force',
+        'in-force-recent': 'Recently In-force',
+        'signed-pending': 'Signed · Awaiting EIF'
+    };
+    return map[status] || status;
+}
+
+function typeBadge(fta) {
+    return fta.type;
+}
+
+function yearString(fta) {
+    if (fta.yearInForce && fta.yearSigned !== fta.yearInForce) {
+        return `${fta.yearSigned} signed · ${fta.yearInForce} in force`;
+    } else if (fta.yearInForce) {
+        return `Since ${fta.yearInForce}`;
+    } else {
+        return `Signed ${fta.yearSigned} · pending`;
+    }
+}
+
+function renderFilterChips() {
+    Object.keys(FILTERS).forEach(dim => {
+        const container = document.getElementById(`${dim}Chips`);
+        if (!container) return;
+        FILTERS[dim].forEach(item => {
+            const chip = document.createElement('button');
+            chip.className = 'chip';
+            chip.textContent = item.label;
+            chip.dataset.dimension = dim;
+            chip.dataset.value = item.id;
+            chip.setAttribute('aria-pressed', 'false');
+            chip.addEventListener('click', () => toggleFilter(dim, item.id, chip));
+            container.appendChild(chip);
+        });
+    });
+}
+
+function toggleFilter(dim, value, chipEl) {
+    const set = state.activeFilters[dim];
+    if (set.has(value)) {
+        set.delete(value);
+        chipEl.classList.remove('active');
+        chipEl.setAttribute('aria-pressed', 'false');
+    } else {
+        set.add(value);
+        chipEl.classList.add('active');
+        chipEl.setAttribute('aria-pressed', 'true');
+    }
+    renderPanels();
+}
+
+function clearAllFilters() {
+    Object.keys(state.activeFilters).forEach(dim => state.activeFilters[dim].clear());
+    document.querySelectorAll('.chip.active').forEach(c => {
+        c.classList.remove('active');
+        c.setAttribute('aria-pressed', 'false');
+    });
+    document.getElementById('search').value = '';
+    state.searchQuery = '';
+    renderPanels();
+}
+
+function matchesFilters(fta) {
+    // Sector: any selected sector must overlap fta.sectors
+    if (state.activeFilters.sector.size > 0) {
+        const overlap = [...state.activeFilters.sector].some(s => fta.sectors.includes(s));
+        if (!overlap) return false;
+    }
+    // Region: must match
+    if (state.activeFilters.region.size > 0) {
+        if (!state.activeFilters.region.has(fta.region)) return false;
+    }
+    // Status
+    if (state.activeFilters.status.size > 0) {
+        if (!state.activeFilters.status.has(fta.status)) return false;
+    }
+    // Direction
+    if (state.activeFilters.direction.size > 0) {
+        if (!state.activeFilters.direction.has(fta.direction)) return false;
+    }
+    // Search
+    if (state.searchQuery) {
+        const q = state.searchQuery.toLowerCase();
+        const hay = [
+            fta.name, fta.fullTitle, fta.tagline,
+            (fta.members || []).join(' '),
+            fta.sectors.join(' '),
+            fta.expansion.exportFromIndia.join(' '),
+            fta.expansion.importToIndia.join(' '),
+            fta.expansion.bestUseCases.join(' '),
+            fta.expansion.tariffHighlights,
+            fta.expansion.rulesOfOrigin,
+            fta.expansion.tradeVolume
+        ].join(' ').toLowerCase();
+        if (!hay.includes(q)) return false;
+    }
+    return true;
+}
+
+function sortFTAs(arr) {
+    const sorted = [...arr];
+    if (state.sortBy === 'alpha') {
+        sorted.sort((a, b) => a.name.localeCompare(b.name));
+    } else if (state.sortBy === 'newest') {
+        sorted.sort((a, b) => (b.yearInForce || b.yearSigned) - (a.yearInForce || a.yearSigned));
+    } else if (state.sortBy === 'oldest') {
+        sorted.sort((a, b) => (a.yearInForce || a.yearSigned) - (b.yearInForce || b.yearSigned));
+    }
+    return sorted;
+}
+
+function listToHTML(arr) {
+    return arr.map(item => `<li>${item}</li>`).join('');
+}
+
+function renderPanel(fta) {
+    const isOpen = state.openPanels.has(fta.id);
+    const exp = fta.expansion;
+    const membersBlock = fta.members
+        ? `<div class="members-list">Members: ${fta.members.join(' · ')}</div>`
+        : '';
+
+    const resourcesHTML = exp.resources.map(r =>
+        `<a class="resource-link" href="${r.url}" target="_blank" rel="noopener">${r.label}</a>`
+    ).join('');
+
+    return `
+        <article class="panel ${isOpen ? 'open' : ''}" data-region="${fta.region}" data-id="${fta.id}">
+            <header class="panel-header" tabindex="0" role="button" aria-expanded="${isOpen}">
+                <div class="region-mark"></div>
+                <div class="header-content">
+                    <div class="header-top">
+                        <h2 class="country-name">${fta.name}</h2>
+                        <span class="agreement-tag">${typeBadge(fta)}</span>
+                        <span class="year-tag">${yearString(fta)}</span>
+                    </div>
+                    <p class="tagline">${fta.tagline}</p>
+                    ${membersBlock}
+                </div>
+                <div class="header-meta">
+                    <span class="status-pill status-${fta.status}">${statusLabel(fta.status)}</span>
+                    <span class="toggle-icon">+</span>
+                </div>
+            </header>
+            <div class="panel-body">
+                <div class="body-grid">
+                    <div>
+                        <h3 class="section-h export">Key Exports From India</h3>
+                        <ul class="body-list export">${listToHTML(exp.exportFromIndia)}</ul>
+                    </div>
+                    <div>
+                        <h3 class="section-h import">Key Imports Into India</h3>
+                        <ul class="body-list import">${listToHTML(exp.importToIndia)}</ul>
+                    </div>
+                    <div class="full">
+                        <h3 class="section-h">Best Use Cases for Entrepreneurs</h3>
+                        <ul class="body-list">${listToHTML(exp.bestUseCases)}</ul>
+                    </div>
+                    <div>
+                        <h3 class="section-h">Tariff Highlights</h3>
+                        <p class="prose">${exp.tariffHighlights}</p>
+                    </div>
+                    <div>
+                        <h3 class="section-h">Rules of Origin</h3>
+                        <p class="prose">${exp.rulesOfOrigin}</p>
+                    </div>
+                    <div class="full">
+                        <div class="stat-card">
+                            <div class="label">Trade Volume Snapshot</div>
+                            <div class="value">${exp.tradeVolume}</div>
+                        </div>
+                    </div>
+                    <div class="full">
+                        <h3 class="section-h">Official Resources</h3>
+                        <div class="resources">${resourcesHTML}</div>
+                    </div>
+                </div>
+            </div>
+        </article>
+    `;
+}
+
+function renderPanels() {
+    const filtered = sortFTAs(FTA_DATA.filter(matchesFilters));
+    const list = document.getElementById('panelList');
+    const noRes = document.getElementById('noResults');
+    const count = document.getElementById('resultCount');
+
+    list.innerHTML = filtered.map(renderPanel).join('');
+    count.textContent = `${filtered.length} of ${FTA_DATA.length}`;
+
+    // Wrap acronyms in newly-rendered panels
+    wrapAcronyms(list);
+
+    if (filtered.length === 0) {
+        noRes.classList.add('show');
+    } else {
+        noRes.classList.remove('show');
+    }
+
+    // Wire panel toggles
+    list.querySelectorAll('.panel-header').forEach(header => {
+        header.addEventListener('click', () => {
+            const panel = header.parentElement;
+            const id = panel.dataset.id;
+            if (state.openPanels.has(id)) {
+                state.openPanels.delete(id);
+                panel.classList.remove('open');
+                header.setAttribute('aria-expanded', 'false');
+            } else {
+                state.openPanels.add(id);
+                panel.classList.add('open');
+                header.setAttribute('aria-expanded', 'true');
+            }
+        });
+        header.addEventListener('keydown', e => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                header.click();
+            }
+        });
+    });
+}
+
+/* ============================================
+   ACRONYM WRAPPING + TOOLTIPS
+   ============================================ */
+const ACRONYMS_BY_LENGTH = Object.keys(GLOSSARY).sort((a, b) => b.length - a.length);
+
+function escapeRegex(str) {
+    return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+function slugForAcronym(acr) {
+    return acr.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+}
+
+function wrapAcronyms(rootEl) {
+    const skipTags = new Set(['ABBR', 'CODE', 'A', 'SCRIPT', 'STYLE', 'INPUT', 'BUTTON', 'SELECT']);
+
+    function processTextNode(node) {
+        const text = node.textContent;
+        const matches = [];
+
+        ACRONYMS_BY_LENGTH.forEach(acr => {
+            const escaped = escapeRegex(acr);
+            // Word-boundary regex; for "Mode 1" the space is internal
+            const regex = new RegExp(`(^|[^A-Za-z0-9])(${escaped})(?=$|[^A-Za-z0-9])`, 'g');
+            let m;
+            while ((m = regex.exec(text)) !== null) {
+                const start = m.index + m[1].length;
+                matches.push({start, length: acr.length, acr});
+            }
+        });
+
+        if (matches.length === 0) return;
+
+        // Filter overlaps — longest acronym wins (we already iterate longest-first, so first match at a position holds)
+        matches.sort((a, b) => a.start - b.start || b.length - a.length);
+        const filtered = [];
+        let lastEnd = 0;
+        matches.forEach(m => {
+            if (m.start >= lastEnd) {
+                filtered.push(m);
+                lastEnd = m.start + m.length;
+            }
+        });
+
+        if (filtered.length === 0) return;
+
+        const frag = document.createDocumentFragment();
+        let cursor = 0;
+        filtered.forEach(m => {
+            if (m.start > cursor) {
+                frag.appendChild(document.createTextNode(text.substring(cursor, m.start)));
+            }
+            const abbr = document.createElement('abbr');
+            abbr.className = 'gloss';
+            abbr.dataset.acr = m.acr;
+            abbr.setAttribute('title', GLOSSARY[m.acr].full);
+            abbr.setAttribute('tabindex', '0');
+            abbr.setAttribute('aria-expanded', 'false');
+            abbr.textContent = m.acr;
+            frag.appendChild(abbr);
+            cursor = m.start + m.length;
+        });
+        if (cursor < text.length) {
+            frag.appendChild(document.createTextNode(text.substring(cursor)));
+        }
+        node.parentNode.replaceChild(frag, node);
+    }
+
+    function walk(node) {
+        if (node.nodeType === Node.TEXT_NODE) {
+            processTextNode(node);
+            return;
+        }
+        if (node.nodeType !== Node.ELEMENT_NODE) return;
+        if (skipTags.has(node.tagName)) return;
+        // Snapshot children first since we will modify
+        const kids = [...node.childNodes];
+        kids.forEach(walk);
+    }
+
+    walk(rootEl);
+}
+
+/* ============================================
+   TOOLTIP SYSTEM
+   ============================================ */
+let tooltipEl = null;
+let activeAbbr = null;
+
+function ensureTooltip() {
+    if (tooltipEl) return tooltipEl;
+    tooltipEl = document.createElement('div');
+    tooltipEl.className = 'tooltip-pop';
+    tooltipEl.setAttribute('role', 'tooltip');
+    document.body.appendChild(tooltipEl);
+    return tooltipEl;
+}
+
+function showTooltip(abbr) {
+    const acr = abbr.dataset.acr;
+    const entry = GLOSSARY[acr];
+    if (!entry) return;
+    const tip = ensureTooltip();
+
+    tip.innerHTML = `
+        <div class="tt-title">${acr}<span class="tt-full">${entry.full}</span></div>
+        <div class="tt-desc">${entry.desc}</div>
+        <a class="tt-link" href="#glossary-${slugForAcronym(acr)}" data-glossary-link="${acr}">Learn more in glossary →</a>
+    `;
+
+    // Position
+    const rect = abbr.getBoundingClientRect();
+    tip.style.visibility = 'hidden';
+    tip.classList.add('show');
+    const tipRect = tip.getBoundingClientRect();
+
+    const showAbove = rect.top > tipRect.height + 20;
+    const left = Math.min(
+        Math.max(12, rect.left + rect.width / 2 - tipRect.width / 2),
+        window.innerWidth - tipRect.width - 12
+    );
+    const top = showAbove
+        ? rect.top + window.scrollY - tipRect.height - 12
+        : rect.bottom + window.scrollY + 12;
+
+    tip.style.left = `${left}px`;
+    tip.style.top = `${top}px`;
+    tip.dataset.pos = showAbove ? 'above' : 'below';
+
+    // Adjust arrow horizontal position
+    const arrowLeftPct = ((rect.left + rect.width / 2 - left) / tipRect.width) * 100;
+    tip.style.setProperty('--arrow-left', `${arrowLeftPct}%`);
+
+    tip.style.visibility = '';
+    abbr.setAttribute('aria-expanded', 'true');
+    activeAbbr = abbr;
+}
+
+function hideTooltip() {
+    if (!tooltipEl) return;
+    tooltipEl.classList.remove('show');
+    if (activeAbbr) {
+        activeAbbr.setAttribute('aria-expanded', 'false');
+        activeAbbr = null;
+    }
+}
+
+function setupTooltipHandlers() {
+    document.addEventListener('mouseover', e => {
+        const abbr = e.target.closest('abbr.gloss');
+        if (abbr && !('ontouchstart' in window)) showTooltip(abbr);
+    });
+    document.addEventListener('mouseout', e => {
+        const abbr = e.target.closest('abbr.gloss');
+        if (!abbr) return;
+        // Only auto-hide if not "pinned" by click
+        const related = e.relatedTarget;
+        if (related && tooltipEl && tooltipEl.contains(related)) return;
+        if (!('ontouchstart' in window)) hideTooltip();
+    });
+    document.addEventListener('click', e => {
+        const abbr = e.target.closest('abbr.gloss');
+        const insideTip = e.target.closest('.tooltip-pop');
+        if (abbr) {
+            e.preventDefault();
+            if (activeAbbr === abbr) {
+                hideTooltip();
+            } else {
+                showTooltip(abbr);
+            }
+        } else if (!insideTip && activeAbbr) {
+            hideTooltip();
+        }
+    });
+    document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') hideTooltip();
+    });
+    // Glossary link inside tooltip
+    document.addEventListener('click', e => {
+        const link = e.target.closest('[data-glossary-link]');
+        if (!link) return;
+        e.preventDefault();
+        const acr = link.dataset.glossaryLink;
+        const target = document.getElementById(`glossary-${slugForAcronym(acr)}`);
+        hideTooltip();
+        if (target) {
+            target.scrollIntoView({behavior: 'smooth', block: 'center'});
+            target.classList.add('flash');
+            setTimeout(() => target.classList.remove('flash'), 1800);
+        }
+    });
+}
+
+/* ============================================
+   GLOSSARY RENDERER
+   ============================================ */
+function renderGlossary() {
+    const container = document.getElementById('glossaryContent');
+    if (!container) return;
+    let html = '';
+    GLOSSARY_GROUPS.forEach(group => {
+        const entries = Object.entries(GLOSSARY)
+            .filter(([_, v]) => v.group === group.id)
+            .sort(([a], [b]) => a.localeCompare(b));
+        if (entries.length === 0) return;
+        html += `<div class="glossary-group">
+            <h3 class="glossary-group-h">${group.label}</h3>
+            <div class="glossary-entries">`;
+        entries.forEach(([acr, def]) => {
+            const slug = slugForAcronym(acr);
+            html += `<div class="glossary-entry" id="glossary-${slug}">
+                <div class="glossary-acr">${acr}</div>
+                <div class="glossary-full">${def.full}</div>
+                <p class="glossary-desc">${def.desc}</p>
+            </div>`;
+        });
+        html += `</div></div>`;
+    });
+    container.innerHTML = html;
+}
+
+/* ============================================
+   INIT
+   ============================================ */
+function init() {
+    renderFilterChips();
+    renderGlossary();
+    renderPanels();
+
+    // Wrap acronyms in static sections (masthead, pipeline, footer)
+    document.querySelectorAll('.masthead, .pipeline, .colophon').forEach(wrapAcronyms);
+
+    setupTooltipHandlers();
+
+    document.getElementById('search').addEventListener('input', e => {
+        state.searchQuery = e.target.value.trim();
+        renderPanels();
+    });
+
+    document.getElementById('sort').addEventListener('change', e => {
+        state.sortBy = e.target.value;
+        renderPanels();
+    });
+
+    document.getElementById('clearAll').addEventListener('click', clearAllFilters);
+}
+
+document.addEventListener('DOMContentLoaded', init);
+</script>
+
+</body>
+</html>
