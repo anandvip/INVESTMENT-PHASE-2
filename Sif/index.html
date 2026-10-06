@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SIF card check — personal reference</title>
+<style>
+:root{
+  --bg:#faf7f2;--card:#fff;--ink:#2b2621;--muted:#6b6259;
+  --accent:#7a5c3e;--accent-soft:#f0e7db;--line:#ded3c4;
+  --warn:#a1662f;--ok:#4a6741
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--ink)}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;font-size:16px;line-height:1.55}
+main{max-width:720px;margin:0 auto;padding:20px 16px 48px}
+h1,h2,h3{font-family:Georgia,"Iowan Old Style",Palatino,serif;font-weight:normal;line-height:1.25;margin:0 0 10px}
+h1{font-size:1.7rem}
+h2{font-size:1.28rem;margin-top:28px}
+h3{font-size:1.05rem;margin-top:18px}
+p{margin:0 0 12px}
+.crumb{font-size:0.82rem;color:var(--muted);margin-bottom:14px}
+.crumb a{color:var(--accent);text-decoration:none}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 14px 6px;margin:0 0 14px}
+.meta{color:var(--muted);font-size:0.88rem}
+.pill{display:inline-block;font-size:0.72rem;letter-spacing:0.02em;border:1px solid var(--line);border-radius:999px;padding:1px 8px;margin:0 4px 4px 0;color:var(--muted);background:var(--bg)}
+.pill.doubt{border-color:var(--warn);color:var(--warn);background:#faf3ea}
+.pill.ok{border-color:var(--ok);color:var(--ok);background:#f3f6f1}
+.pill.warn{border-color:var(--warn);color:var(--warn)}
+table{width:100%;border-collapse:collapse;font-size:0.84rem;margin:8px 0 14px}
+th,td{text-align:left;vertical-align:top;padding:8px 6px;border-bottom:1px solid var(--line)}
+th{font-weight:600;color:var(--muted);font-size:0.75rem}
+td.num,th.num{text-align:right;white-space:nowrap}
+.neg{color:var(--warn)}
+.pos{color:var(--ok)}
+ol.sources{padding-left:1.2rem;font-size:0.84rem}
+ol.sources li{margin:0 0 10px}
+.footstrip{margin-top:28px;padding-top:14px;border-top:1px solid var(--line);font-size:0.82rem;color:var(--muted)}
+label.check{display:flex;gap:8px;align-items:flex-start;margin:0 0 8px;font-size:0.92rem}
+textarea,input[type="text"]{width:100%;border:1px solid var(--line);border-radius:8px;padding:8px;font:inherit;background:#fff;color:var(--ink)}
+button{border:1px solid var(--accent);background:var(--accent-soft);color:var(--ink);border-radius:8px;padding:8px 12px;font:inherit}
+.note{font-size:0.84rem;color:var(--muted)}
+ul{margin:0 0 12px;padding-left:1.15rem}
+li{margin:0 0 6px}
+</style>
+</head>
+<body>
+<main>
+<p class="crumb">vipulanand.in › research › SIF card check</p>
+<h1>SIF card check</h1>
+<p class="meta">Personal reference. Prepared 6 October 2026. Working cut: Regular Growth, 1 October 2026, as republished by MeraSIF from AMFI NAVs. Not a recommendation. Final action stays mine.</p>
+<div class="card">
+<p><span class="pill">Personal</span><span class="pill doubt">Doubtful where marked</span><span class="pill">Cross-check open</span></p>
+<p>The IBN card is a marketed ranking. A figure is kept below only if a named page gave a number, a date, and a plan. Where two pages disagree, both numbers stay and the cell is marked doubtful. I have not opened the AMFI NAV file myself. That is the manual pass still to do.</p>
+</div>
+
+<h2>What the card claimed</h2>
+<div class="card">
+<p>Screenshot dated 6 October 2026, 10:04. Brand line: IBN / Invest Better Now. Headline: 17 of 28 SIFs positive over the last 3 months. No as-of date, no Direct or Regular, no ARN, no benchmark.</p>
+<p>The product class is real. Specialised Investment Funds sit under the SEBI mutual-fund regulations. Operational circular SEBI/HO/IMD/IMD-I POD-1/P/CIR/2025/26, 27 February 2025, effective 1 April 2025. Minimum ₹10 lakh aggregated across strategies of one AMC at PAN level. Accredited investors exempt. Unhedged short via derivatives capped at 25% of net assets.</p>
+</div>
+
+<h2>Verdict on the card</h2>
+<div class="card">
+<table>
+<thead><tr><th>Claim</th><th>Working finding</th><th>Mark</th></tr></thead>
+<tbody>
+<tr><td>17 of 28 positive</td><td>Live count by early October is 33 on MeraSIF and 34 on SIFscan. The 28 is an older universe. SIFscan category average for Equity Long-Short over 3 months is −1.81% (5 Oct 2026). Positives are not the category.</td><td><span class="pill doubt">Doubtful count</span></td></tr>
+<tr><td>Top two near +25%</td><td>Same direction on the 1 Oct Regular cut: allocator +21.51%, hybrid +22.12%. A Direct print on 18 Sep was +25.89% for the allocator. Card did not say which plan.</td><td><span class="pill ok">Direction holds</span> <span class="pill doubt">Plan unknown</span></td></tr>
+<tr><td>All 17 names positive</td><td>Five names are negative on the 1 Oct Regular cut. See table.</td><td><span class="pill warn">Sign fail</span></td></tr>
+<tr><td>Generic risk line</td><td>SIF framework warning is loss of capital, liquidity risk, and market volatility. Card uses the ordinary mutual-fund sentence.</td><td><span class="pill warn">Weaker warning</span></td></tr>
+<tr><td>IBN identity</td><td>No ARN on the card. Not matched to an AMFI distributor in this pass. A US adviser of a similar name is a different firm.</td><td><span class="pill doubt">Doubtful</span></td></tr>
+</tbody>
+</table>
+</div>
+
+<h2>Working table</h2>
+<p class="note">Returns are absolute point-to-point, not annualised. NAV date 1 October 2026, Regular Growth, MeraSIF archive of AMFI NAVs. AUM and risk band: Value Research, 21 September 2026, except where a second extract of the same tracker disagrees. TER: MeraSIF citing AMFI disclosure. Card column is the screenshot only.</p>
+<div class="card" style="overflow-x:auto">
+<table>
+<thead>
+<tr><th>Fund</th><th class="num">Card 3M</th><th class="num">1 Oct 3M</th><th class="num">1M</th><th class="num">SI</th><th>AUM</th><th class="num">TER</th><th>Read</th></tr>
+</thead>
+<tbody>
+<tr>
+<td>qSIF Active Asset Allocator<br><span class="note">Quant · interval · allotted Apr 2026</span></td>
+<td class="num">+24.81%</td>
+<td class="num pos">+21.51%</td>
+<td class="num">+12.37% <span class="pill doubt">Doubtful</span></td>
+<td class="num">+29.35%</td>
+<td>₹167 Cr</td>
+<td class="num">1.83% <span class="pill doubt">Doubtful</span></td>
+<td>NAV ₹12.9352. Canara, 5 Oct, prints 3M +21.19% and 1M +5.14% on NAV ₹12.9010. The 1-month gap is unexplained. Sharescart prints Regular TER 3.93% including GST against 1.83% here. Allotment given as 2 Apr and as 21 Apr.</td>
+</tr>
+<tr>
+<td>qSIF Hybrid Long-Short<br><span class="note">Quant · allotted 15 Oct 2025</span></td>
+<td class="num">+24.22%</td>
+<td class="num pos">+22.12%</td>
+<td class="num pos">+16.86%</td>
+<td class="num">+28.82%</td>
+<td>₹214 Cr</td>
+<td class="num">1.85%</td>
+<td>NAV ₹12.8824. 6M +31.12%. Fund page matches the universe row. Includes the 4 Sep and 8 Sep sessions.</td>
+</tr>
+<tr>
+<td>Dyna Equity Ex-Top 100<br><span class="note">360 ONE · band 5</span></td>
+<td class="num">+10.11%</td>
+<td class="num pos">+9.34%</td>
+<td class="num pos">+0.63%</td>
+<td class="num">+10.45%</td>
+<td>₹151 Cr</td>
+<td class="num">2.10%</td>
+<td>NAV ₹11.0445. No 6-month figure. Close to the card. Small book.</td>
+</tr>
+<tr>
+<td>qSIF Equity Ex-Top 100<br><span class="note">Quant · band 4</span></td>
+<td class="num">+9.03%</td>
+<td class="num pos">+6.54%</td>
+<td class="num neg">−1.85%</td>
+<td class="num">+12.22%</td>
+<td>₹420 Cr</td>
+<td class="num">1.95%</td>
+<td>NAV ₹11.2218. 6M +32.01%. Card overstates the 1 Oct Regular 3-month. One month already negative.</td>
+</tr>
+<tr>
+<td>Apex Hybrid<br><span class="note">Aditya Birla Sun Life · band 1</span></td>
+<td class="num">+4.44%</td>
+<td class="num pos">+3.60%</td>
+<td class="num neg">−0.16%</td>
+<td class="num">+7.05%</td>
+<td>₹176 Cr</td>
+<td class="num">1.41%</td>
+<td>NAV ₹10.7051. 6M +6.97%. Close.</td>
+</tr>
+<tr>
+<td>iSIF Equity Long-Short<br><span class="note">ICICI Prudential · band 5</span></td>
+<td class="num">+4.03%</td>
+<td class="num pos">+1.95%</td>
+<td class="num neg">−3.15%</td>
+<td class="num">+4.60%</td>
+<td>₹599 Cr</td>
+<td class="num">2.02%</td>
+<td>NAV ₹10.46. Card overstates. No 6-month figure on this cut.</td>
+</tr>
+<tr>
+<td>qSIF Equity Long-Short<br><span class="note">Quant · band 3</span></td>
+<td class="num">+3.49%</td>
+<td class="num pos">+1.24%</td>
+<td class="num neg">−2.32%</td>
+<td class="num">+8.16%</td>
+<td>₹758 Cr</td>
+<td class="num">1.96%</td>
+<td>NAV ₹10.816. 6M +22.73%. Recent month has given back.</td>
+</tr>
+<tr>
+<td>Altiva Hybrid<br><span class="note">Edelweiss · band 1 · largest book</span></td>
+<td class="num">+2.19%</td>
+<td class="num pos">+1.27%</td>
+<td class="num neg">−1.12%</td>
+<td class="num">+9.01%</td>
+<td>₹9,268 Cr</td>
+<td class="num">1.25%</td>
+<td>NAV ₹10.9011. 6M +7.60%. Scale sits here, not in the Quant outliers. A 5 Oct republish prints 3M +1.21% and SI +9.35%.</td>
+</tr>
+<tr>
+<td>iSIF Active Asset Allocator<br><span class="note">ICICI Prudential · band 2</span></td>
+<td class="num">+2.02%</td>
+<td class="num pos">+0.50%</td>
+<td class="num neg">−1.83%</td>
+<td class="num">+2.19%</td>
+<td>₹759–984 Cr <span class="pill doubt">Doubtful</span></td>
+<td class="num">1.63%</td>
+<td>NAV ₹10.2187. Two extracts of the same tracker give ₹759 Cr and ₹984 Cr. Do not use either until the Value Research or AMFI row is opened.</td>
+</tr>
+<tr>
+<td>RedHex Hybrid<br><span class="note">HSBC · band 2</span></td>
+<td class="num">+1.79%</td>
+<td class="num pos">+1.34%</td>
+<td class="num pos">+0.17%</td>
+<td class="num">+2.08%</td>
+<td>₹1,073 Cr</td>
+<td class="num">0.93%</td>
+<td>NAV ₹10.208. No 6-month figure. Close. Lower TER than the outliers.</td>
+</tr>
+<tr>
+<td>Dyna Active Asset Allocator<br><span class="note">360 ONE · band 2</span></td>
+<td class="num">+1.75%</td>
+<td class="num pos">+0.08%</td>
+<td class="num neg">−1.02%</td>
+<td class="num">+3.71%</td>
+<td>₹214 Cr</td>
+<td class="num">1.63%</td>
+<td>NAV ₹10.3705. Effectively flat over 3 months. Card overstates.</td>
+</tr>
+<tr>
+<td>iSIF Hybrid<br><span class="note">ICICI Prudential · band 5</span></td>
+<td class="num">+1.58%</td>
+<td class="num neg">−0.36%</td>
+<td class="num neg">−3.28%</td>
+<td class="num">+2.42%</td>
+<td>₹1,323 Cr</td>
+<td class="num">1.82%</td>
+<td>NAV ₹10.2425. Sign fails on this cut. 6M was +11.99%.</td>
+</tr>
+<tr>
+<td>qSIF Sector Rotation<br><span class="note">Quant · band 3</span></td>
+<td class="num">+1.27%</td>
+<td class="num neg">−0.60%</td>
+<td class="num neg">−0.24%</td>
+<td class="num">+2.45%</td>
+<td>₹49 Cr</td>
+<td class="num">2.10%</td>
+<td>NAV ₹10.2453. Sign fails. Smallest book in this set.</td>
+</tr>
+<tr>
+<td>iSIF Equity Ex-Top 100<br><span class="note">ICICI Prudential · band 5</span></td>
+<td class="num">+1.10%</td>
+<td class="num neg">−1.28%</td>
+<td class="num neg">−3.38%</td>
+<td class="num">+0.10%</td>
+<td>₹2,475 Cr</td>
+<td class="num">1.70%</td>
+<td>NAV ₹10.01. Sign fails. Large book, almost flat since start. 6M +12.11%.</td>
+</tr>
+<tr>
+<td>Titanium Equity<br><span class="note">Tata · band 5</span></td>
+<td class="num">+0.96%</td>
+<td class="num neg">−1.55%</td>
+<td class="num neg">−4.09%</td>
+<td class="num">+1.05%</td>
+<td>₹276 Cr</td>
+<td class="num">2.09%</td>
+<td>NAV ₹10.1049. Sign fails.</td>
+</tr>
+<tr>
+<td>Arudha Hybrid<br><span class="note">Bandhan · band 1</span></td>
+<td class="num">+0.84%</td>
+<td class="num pos">+0.68%</td>
+<td class="num pos">+0.09%</td>
+<td class="num">+3.82%</td>
+<td>₹147–158 Cr <span class="pill doubt">Doubtful</span></td>
+<td class="num">0.63%</td>
+<td>NAV ₹10.382. 6M +3.01%. Close. Lowest TER in the set. AUM differs by ₹11 Cr across two extracts.</td>
+</tr>
+<tr>
+<td>Altiva Equity Ex-Top 100<br><span class="note">Edelweiss · band 5</span></td>
+<td class="num">+0.15%</td>
+<td class="num neg">−2.10%</td>
+<td class="num neg">−5.33%</td>
+<td class="num">+5.14%</td>
+<td>₹1,366 Cr</td>
+<td class="num">1.82%</td>
+<td>NAV ₹10.5138. Sign fails. Weak recent month.</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<h2>Not on the card</h2>
+<div class="card">
+<p>Magnum Hybrid, SBI, is the second-largest book. On the same 1 Oct Regular cut: NAV ₹10.2737, 1M −2.50%, 3M −1.52%, 6M +3.49%, since inception +2.74%, TER 0.92%, risk band 1. AUM is ₹3,800 Cr on one extract and ₹4,001 Cr on the MeraSIF home list. <span class="pill doubt">Doubtful AUM</span></p>
+<p>Category averages, SIFscan, Regular Growth, NAV 5 October 2026: Active Asset Allocator +7.75% (3 funds), Hybrid Long-Short +3.16% (11), Equity Ex-Top 100 +3.11% (7), Sector Rotation +0.22% (1), Equity Long-Short −1.81% (12). Fund names were not visible on that page, so these averages are a secondary cut. <span class="pill doubt">Doubtful until names are opened</span></p>
+</div>
+
+<h2>The two sessions that move the story</h2>
+<div class="card">
+<p>MeraSIF data note, 4 September 2026: on official AMFI NAVs, qSIF Hybrid rose 6.32% and qSIF Active Asset Allocator rose 5.33% in one day. Median SIF that day: +0.02%. Both rose again on 8 September, +2.61% and +2.12%. Any 3-month window that includes those dates includes them.</p>
+<p>I do not have an AMC factsheet that explains those two days. Until that note is read, the +21% and +22% lines are real NAV changes and an unexplained process. <span class="pill doubt">Doubtful cause</span></p>
+</div>
+
+<h2>How I am using this</h2>
+<div class="card">
+<ol>
+<li>A 3-month NAV rise is a fact about a window. It is not evidence the process repeats. Most of these strategies are under a year old. Since-inception here is NAV against face value, not a CAGR.</li>
+<li>Scale and rank point different ways. Altiva Hybrid holds about ₹9,268 Cr and is +1.27% over three months. The +21% allocator is about ₹167 Cr and is an interval scheme.</li>
+<li>Cost does not explain the outliers. Arudha Hybrid at 0.63% and RedHex at 0.93% are the cheaper lines. Neither is the performance outlier.</li>
+<li>Five of the seventeen card names have the wrong sign on the 1 October Regular cut. The card is not a current screen.</li>
+<li>The ₹10 lakh floor is per PAN per AMC, across that AMC’s SIF strategies. A redemption that I initiate can force the rest out if the floor breaks. A fall caused only by NAV does not.</li>
+</ol>
+<p>Nothing above is an instruction to buy, sell, or ignore a scheme.</p>
+</div>
+
+<h2>Open threads</h2>
+<div class="card">
+<ul>
+<li>Card date, and whether the column is Direct or Regular.</li>
+<li>AMC note on the 4 and 8 September Quant NAV jumps.</li>
+<li>Legal identity and ARN of IBN / Invest Better Now.</li>
+<li>iSIF allocator AUM: ₹759 Cr or ₹984 Cr.</li>
+<li>Magnum Hybrid AUM: ₹3,800 Cr or ₹4,001 Cr.</li>
+<li>Arudha Hybrid AUM: ₹147 Cr or ₹158 Cr.</li>
+<li>qSIF allocator TER: 1.83% or 3.93% including GST, and the exact allotment date.</li>
+<li>qSIF allocator 1-month: +12.37% on 1 Oct versus +5.14% on the Canara 5 Oct snapshot.</li>
+<li>Direct AMFI NAV file, not a republisher, for the manual pass.</li>
+</ul>
+</div>
+
+<h2>My cross-check</h2>
+<div class="card">
+<p class="note">Stored on this phone only, in localStorage. Not sent anywhere.</p>
+<label class="check"><input type="checkbox" data-k="amfi"> Opened the AMFI SIF NAV file for the 1 Oct and 5 Oct rows</label>
+<label class="check"><input type="checkbox" data-k="factsheet"> Read the Quant factsheet for 4 and 8 Sep</label>
+<label class="check"><input type="checkbox" data-k="plan"> Confirmed Direct versus Regular on the card</label>
+<label class="check"><input type="checkbox" data-k="ibn"> Identified IBN and its ARN</label>
+<label class="check"><input type="checkbox" data-k="aum"> Resolved the three AUM conflicts</label>
+<p><label for="note">Note</label></p>
+<textarea id="note" rows="4" placeholder="What I confirmed, and what I threw out"></textarea>
+<p><button type="button" id="save">Save on this device</button> <span id="saved" class="note"></span></p>
+</div>
+
+<h2>Sources</h2>
+<ol class="sources">
+<li>SEBI. 27 February 2025. Regulatory framework for Specialized Investment Funds, circular SEBI/HO/IMD/IMD-I POD-1/P/CIR/2025/26. https://sebi.gov.in/legal/circulars/feb-2025/regulatory-framework-for-specialized-investment-funds-sif-_92299.html — T1.</li>
+<li>SEBI framework text as attached on BSE, including the SIF risk warning. https://www.bseindia.com/markets/MarketInfo/DownloadAttach.aspx?id=20260205-26&attachedId=2171c800-9f66-446c-ba5c-50eb38e44b2c — T1.</li>
+<li>TeamLease RegTech, 5 October 2026, reporting SEBI FAQs on the ₹10 lakh floor and the 30-day restore rule. https://teamleaseregtech.com/updates/article/60022/sebi-issues-faqs-on-specialized-investment-funds-sifs-for-investors/ — T2 citing SEBI. FAQ PDF not opened.</li>
+<li>MeraSIF / Trustner Asset Services, ARN-286886. Fund universe, Regular Growth, NAV 1 October 2026, AUM and risk Value Research 21 September 2026. https://www.merasif.com/fund-universe.html — T2 citing AMFI. Two extracts disagreed on three AUM cells; those are marked doubtful.</li>
+<li>MeraSIF fund page, qSIF Hybrid Long-Short, Regular, NAV ₹12.8824 on 1 October 2026, TER 1.85% as of 14 September 2026, AUM ₹214 Cr as of 21 September 2026, allotted 15 October 2025. https://www.merasif.com/funds/qsif-hybrid.html — T2. Matches the universe row.</li>
+<li>MeraSIF data note, 4 September 2026, on the Quant one-day NAV jumps. Same fund-universe URL — T2 citing AMFI NAVs. Cause not in an AMC document here.</li>
+<li>MeraSIF comparison, iSIF allocator versus qSIF allocator, Regular, 18 September 2026. Allocator 3M +25.38% on that earlier cut. Allotment 21 April 2026. https://www.merasif.com/compare-isif-aaa-vs-qsif-aaa.html — T2.</li>
+<li>Canara Bank Securities scheme snapshot, QSIF Active Asset Allocator, NAV ₹12.9010 on 5 October 2026, 3M +21.19%, 1M +5.14%, inception stated 2 April 2026. https://www.canmoney.in/mutualfund/scheme-snapshot/qsif-active-asset-allocator-long-short-fund/growth — T2. 1-month figure conflicts with MeraSIF. Marked doubtful.</li>
+<li>Financial Express, QSIF Active Asset Allocator Direct Growth, NAV ₹13.16 on 18 September 2026, 3M +25.89%, TER 2.43%, AUM ₹167 Cr. https://www.financialexpress.com/mutual-funds/qsif-active-asset-allocator-long-short-fund-direct-plan-growth-INF966L30241/ — T2. Explains how a card can print near +25% without being the Regular 1 Oct figure.</li>
+<li>Sharescart, qSIF allocator Regular, 3M +22.78%, TER 3.93% including GST. https://www.sharescart.com/mutual-funds/quant-sif/qsif-active-asset-allocator-long-short-fund-regular-plan-growth/ — T3 on the TER. Not used as the working TER.</li>
+<li>SIFscan performance, 34 funds, NAV 5 October 2026, category averages. https://sifscan.com/performance — T2 citing AMFI. Names not visible on the fetch. Averages marked doubtful until opened.</li>
+<li>MeraSIF home, category AUM ₹31,175 Cr, AMFI, August 2026, 33 SIFs, 17 AMCs. https://www.merasif.com/ — T2 citing AMFI.</li>
+<li>Outlook Money, 1 September 2026, July-end AUM ₹23,177.31 Cr, AMFI, top three platforms about 71%. https://www.outlookmoney.com/invest/sif-industry-aum-rs-23000-crore-top-3-amcs-70-percent-aum — T2 citing AMFI and SIF360. Older than the October cut.</li>
+<li>IBN card, screenshot 6 October 2026, 10:04. Publisher not identified. Treated as a primary artefact of the claim, not as a data source.</li>
+</ol>
+<p class="note">Not found: IBN ARN, the AMC explanation of 4 and 8 September, and a direct AMFI file opened in this pass.</p>
+<p class="footstrip">vipulanand.in · benf.in · ride.vipulanand.in</p>
+</main>
+<script>
+(function(){
+  var key="sif-card-check-v1";
+  var saved=document.getElementById("saved");
+  function load(){
+    var raw=localStorage.getItem(key);
+    if(!raw) return;
+    try{
+      var data=JSON.parse(raw);
+      document.querySelectorAll("input[type=checkbox]").forEach(function(el){
+        el.checked=!!data[el.getAttribute("data-k")];
+      });
+      if(data.note) document.getElementById("note").value=data.note;
+    }catch(e){}
+  }
+  function save(){
+    var data={note:document.getElementById("note").value};
+    document.querySelectorAll("input[type=checkbox]").forEach(function(el){
+      data
