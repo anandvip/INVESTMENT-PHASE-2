@@ -346,4 +346,18 @@ li{margin:0 0 6px}
   function save(){
     var data={note:document.getElementById("note").value};
     document.querySelectorAll("input[type=checkbox]").forEach(function(el){
-      data
+      data[el.getAttribute("data-k")]=el.checked;
+    });
+    localStorage.setItem(key,JSON.stringify(data));
+    saved.textContent="Saved on this device.";
+  }
+  document.getElementById("save").addEventListener("click",save);
+  document.querySelectorAll("input[type=checkbox]").forEach(function(el){
+    el.addEventListener("change",save);
+  });
+  load();
+})();
+</script>
+</body>
+</html>
+
